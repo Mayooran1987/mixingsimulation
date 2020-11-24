@@ -7,7 +7,7 @@ The goal of mixingsimulation is to develop simulated results and comparing graph
 
 ## Installation
 
-Any R user can install the development version of grabsampling package
+Any R user can install the development version of mixingsimulation package
 from [GitHub](https://github.com/) with just two lines of code:
 
 ``` r
