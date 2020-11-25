@@ -30,7 +30,7 @@ sim_single <- function(n_iter, mu, sigma, b, k, distribution, summary = FALSE){
       sim[,j] <-  stats::rpois(n_iter, mu)
     }
   } else if (distribution == "Poisson-beta") {
-    for (i in 1:length(k)) {
+    for (i in 1:k) {
       # alpha <- rep(b,k)
       y<-matrix(stats::rgamma(k,b,1),ncol=k, nrow=1)
       w <- y[,i]/sum(y[,i])
