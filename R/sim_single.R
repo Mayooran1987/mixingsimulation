@@ -27,16 +27,18 @@ sim_single <- function(n_iter, mu, sigma, b, k, distribution, summary = FALSE){
   if (distribution == "Poisson-fair") {
     sim <-  matrix(NA, nrow = n_iter, ncol = k)
     for(j in 1:k){
-      sim[,j] <-  stats::rpois(n_iter, mu)
+      sim[,j] <-  stats::rpois(n_iter, mu/k)
     }
   } else if (distribution == "Poisson-beta") {
     for (i in 1:k) {
-      # alpha <- rep(b,k)
-      y<-matrix(stats::rgamma(k,b,1),ncol=k, nrow=1)
-      w <- y[,i]/sum(y[,i])
+      x <- matrix(stats::rgamma(k,b), ncol = k, nrow = 1)
+      sm <- x%*%rep(1, k)
+      w <- x/as.vector(sm)
+      # y<-matrix(stats::rgamma(k,b,1),ncol=k, nrow=1)
+      # w <- y[,i]/sum(y[,i])
       sim <-  matrix(NA, nrow = n_iter, ncol = k)
       for(j in 1:k){
-        sim[,j] <-  rpois(n_iter, mu*w)
+        sim[,j] <-  rpois(n_iter, mu*w[,j])
       }
     }
   } else if (distribution == "Lognormal-fair") {
@@ -46,18 +48,20 @@ sim_single <- function(n_iter, mu, sigma, b, k, distribution, summary = FALSE){
       sim[,j] <-  rbinom(n_iter, floor(M[,j]), 1/k)
     }
   } else if (distribution == "Lognormal-beta") {
-    y <- matrix(stats::rgamma(k,b), ncol = k, nrow = 1)
-    sum <- apply(y, 1, sum)
-    w <- matrix(NA, ncol=k, nrow=1)
-    for( j in 1:k) {
-      w[ ,j] <-  y[,j]/sum
-    }
+    # y <- matrix(stats::rgamma(k,b), ncol = k, nrow = 1)
+    # sum <- apply(y, 1, sum)
+    # w <- matrix(NA, ncol=k, nrow=1)
+    # for( j in 1:k) {
+    #   w[ ,j] <-  y[,j]/sum
+    # }
+    x <- matrix(stats::rgamma(k,b), ncol = k, nrow = 1)
+    sm <- x%*%rep(1, k)
+    w <- x/as.vector(sm)
     M <- matrix(rlnorm(k, meanlog = mu, sdlog = sigma), ncol = k, nrow = 1)
     sim <-  matrix(NA, nrow = n_iter, ncol = k)
     for(j in 1:k){
       sim[,j] <-  stats::rbinom(n_iter, floor(M[,j]), w[,j])
     }
-
   } else {
     print("please choose the one of the given distribution with case sensitive such as 'Poisson-fair' or 'Poisson-beta' or 'Lognormal-fair' or 'Lognormal-beta' ")
   }

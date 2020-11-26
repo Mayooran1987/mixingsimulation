@@ -38,7 +38,7 @@ sim_multiple <- function(n_iter, mu, sigma, b, k, distribution){
    }
   result <- data.frame(sim.sum1)
   colnames(result) <- f_spri(mu, k, b, distribution)
-  cat("Calculation took", proc.time()[1], "seconds.\n")
+  # cat("Calculation took", proc.time()[1], "seconds.\n")
   return(result)
 }
 

@@ -9,7 +9,7 @@
 ##' @return graphical comparison between different mixing schemes
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary sample and \eqn{N' = \sum(N_i)}  and \eqn{i} be the number of colony-forming units in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k} and \eqn{y_i=x_i/\sum(x_i) = q_i/Q}; where \eqn{x_i} follows \eqn{gamma (b,1)} (to be finished later on)
 ##' \itemize{
-##' \item Case 1 (Poisson-fair): \eqn{N_i} follows \eqn{Poisson(\mu)}
+##' \item Case 1 (Poisson-fair): \eqn{N_i} follows \eqn{Poisson(\mu/k)}
 ##' \item Case 2 (Poisson-beta): \eqn{N_i} follows \eqn{Poisson(\mu*y_i)}
 ##' \item Case 3 (Lognormal-fair): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 ##' \item Case 4 (Lognormal-beta): \eqn{N_i}  follows \eqn{Binomial(M_i,y_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
@@ -20,11 +20,11 @@
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
 ##' }
 ##' @examples
-##' n_iter <- 200000
+##' n_iter <- 2000000
 ##' mu <- c(log(100),log(100),log(100))
 ##' sigma <- c(0.8,0.8,0.8)
 ##' b <- c(0.1,1,10)
-##' k <- c(10,10,10)
+##' k <- c(30,30,30)
 ##' distribution <-  c("Lognormal-beta","Lognormal-beta","Lognormal-beta")
 ##' compare_mixing (n_iter, mu, sigma, b, k, distribution )
 ##' @export
