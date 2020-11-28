@@ -144,7 +144,7 @@
     </tr>
     <tr>
       <th>distribution</th>
-      <td><p>what suitable distribution type we have employed for simulation such as 'Poisson-fair' or 'Poisson-beta' or 'Lognormal-fair' or 'Lognormal-beta'</p></td>
+      <td><p>what suitable distribution type we have employed for simulation such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'</p></td>
     </tr>
     <tr>
       <th>summary</th>
@@ -171,14 +171,13 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>n_iter</span> <span class='op'>&lt;-</span> <span class='fl'>200000</span>
-<span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20</span>,<span class='fl'>30</span>,<span class='fl'>50</span>,<span class='fl'>60</span><span class='op'>)</span>
-<span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.8</span>,<span class='fl'>0.8</span>,<span class='fl'>0.8</span>,<span class='fl'>0.8</span><span class='op'>)</span>
-<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>0.1</span>,<span class='fl'>0.1</span>,<span class='fl'>0.1</span><span class='op'>)</span>
-<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>,<span class='fl'>10</span>,<span class='fl'>10</span>,<span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Poisson-fair"</span>,<span class='st'>"Poisson-beta"</span>,<span class='st'>"Lognormal-fair"</span>,<span class='st'>"Lognormal-beta"</span><span class='op'>)</span>
-<span class='fu'>sim_single</span><span class='op'>(</span> <span class='va'>n_iter</span>, <span class='va'>mu</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>sigma</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>b</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>k</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='va'>distribution</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, summary <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Calculation took 32.03 seconds.</div><div class='output co'>#&gt;     mean_N   St.D_N
-#&gt; 1 30.00177 5.476065</div></pre>
+<span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fl'>100</span>
+<span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span>
+<span class='va'>b</span> <span class='op'>&lt;-</span> <span class='fl'>0.1</span>
+<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
+<span class='fu'>sim_single</span><span class='op'>(</span> <span class='va'>n_iter</span>, <span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>b</span>, <span class='va'>k</span>, distribution <span class='op'>=</span> <span class='st'>"Poisson-Type A"</span>, summary <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Calculation took 41.82 seconds.</div><div class='output co'>#&gt;     mean_N   St.D_N
+#&gt; 1 99.99069 10.00949</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

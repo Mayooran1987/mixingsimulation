@@ -5,14 +5,14 @@
 ##' @param sigma log standard deviation of the colony-forming units in a primary sample
 ##' @param b concentration parameter
 ##' @param k number of small portions/ primary samples
-##' @param distribution what suitable distribution type we have employed for simulation such as 'Poisson-fair' or 'Poisson-beta' or 'Lognormal-fair' or 'Lognormal-beta'
+##' @param distribution what suitable distribution type we have employed for simulation such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'
 ##' @return graphical comparison between different mixing schemes
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary sample and \eqn{N' = \sum(N_i)}  and \eqn{i} be the number of colony-forming units in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k} and \eqn{y_i=x_i/\sum(x_i) = q_i/Q}; where \eqn{x_i} follows \eqn{gamma (b,1)} (to be finished later on)
 ##' \itemize{
-##' \item Case 1 (Poisson-fair): \eqn{N_i} follows \eqn{Poisson(\mu/k)}
-##' \item Case 2 (Poisson-beta): \eqn{N_i} follows \eqn{Poisson(\mu*y_i)}
-##' \item Case 3 (Lognormal-fair): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
-##' \item Case 4 (Lognormal-beta): \eqn{N_i}  follows \eqn{Binomial(M_i,y_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
+##' \item Case 1 (Poisson-Type A): \eqn{N_i} follows \eqn{Poisson(\mu/k)}
+##' \item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*y_i)}
+##' \item Case 3 (Lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
+##' \item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,y_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 ##' }
 ##' @seealso \link{sim_multiple}, \link{sim_single}
 ##' @references
@@ -25,7 +25,7 @@
 ##' sigma <- c(0.8,0.8,0.8)
 ##' b <- c(0.1,1,10)
 ##' k <- c(30,30,30)
-##' distribution <-  c("Lognormal-beta","Lognormal-beta","Lognormal-beta")
+##' distribution <-  c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
 ##' compare_mixing (n_iter, mu, sigma, b, k, distribution )
 ##' @export
 compare_mixing <- function(n_iter, mu, sigma, b, k, distribution){

@@ -5,7 +5,7 @@
 ##' @param sigma log standard deviation of the colony-forming units in a primary sample
 ##' @param b concentration parameter
 ##' @param k number of small portions/ primary samples
-##' @param distribution what suitable distribution type we have employed for simulation such as 'Poisson-fair' or 'Poisson-beta' or 'Lognormal-fair' or 'Lognormal-beta'
+##' @param distribution what suitable distribution type we have employed for simulation such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'
 ##' @param summary if we need to get the mean and standard deviation of simulated \eqn{N'}, use summary = TRUE ( default summary =FALSE).
 ##' @return total number of colony forming units in the single mixing plan
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary sample and \eqn{N' = \sum(N_i)} (to be finished later on)
@@ -16,20 +16,19 @@
 ##' }
 ##' @examples
 ##' n_iter <- 200000
-##' mu <- c(20,30,50,60)
-##' sigma <- c(0.8,0.8,0.8,0.8)
-##' b <- c(0.1,0.1,0.1,0.1)
-##' k <- c(10,10,10,10)
-##'distribution <-  c("Poisson-fair","Poisson-beta","Lognormal-fair","Lognormal-beta")
-##' sim_single( n_iter, mu[2], sigma[2], b[2], k[2], distribution[2], summary = TRUE)
+##' mu <- 100
+##' sigma <- 0.8
+##' b <- 0.1
+##' k <- 10
+##' sim_single( n_iter, mu, sigma, b, k, distribution = "Poisson-Type A", summary = TRUE)
 ##' @export
-sim_single <- function(n_iter, mu, sigma, b, k, distribution, summary = FALSE){
-  if (distribution == "Poisson-fair") {
+sim_single <- function(n_iter, mu, sigma , b , k, distribution, summary = FALSE){
+  if (distribution == "Poisson-Type A") {
     sim <-  matrix(NA, nrow = n_iter, ncol = k)
     for(j in 1:k){
       sim[,j] <-  stats::rpois(n_iter, mu/k)
     }
-  } else if (distribution == "Poisson-beta") {
+  } else if (distribution == "Poisson-Type B") {
     for (i in 1:k) {
       x <- matrix(stats::rgamma(k,b), ncol = k, nrow = 1)
       sm <- x%*%rep(1, k)
@@ -41,13 +40,13 @@ sim_single <- function(n_iter, mu, sigma, b, k, distribution, summary = FALSE){
         sim[,j] <-  rpois(n_iter, mu*w[,j])
       }
     }
-  } else if (distribution == "Lognormal-fair") {
+  } else if (distribution == "Lognormal-Type A") {
     M <- matrix(stats::rlnorm(k, meanlog = mu, sdlog = sigma), ncol = k, nrow = 1)
     sim <-  matrix(NA, nrow = n_iter, ncol = k)
     for(j in 1:k){
       sim[,j] <-  rbinom(n_iter, floor(M[,j]), 1/k)
     }
-  } else if (distribution == "Lognormal-beta") {
+  } else if (distribution == "Lognormal-Type B") {
     # y <- matrix(stats::rgamma(k,b), ncol = k, nrow = 1)
     # sum <- apply(y, 1, sum)
     # w <- matrix(NA, ncol=k, nrow=1)
@@ -63,7 +62,7 @@ sim_single <- function(n_iter, mu, sigma, b, k, distribution, summary = FALSE){
       sim[,j] <-  stats::rbinom(n_iter, floor(M[,j]), w[,j])
     }
   } else {
-    print("please choose the one of the given distribution with case sensitive such as 'Poisson-fair' or 'Poisson-beta' or 'Lognormal-fair' or 'Lognormal-beta' ")
+    print("please choose the one of the given distribution type with case sensitive such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'")
   }
   if (summary == TRUE){
     mean_N <- sum(apply(sim, 2, mean))
@@ -75,6 +74,7 @@ sim_single <- function(n_iter, mu, sigma, b, k, distribution, summary = FALSE){
   cat("Calculation took", proc.time()[1], "seconds.\n")
   return(result)
 }
+
 
 
 

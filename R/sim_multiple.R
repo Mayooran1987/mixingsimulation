@@ -5,7 +5,7 @@
 ##' @param sigma log standard deviation of the colony-forming units in a primary sample
 ##' @param b concentration parameter
 ##' @param k number of small portions/ primary samples
-##' @param distribution what suitable distribution type we have employed for simulation such as 'Poisson-fair' or 'Poisson-beta' or 'Lognormal-fair' or 'Lognormal-beta'
+##' @param distribution what suitable distribution type we have employed for simulation such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'
 ##' @return total number of colony forming units in the multiple mixing scheme
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary sample and \eqn{N' = \sum(N_i)} (to be finished later on)
 ##' @seealso \link{sim_single}, \link{compare_mixing}
@@ -19,7 +19,7 @@
 ##' sigma <- c(0.8,0.8,0.8,0.8)
 ##' b <- c(0.1,0.1,0.1,0.1)
 ##' k <- c(10,10,10,10)
-##'distribution <-  c("Poisson-fair","Poisson-fair","Poisson-fair","Poisson-fair")
+##'distribution <-  c("Poisson-Type A","Poisson-Type A","Poisson-Type A","Poisson-Type A")
 ##' head(sim_multiple( n_iter, mu, sigma, b, k, distribution))
 ##' @export
 sim_multiple <- function(n_iter, mu, sigma, b, k, distribution){

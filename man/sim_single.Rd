@@ -17,7 +17,7 @@ sim_single(n_iter, mu, sigma, b, k, distribution, summary = FALSE)
 
 \item{k}{number of small portions/ primary samples}
 
-\item{distribution}{what suitable distribution type we have employed for simulation such as 'Poisson-fair' or 'Poisson-beta' or 'Lognormal-fair' or 'Lognormal-beta'}
+\item{distribution}{what suitable distribution type we have employed for simulation such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'}
 
 \item{summary}{if we need to get the mean and standard deviation of simulated \eqn{N'}, use summary = TRUE ( default summary =FALSE).}
 }
@@ -32,12 +32,11 @@ Let \eqn{N'} be the number of colony-forming units in the mixed sample which is 
 }
 \examples{
 n_iter <- 200000
-mu <- c(20,30,50,60)
-sigma <- c(0.8,0.8,0.8,0.8)
-b <- c(0.1,0.1,0.1,0.1)
-k <- c(10,10,10,10)
-distribution <-  c("Poisson-fair","Poisson-beta","Lognormal-fair","Lognormal-beta")
-sim_single( n_iter, mu[2], sigma[2], b[2], k[2], distribution[2], summary = TRUE)
+mu <- 100
+sigma <- 0.8
+b <- 0.1
+k <- 10
+sim_single( n_iter, mu, sigma, b, k, distribution = "Poisson-Type A", summary = TRUE)
 }
 \references{
 \itemize{
