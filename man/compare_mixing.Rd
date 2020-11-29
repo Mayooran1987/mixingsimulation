@@ -27,16 +27,16 @@ This function provides the graphical displays for a different set of mixing plan
 }
 \details{
 {Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units
-in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k}. Following Nauta (2005), contribution weight of contamination by each primary sample can be defined by the random variable \eqn{y_i}
-which is possible to be following either uniform distribution with paramater \eqn{k} or joint distribution of \eqn{y_1,y_2,\cdots y_k} follows Dirichlet distribution with concentration parameter \eqn{b}.
-Based on the literature, Dirichlet distribution can be formulated by beta or gamma algorithm which are revealed the same results; see Nauta (2005). This function is developed by based on
+in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k}. Following Nauta (2005), contribution weight of contamination by each primary sample can be defined by the random variable \eqn{w_i}
+which is possible to be following either uniform distribution with paramater \eqn{1/k} or joint distribution of \eqn{w_1,w_2,\cdots w_k} follows Dirichlet distribution with concentration parameter \eqn{b}.
+From the previous literature, Dirichlet distribution can be formulated by beta or gamma algorithm which are revealed the same results; see Nauta (2005). This function is developed by based on
 gamma algorithm, it is formulated  the following steps.
-\deqn{y_i=\frac{x_i}{\sum_{j=1}^{k}{x_j}}~~~~ \forall i = 1,2,\cdots k}; where \eqn{x_i} follows \eqn{gamma (b,1)} and also \eqn{\sum y_i} must be equal to one.
+\deqn{w_i=\frac{x_i}{\sum_{j=1}^{k}{x_j}}~~~~ \forall i = 1,2,\cdots k}; where \eqn{x_i} follows \eqn{gamma (b,1)} and also \eqn{\sum w_i} must be equal to one.
 \itemize{
 \item Case 1 (Poisson-Type A): \eqn{N_i} follows \eqn{Poisson(\mu/k)}
-\item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*y_i)}
+\item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*w_i)}
 \item Case 3 (Lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
-\item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,y_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
+\item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,w_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 }}
 }
 \examples{
