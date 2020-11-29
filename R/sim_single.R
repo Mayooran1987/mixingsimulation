@@ -1,14 +1,14 @@
 ##' This function calculates the resulting total number of colony forming units in the mixed sample in the single mixing plan. (to be finished later on)
 ##' @title The total number of colony-forming units in the mixed sample by simulation result (in the single mixing plan).
 ##' @param n_iter number of iterations
-##' @param mu average number of colony-forming units in a primary sample which is in logarithmic scale if we use a lognormal distribution
-##' @param sigma log standard deviation of the colony-forming units in a primary sample
+##' @param mu average number of colony-forming units in mixed sample which is in logarithmic scale if we use a lognormal distribution
+##' @param sigma log standard deviation of the colony-forming units in the mixed sample
 ##' @param b concentration parameter
 ##' @param k number of small portions/ primary samples
-##' @param distribution what suitable distribution type we have employed for simulation such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'
+##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}
 ##' @param summary if we need to get the mean and standard deviation of simulated \eqn{N'}, use summary = TRUE ( default summary =FALSE).
 ##' @return total number of colony forming units in the single mixing plan
-##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary sample and \eqn{N' = \sum(N_i)} (to be finished later on)
+##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.To more details, please refer the details section of  \link{compare_mixing}. (to be finished later on)
 ##' @seealso \link{sim_multiple}, \link{compare_mixing}
 ##' @references
 ##' \itemize{

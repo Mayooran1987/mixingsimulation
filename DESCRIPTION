@@ -18,6 +18,6 @@ Imports: ggplot2, ggthemes, plyr, reshape2, stats
 Suggests: 
     testthat
 RoxygenNote: 7.1.1
-Depends: R (>= 3.2)
+Depends: R (>= 4.0)
 Maintainer: Mayooran Thevaraja <mayooran@eng.jfn.ac.lk>
 Language: en-US

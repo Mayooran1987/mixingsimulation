@@ -9,15 +9,15 @@ compare_mixing(n_iter, mu, sigma, b, k, distribution)
 \arguments{
 \item{n_iter}{number of iterations}
 
-\item{mu}{average number of colony-forming units in a primary sample which is in logarithmic scale if we use a lognormal distribution}
+\item{mu}{average number of colony-forming units in mixed sample which is in logarithmic scale if we use a lognormal distribution}
 
-\item{sigma}{log standard deviation of the colony-forming units in a primary sample}
+\item{sigma}{log standard deviation of the colony-forming units in the mixed sample}
 
 \item{b}{concentration parameter}
 
 \item{k}{number of small portions/ primary samples}
 
-\item{distribution}{what suitable distribution type we have employed for simulation such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'}
+\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
 }
 \value{
 graphical comparison between different mixing schemes
@@ -26,13 +26,18 @@ graphical comparison between different mixing schemes
 This function provides the graphical displays for a different set of mixing plans for comparison purpose. (to be finished later on)
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary sample and \eqn{N' = \sum(N_i)}  and \eqn{i} be the number of colony-forming units in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k} and \eqn{y_i=x_i/\sum(x_i) = q_i/Q}; where \eqn{x_i} follows \eqn{gamma (b,1)} (to be finished later on)
+{Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units
+in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k}. Following Nauta (2005), contribution weight of contamination by each primary sample can be defined by the random variable \eqn{y_i}
+which is possible to be following either uniform distribution with paramater \eqn{k} or joint distribution of \eqn{y_1,y_2,\cdots y_k} follows Dirichlet distribution with concentration parameter \eqn{b}.
+Based on the literature, Dirichlet distribution can be formulated by beta or gamma algorithm which are revealed the same results; see Nauta (2005). This function is developed by based on
+gamma algorithm, it is formulated  the following steps.
+\deqn{y_i=\frac{x_i}{\sum_{j=1}^{k}{x_j}}~~~~ \forall i = 1,2,\cdots k}; where \eqn{x_i} follows \eqn{gamma (b,1)} and also \eqn{\sum y_i} must be equal to one.
 \itemize{
 \item Case 1 (Poisson-Type A): \eqn{N_i} follows \eqn{Poisson(\mu/k)}
 \item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*y_i)}
 \item Case 3 (Lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 \item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,y_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
-}
+}}
 }
 \examples{
 n_iter <- 2000000
