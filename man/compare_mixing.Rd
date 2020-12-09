@@ -4,49 +4,50 @@
 \alias{compare_mixing}
 \title{The graphical comparison between different mixing schemes with varying parameters of mixing by simulation results.}
 \usage{
-compare_mixing(n_iter, mu, sigma, b, k, distribution)
+compare_mixing(mu, sigma, alpha, k, distribution, n_sim)
 }
 \arguments{
-\item{n_iter}{number of iterations}
+\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
 
-\item{mu}{average number of colony-forming units in mixed sample which is in logarithmic scale if we use a lognormal distribution}
+\item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the log10 scale (default value 0.8)}
 
-\item{sigma}{log standard deviation of the colony-forming units in the mixed sample}
-
-\item{b}{concentration parameter}
+\item{alpha}{concentration parameter}
 
 \item{k}{number of small portions/ primary samples}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
+
+\item{n_sim}{number of simulations}
 }
 \value{
 graphical comparison between different mixing schemes
 }
 \description{
-This function provides the graphical displays for a different set of mixing plans for comparison purpose. (to be finished later on)
+This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes.
 }
 \details{
 {Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units
-in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k}. Following Nauta (2005), contribution weight of contamination by each primary sample can be defined by the random variable \eqn{w_i}
-which is possible to be following either uniform distribution with paramater \eqn{1/k} or joint distribution of \eqn{w_1,w_2,\cdots w_k} follows Dirichlet distribution with concentration parameter \eqn{b}.
-From the previous literature, Dirichlet distribution can be formulated by beta or gamma algorithm which are revealed the same results; see Nauta (2005). This function is developed by based on
+in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k}. Following \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}, contribution weight of contamination by each primary sample can be defined by the random variable \eqn{w_i}
+which is possible to be following either uniform distribution with paramater \eqn{1/k} or joint distribution of \eqn{w_1,w_2,\cdots w_k} follows Dirichlet distribution with concentration parameter \eqn{alpha}.
+From the previous literature, Dirichlet distribution can be formulated by beta or gamma algorithm which are revealed the same results; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}. This function is developed by based on
 gamma algorithm, it is formulated  the following steps.
-\deqn{w_i=\frac{x_i}{\sum_{j=1}^{k}{x_j}}~~~~ \forall i = 1,2,\cdots k}; where \eqn{x_i} follows \eqn{gamma (b,1)} and also \eqn{\sum w_i} must be equal to one.
+\deqn{w_i=\frac{x_i}{\sum_{j=1}^{k}{x_j}}~~~~ \forall i = 1,2,\cdots k}; where \eqn{x_i} follows \eqn{gamma (alpha,1)} and also \eqn{\sum w_i} must be equal to one.
 \itemize{
 \item Case 1 (Poisson-Type A): \eqn{N_i} follows \eqn{Poisson(\mu/k)}
 \item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*w_i)}
 \item Case 3 (Lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 \item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,w_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 }}
+For this package development, we have employed the notations 'Type-A' and 'Type-B'  to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
 }
 \examples{
-n_iter <- 2000000
-mu <- c(log(100),log(100),log(100))
+mu <- c(100,100,100)
 sigma <- c(0.8,0.8,0.8)
-b <- c(0.1,1,10)
+alpha <- c(0.1,1,10)
 k <- c(30,30,30)
 distribution <-  c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
-compare_mixing (n_iter, mu, sigma, b, k, distribution )
+n_sim <- 20000
+compare_mixing (mu, sigma, alpha, k, distribution, n_sim )
 }
 \references{
 \itemize{

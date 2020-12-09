@@ -4,20 +4,20 @@
 \alias{sim_multiple}
 \title{The total number of colony-forming units in the mixed sample by simulation result (in the multiple mixing plan).}
 \usage{
-sim_multiple(n_iter, mu, sigma, b, k, distribution)
+sim_multiple(mu, sigma, alpha, k, distribution, n_sim)
 }
 \arguments{
-\item{n_iter}{number of iterations}
+\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
 
-\item{mu}{average number of colony-forming units in mixed sample which is in logarithmic scale if we use a lognormal distribution}
+\item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the log10 scale (default value 0.8)}
 
-\item{sigma}{log standard deviation of the colony-forming units in the mixed sample}
-
-\item{b}{concentration parameter}
+\item{alpha}{concentration parameter}
 
 \item{k}{number of small portions/ primary samples}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
+
+\item{n_sim}{number of simulations}
 }
 \value{
 total number of colony forming units in the multiple mixing scheme
@@ -29,13 +29,24 @@ This function calculates the resulting total number of colony forming units in t
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing}. (to be finished later on)
 }
 \examples{
-n_iter <- 200000
-mu <- c(20,30,50,60)
-sigma <- c(0.8,0.8,0.8,0.8)
-b <- c(0.1,0.1,0.1,0.1)
-k <- c(10,10,10,10)
-distribution <-  c("Poisson-Type A","Poisson-Type A","Poisson-Type A","Poisson-Type A")
-head(sim_multiple( n_iter, mu, sigma, b, k, distribution))
+mu <- c(100,100)
+sigma <- c(0.8,0.8)
+alpha <- c(0.1,10)
+k <- c(10,10)
+distribution <-  c("Lognormal-Type B","Lognormal-Type B")
+n_sim <- 20000
+n_sim_df <-data.frame(n_simulations = c(1:n_sim))
+Prob_df <- cbind.data.frame(n_sim_df,sim_multiple(mu, sigma, alpha, k, distribution, n_sim))
+melten.Prob <- reshape2::melt(Prob_df, id = "n_simulations", variable.name = "mixing_scheme",
+value.name = "Total_CFU")
+plot_example <- ggplot2::ggplot(melten.Prob) + ggplot2::geom_point(ggplot2::aes(x = n_simulations,
+y = Total_CFU, group = mixing_scheme, colour = mixing_scheme))+
+ggplot2::xlab(expression("Number of simulations"))+ ggplot2::theme_classic()+
+ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5),legend.position = c(0.70,0.90),
+legend.box.background = ggplot2::element_rect(),legend.box.margin = ggplot2::margin(1,1,1,1))+
+ggplot2::ylab(expression("Total number of CFU"))+
+ggthemes::scale_colour_colorblind()
+print(plot_example)
 }
 \references{
 \itemize{

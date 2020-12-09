@@ -17,5 +17,9 @@ Any R user can install the development version of mixingsimulation package from 
 devtools::install_github("Mayooran1987/mixingsimulation")
 ```
 
+<!-- The homogenisation occurs stage-by-stage in the powder-mixing process, which is illustrated in the following Figure. -->
 
+<!-- ```{r, fig.cap="\\label{Figure 1} Explanation of the analytical sample preparation process for microorganisms testing"} -->
+<!-- knitr::include_graphics("analytical_sample.pdf") -->
+<!-- ``` -->
 

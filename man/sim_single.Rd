@@ -4,20 +4,20 @@
 \alias{sim_single}
 \title{The total number of colony-forming units in the mixed sample by simulation result (in the single mixing plan).}
 \usage{
-sim_single(n_iter, mu, sigma, b, k, distribution, summary = FALSE)
+sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = FALSE)
 }
 \arguments{
-\item{n_iter}{number of iterations}
+\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
 
-\item{mu}{average number of colony-forming units in mixed sample which is in logarithmic scale if we use a lognormal distribution}
+\item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the log10 scale (default value 0.8)}
 
-\item{sigma}{log standard deviation of the colony-forming units in the mixed sample}
-
-\item{b}{concentration parameter}
+\item{alpha}{concentration parameter}
 
 \item{k}{number of small portions/ primary samples}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
+
+\item{n_sim}{number of simulations}
 
 \item{summary}{if we need to get the mean and standard deviation of simulated \eqn{N'}, use summary = TRUE ( default summary =FALSE).}
 }
@@ -31,12 +31,12 @@ This function calculates the resulting total number of colony forming units in t
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.To more details, please refer the details section of  \link{compare_mixing}. (to be finished later on)
 }
 \examples{
-n_iter <- 200000
 mu <- 100
 sigma <- 0.8
-b <- 0.1
+alpha <- 0.1
 k <- 10
-sim_single( n_iter, mu, sigma, b, k, distribution = "Poisson-Type A", summary = TRUE)
+n_sim <- 20000
+sim_single(mu, sigma, alpha, k, distribution = "Poisson-Type A", n_sim, summary = TRUE)
 }
 \references{
 \itemize{
