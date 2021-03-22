@@ -1,21 +1,21 @@
-##' This function calculates the resulting total number of colony forming units in the mixed sample in the multiple mixing plans. (to be finished later on)
-##' @title The total number of colony-forming units in the mixed sample by simulation result (in the multiple mixing plan).
+##' This function calculates the resulting total number of colony forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
+##' @title The total number of colony-forming units in the mixed sample by the simulation results in the multiple mixing plan with varying mixing parameters.
 ##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution
-##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the log10 scale (default value 0.8)
+##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha concentration parameter
 ##' @param k number of small portions/ primary samples
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}
 ##' @param n_sim number of simulations
 ##' @return total number of colony forming units in the multiple mixing scheme
-##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing}. (to be finished later on)
-##' @seealso \link{sim_single}, \link{compare_mixing}
+##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_stages}.
+##' @seealso \link{sim_single}, \link{compare_mixing_stages}
 ##' @references
 ##' \itemize{
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
 ##' }
 ##' @examples
 ##' mu <- c(100,100)
-##' sigma <- c(0.8,0.8)
+##' sigma <- 0.8
 ##' alpha <- c(0.1,10)
 ##' k <- c(10,10)
 ##' distribution <-  c("Lognormal-Type B","Lognormal-Type B")
@@ -36,18 +36,18 @@
 sim_multiple <- function(mu, sigma, alpha, k, distribution, n_sim){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
-  }
+    }
   if (length(mu)!=length(k)) {
     warning("length of mu and length of k are must be equal")
-  } else {
-  sim.sum1 <- matrix(NA, nrow = n_sim, ncol = length(k))
-  for(j in 1:length(k)){
-    sim.sum1[,j] <-  sim_single(mu[j], sigma[j], alpha[j], k[j], distribution[j], n_sim)
-  }
-   }
+    } else {
+      sim.sum1 <- matrix(NA, nrow = n_sim, ncol = length(k))
+      for(j in 1:length(k)){
+        sim.sum1[,j] <-  sim_single(mu[j], sigma, alpha[j], k[j], distribution[j], n_sim, summary = FALSE)
+      }
+      }
   result <- data.frame(sim.sum1)
   colnames(result) <- f_spri(mu, k, alpha, distribution)
   # cat("Calculation took", proc.time()[1], "seconds.\n")
   return(result)
-}
+  }
 

@@ -2,14 +2,14 @@
 % Please edit documentation in R/sim_multiple.R
 \name{sim_multiple}
 \alias{sim_multiple}
-\title{The total number of colony-forming units in the mixed sample by simulation result (in the multiple mixing plan).}
+\title{The total number of colony-forming units in the mixed sample by the simulation results in the multiple mixing plan with varying mixing parameters.}
 \usage{
 sim_multiple(mu, sigma, alpha, k, distribution, n_sim)
 }
 \arguments{
 \item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
 
-\item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the log10 scale (default value 0.8)}
+\item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
 \item{alpha}{concentration parameter}
 
@@ -23,14 +23,14 @@ sim_multiple(mu, sigma, alpha, k, distribution, n_sim)
 total number of colony forming units in the multiple mixing scheme
 }
 \description{
-This function calculates the resulting total number of colony forming units in the mixed sample in the multiple mixing plans. (to be finished later on)
+This function calculates the resulting total number of colony forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing}. (to be finished later on)
+Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_stages}.
 }
 \examples{
 mu <- c(100,100)
-sigma <- c(0.8,0.8)
+sigma <- 0.8
 alpha <- c(0.1,10)
 k <- c(10,10)
 distribution <-  c("Lognormal-Type B","Lognormal-Type B")
@@ -54,5 +54,5 @@ print(plot_example)
 }
 }
 \seealso{
-\link{sim_single}, \link{compare_mixing}
+\link{sim_single}, \link{compare_mixing_stages}
 }

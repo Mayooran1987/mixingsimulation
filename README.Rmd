@@ -4,11 +4,15 @@ output: github_document
 
 [![Build Status](https://travis-ci.com/Mayooran1987/mixingsimulation.svg?branch=main)](https://travis-ci.com/Mayooran1987/mixingsimulation)
 
-# mixingsimulation
+<style>
+body {text-align: justify}
+</style>
+
+# 'mixingsimulation'
 
 The goal of mixingsimulation is to develop simulated results and comparing graphical displays for different mixing plans. Also, description of this package functions is available at <https://mayooran1987.github.io/mixingsimulation/reference/index.html>.
 
-## Installation
+### Installation
 
 Any R user can install the development version of mixingsimulation package from [GitHub](https://github.com/) with just two lines of code:
 
@@ -16,6 +20,15 @@ Any R user can install the development version of mixingsimulation package from 
 # install.packages("devtools")
 devtools::install_github("Mayooran1987/mixingsimulation")
 ```
+
+
+### Explanation of the analytical sample preparation process for microorganisms testing
+<center>
+![Figure 1](F:/Package_mixing/analytical_sample.jpg){width=80%}
+</center>
+
+
+
 
 <!-- The homogenisation occurs stage-by-stage in the powder-mixing process, which is illustrated in the following Figure. -->
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing. — sim_single • mixingsimulation</title>
+<title>The graphical comparison between different mixing schemes by the simulation results in the mixing process's multiple stages with varying mixing parameters. — compare_mixing_stages • mixingsimulation</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing. — sim_single" />
-<meta property="og:description" content="This function calculates the resulting total number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing." />
+<meta property="og:title" content="The graphical comparison between different mixing schemes by the simulation results in the mixing process's multiple stages with varying mixing parameters. — compare_mixing_stages" />
+<meta property="og:description" content="This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes with multiple stages of mixing." />
 
 
 
@@ -108,16 +108,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/sim_single.R'><code>R/sim_single.R</code></a></small>
-    <div class="hidden name"><code>sim_single.Rd</code></div>
+    <h1>The graphical comparison between different mixing schemes by the simulation results in the mixing process's multiple stages with varying mixing parameters.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/compare_mixing_stages.R'><code>R/compare_mixing_stages.R</code></a></small>
+    <div class="hidden name"><code>compare_mixing_stages.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function calculates the resulting total number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.</p>
+    <p>This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes with multiple stages of mixing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sim_single</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha</span>, <span class='va'>k</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span>, summary <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>compare_mixing_stages</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,12 +131,20 @@
       <td><p>the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)</p></td>
     </tr>
     <tr>
-      <th>alpha</th>
-      <td><p>concentration parameter</p></td>
+      <th>alpha_in</th>
+      <td><p>concentration parameter at the initial stage</p></td>
     </tr>
     <tr>
       <th>k</th>
       <td><p>number of small portions/ primary samples</p></td>
+    </tr>
+    <tr>
+      <th>l</th>
+      <td><p>number of revolutions/stages</p></td>
+    </tr>
+    <tr>
+      <th>rate</th>
+      <td><p>concentration parameter changing rate in the each revolutions</p></td>
     </tr>
     <tr>
       <th>distribution</th>
@@ -146,18 +154,28 @@
       <th>n_sim</th>
       <td><p>number of simulations</p></td>
     </tr>
-    <tr>
-      <th>summary</th>
-      <td><p>if we need to get all simulated \(N'\), use <code>summary = FALSE</code> otherwise function provides mean value of the simulated \(N'\) ( default <code>summary = TRUE</code>).</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>total number of colony forming units in the single mixing plan</p>
+    <p>graphical comparison between different mixing schemes.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Let \(N'\) be the number of colony-forming units in the mixed sample which is produced by mixing of \(k\) primary samples and \(N' = \sum N_i\).To more details, please refer the details section of  <a href='compare_mixing_stages.html'>compare_mixing_stages</a>. (to be finished later on)</p>
+    <p>Let \(N'\) be the number of colony-forming units in the mixed sample which is produced by mixing of \(k\) primary samples and \(N' = \sum N_i\) and \(N_i\) be the number of colony-forming units
+in the \(i^{th}\) primary sample; where \(i = 1,2,....k\).For this package development, we have employed the notations 'Type-A' and 'Type-B'  to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively; see <a href='https://doi.org/10.1016/j.ijfoodmicro.2004.10.027'>Nauta (2005)</a>.Following <a href='https://doi.org/10.1016/j.ijfoodmicro.2004.10.027'>Nauta (2005)</a>, the contribution weight of contamination by each primary sample can be defined by the random variable \(w_i\)
+which is possible to be following either uniform distribution with parameter \(1/k\) or joint distribution of \(w_1,w_2,\cdots w_k\) follows Dirichlet distribution with concentration parameter \(\alpha\).
+From the previous literature, Dirichlet distribution can be formulated by beta or gamma algorithm which are revealed the same results; see <a href='https://doi.org/10.1016/j.ijfoodmicro.2004.10.027'>Nauta (2005)</a>.This function is developed based on the beta algorithm, and the following steps formulate it.
+$$w_i = x_i {\prod_{j=1}^{i-1}{1-x_j}}~~~~ \forall i = 2,3,\cdots k$$ and \(w_1=x_1\);where \(x_i\) follows \(Beta (\alpha,\alpha(k-i))\) and also \(\sum w_i\) must be equal to one.
+<ul>
+<li><p>Case 1 (Poisson-Type A): \(N_i\) follows \(Poisson(\mu/k)\)</p></li>
+<li><p>Case 2 (Poisson-Type B): \(N_i\) follows \(Poisson(\mu*w_i)\)</p></li>
+<li><p>Case 3 (Lognormal-Type A): \(N_i\) follows \(Binomial(M_i,1/k)\); where  \(M_i\) follows \(Lognormal(\mu, \sigma)\)</p></li>
+<li><p>Case 4 (Lognormal-Type B): \(N_i\)  follows \(Binomial(M_i,w_i)\); where  \(M_i\) follows \(Lognormal(\mu, \sigma)\)</p></li>
+</ul></p>
+
+<p>The powder mixing process can be defined as breaking clusters stage by stage. Usually, it will be occurring systematically in the standard powder mixtures. For this package development, we assume that mixing parameters also systematically changing with a fixed rate in each stage of the mixing.
+The mixing parameter can be defined as revolutions instead of the mixing stage in general. Due to the lack of theoretical results to the dependent random variable sum's distribution, we have chosen simulation techniques for this modelling.</p>
+<p>Let \(l\) be the number of stages or revolution of the mixture, also we assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed that increasing at every stage of the mixing, which is possible to be systematically. Therefore this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -167,16 +185,19 @@
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='compare_mixing_stages.html'>compare_mixing_stages</a></p></div>
+    <div class='dont-index'><p><a href='sim_single.html'>sim_single</a>, <a href='sim_single_stages.html'>sim_single_stages</a>, <a href='sim_multiple_stages.html'>sim_multiple_stages</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fl'>100</span>
+    <pre class="examples"><div class='input'><span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>100</span>,<span class='fl'>100</span>,<span class='fl'>100</span><span class='op'>)</span>
 <span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span>
-<span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>0.1</span>
-<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fl'>30</span>
+<span class='va'>alpha_in</span> <span class='op'>&lt;-</span> <span class='fl'>1</span>
+<span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>,<span class='fl'>30</span>,<span class='fl'>50</span><span class='op'>)</span>
+<span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>800</span>
+<span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span>
+<span class='va'>distribution</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Lognormal-Type B"</span>,<span class='st'>"Lognormal-Type B"</span>,<span class='st'>"Lognormal-Type B"</span><span class='op'>)</span>
 <span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span>
-<span class='fu'>sim_single</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha</span>, <span class='va'>k</span>, distribution <span class='op'>=</span> <span class='st'>"Lognormal-Type B"</span>, <span class='va'>n_sim</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 146.5243</div></pre>
+<span class='fu'>compare_mixing_stages</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span>
+</div><div class='img'><img src='compare_mixing_stages-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
