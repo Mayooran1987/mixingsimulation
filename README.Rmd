@@ -22,10 +22,10 @@ devtools::install_github("Mayooran1987/mixingsimulation")
 ```
 
 
-### Explanation of the analytical sample preparation process for microorganisms testing
-<center>
-![Figure 1](F:/Package_mixing/analytical_sample.jpg){width=80%}
-</center>
+<!-- ### Explanation of the analytical sample preparation process for microorganisms testing -->
+<!-- <center> -->
+<!-- ![Figure 1](F:/Package_mixing/analytical_sample.jpg){width=80%} -->
+<!-- </center> -->
 
 
 

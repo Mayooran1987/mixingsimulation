@@ -38,12 +38,12 @@ This package will consider stage by stage of the mixing process and assume syste
 \examples{
 rate <- 0.01
 l <- 800
-mu <- c(100,100,100)
+mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- c(10,20,30)
 distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
-n_sim <- 20000
+n_sim <- 200000
 colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
 }
 \references{

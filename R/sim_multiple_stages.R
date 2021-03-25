@@ -21,12 +21,12 @@
 ##' @examples
 ##' rate <- 0.01
 ##' l <- 800
-##' mu <- c(100,100,100)
+##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- c(10,20,30)
 ##' distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
-##' n_sim <- 20000
+##' n_sim <- 200000
 ##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
 ##' @export
 sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
@@ -38,7 +38,7 @@ sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n
 # for(i in 1:length(k)){
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(k))
   for(j in 1:length(k)){
-    sim.sum3[,j] <-  sim_single_stages(mu[j], sigma, alpha_in, k[j], l, rate, distribution[j], n_sim)
+    sim.sum3[,j] <-  sim_single_stages(mu, sigma, alpha_in, k[j], l, rate, distribution[j], n_sim)
   }
   result <- data.frame(sim.sum3)
   colnames(result) <- f_spri(mu, k, distribution)

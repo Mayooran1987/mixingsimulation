@@ -58,14 +58,14 @@ The mixing parameter can be defined as revolutions instead of the mixing stage i
 Let \eqn{l} be the number of stages or revolution of the mixture, also we assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed that increasing at every stage of the mixing, which is possible to be systematically. Therefore this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.
 }
 \examples{
-mu <- c(100,100,100)
+mu <- 100
 sigma <- 0.8
 alpha_in <- 1
 k <- c(10,30,50)
-l <- 800
+l <- 1000
 rate <- 0.01
 distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
-n_sim <- 20000
+n_sim <- 200000
 compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \references{

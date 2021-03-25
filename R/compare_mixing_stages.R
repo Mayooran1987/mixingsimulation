@@ -41,14 +41,14 @@
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
 ##' }
 ##' @examples
-##' mu <- c(100,100,100)
+##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 1
 ##' k <- c(10,30,50)
-##' l <- 800
+##' l <- 1000
 ##' rate <- 0.01
 ##' distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
-##' n_sim <- 20000
+##' n_sim <- 200000
 ##' compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 ##' @export
 compare_mixing_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
@@ -63,7 +63,7 @@ compare_mixing_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution,
   stages <- 1:l
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(distribution))
   for(j in 1:length(distribution)){
-    sim.sum3[,j] <-  sim_single_stages(mu[j], sigma , alpha_in, k[j], l, rate, distribution[j], n_sim)
+    sim.sum3[,j] <-  sim_single_stages(mu, sigma , alpha_in, k[j], l, rate, distribution[j], n_sim)
     }
   result <- data.frame(stages, sim.sum3)
   colnames(result) <- c("stages", f_spri(mu, k, distribution))

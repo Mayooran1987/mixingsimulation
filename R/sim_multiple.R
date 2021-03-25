@@ -14,12 +14,12 @@
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
 ##' }
 ##' @examples
-##' mu <- c(100,100)
+##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha <- c(0.1,10)
 ##' k <- c(10,10)
 ##' distribution <-  c("Lognormal-Type B","Lognormal-Type B")
-##' n_sim <- 20000
+##' n_sim <- 200000
 ##' n_sim_df <-data.frame(n_simulations = c(1:n_sim))
 ##' Prob_df <- cbind.data.frame(n_sim_df,sim_multiple(mu, sigma, alpha, k, distribution, n_sim))
 ##' melten.Prob <- reshape2::melt(Prob_df, id = "n_simulations", variable.name = "mixing_scheme",
@@ -37,12 +37,12 @@ sim_multiple <- function(mu, sigma, alpha, k, distribution, n_sim){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
     }
-  if (length(mu)!=length(k)) {
-    warning("length of mu and length of k are must be equal")
+  if (length(alpha)!=length(k)) {
+    warning("length of alpha and length of k are must be equal")
     } else {
       sim.sum1 <- matrix(NA, nrow = n_sim, ncol = length(k))
       for(j in 1:length(k)){
-        sim.sum1[,j] <-  sim_single(mu[j], sigma, alpha[j], k[j], distribution[j], n_sim, summary = FALSE)
+        sim.sum1[,j] <-  sim_single(mu, sigma, alpha[j], k[j], distribution[j], n_sim, summary = FALSE)
       }
       }
   result <- data.frame(sim.sum1)

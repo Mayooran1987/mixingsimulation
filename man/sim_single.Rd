@@ -35,7 +35,7 @@ mu <- 100
 sigma <- 0.8
 alpha <- 0.1
 k <- 30
-n_sim <- 20000
+n_sim <- 200000
 sim_single(mu, sigma, alpha, k, distribution = "Lognormal-Type B", n_sim)
 }
 \references{
