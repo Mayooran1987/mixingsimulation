@@ -4,6 +4,10 @@ output: github_document
 
 [![Build Status](https://travis-ci.com/Mayooran1987/mixingsimulation.svg?branch=main)](https://travis-ci.com/Mayooran1987/mixingsimulation)
 
+<!-- <style> -->
+<!-- body {text-align: justify} -->
+<!-- </style> -->
+
 # 'mixingsimulation'
 
 The goal of mixingsimulation is to develop simulated results and comparing graphical displays for different mixing plans. Also, description of this package functions is available at <https://mayooran1987.github.io/mixingsimulation/reference/index.html>.
