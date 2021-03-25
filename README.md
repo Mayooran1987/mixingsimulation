@@ -2,9 +2,6 @@
 [![Build
 Status](https://travis-ci.com/Mayooran1987/mixingsimulation.svg?branch=main)](https://travis-ci.com/Mayooran1987/mixingsimulation)
 
-<style>
-body {text-align: justify}
-</style>
 
 # ‘mixingsimulation’
 
