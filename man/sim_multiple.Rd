@@ -31,10 +31,10 @@ Let \eqn{N'} be the number of colony-forming units in the mixed sample which is 
 \examples{
 mu <- 100
 sigma <- 0.8
-alpha <- c(0.1,10)
+alpha <- c(0.1,5)
 k <- c(10,10)
 distribution <-  c("Lognormal-Type B","Lognormal-Type B")
-n_sim <- 200000
+n_sim <- 20000
 n_sim_df <-data.frame(n_simulations = c(1:n_sim))
 Prob_df <- cbind.data.frame(n_sim_df,sim_multiple(mu, sigma, alpha, k, distribution, n_sim))
 melten.Prob <- reshape2::melt(Prob_df, id = "n_simulations", variable.name = "mixing_scheme",

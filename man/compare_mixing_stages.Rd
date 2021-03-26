@@ -65,7 +65,7 @@ k <- c(10,30,50)
 l <- 1000
 rate <- 0.01
 distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
-n_sim <- 200000
+n_sim <- 20000
 compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \references{

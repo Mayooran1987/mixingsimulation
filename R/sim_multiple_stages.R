@@ -26,7 +26,7 @@
 ##' alpha_in <- 0.01
 ##' k <- c(10,20,30)
 ##' distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
-##' n_sim <- 200000
+##' n_sim <- 20000
 ##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
 ##' @export
 sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
