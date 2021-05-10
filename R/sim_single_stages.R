@@ -1,13 +1,13 @@
 ##' This function gives a simulated number of CFU after each stage of the mixing process.
 ##' @title The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with \eqn{l}  number of stages.
 ##' @param l the maximum number of stages in the mixing process
-##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution
+##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions/ primary samples
 ##' @param l number of revolutions/stages
 ##' @param rate concentration parameter changing rate in the each revolutions
-##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}
+##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param n_sim number of simulations
 ##' @return average number of colony forming units in the single mixing plan with \eqn{l} number of stages.
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of stages in the mixing process.
@@ -22,9 +22,9 @@
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- 30
-##' l <- 500
+##' l <- 1500
 ##' rate <- 0.01
-##' distribution <-  "Lognormal-Type B"
+##' distribution <-  "Poisson lognormal-Type B"
 ##' n_sim <- 20000
 ##' no.stages <-c(1:l)
 ##' Prob_df <- data.frame(no.stages,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))

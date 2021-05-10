@@ -1,12 +1,12 @@
 ##' This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes with multiple stages of mixing.
 ##' @title The graphical comparison between different mixing schemes by the simulation results in the mixing process's multiple stages with varying mixing parameters.
-##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution
+##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions/ primary samples
 ##' @param l number of revolutions/stages
 ##' @param rate concentration parameter changing rate in the each revolutions
-##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}
+##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param n_sim number of simulations
 ##' @return graphical comparison between different mixing schemes.
 ##' @details {Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units
@@ -28,6 +28,12 @@
 ##' \item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*w_i)}
 ##' \item Case 3 (Lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 ##' \item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,w_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
+##' \item Case 5 (Poisson lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i}
+##'
+##' follows \eqn{Poisson lognormal (\mu, \sigma)}
+##' \item Case 6 (Poisson lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,w_i)}; where  \eqn{M_i}
+##'
+##' follows \eqn{Poisson lognormal(\mu, \sigma)}
 ##' }}
 ##'
 ##'
@@ -43,13 +49,12 @@
 ##' @examples
 ##' mu <- 100
 ##' sigma <- 0.8
-##' alpha_in <- 1
-##' k <- c(10,30,50)
-##' l <- 1000
+##' alpha_in <- 0.01
+##' k <- c(30,50,75)
 ##' rate <- 0.01
-##' distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
+##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 20000
-##' compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+##' compare_mixing_stages(mu, sigma, alpha_in, k, l=25000, rate, distribution, n_sim)
 ##' @export
 compare_mixing_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
   Total_CFU <- NULL
@@ -70,7 +75,7 @@ compare_mixing_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution,
   # return(result)
   melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "Total_CFU")
   # ggplot2::ggplot(df, aes(Total_CFU)) + stat_ecdf(geom = "point")+ theme_classic()
-  plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme, colour = mixing_scheme)) + ggplot2::stat_ecdf(geom = "step") + ggplot2::ylab(expression("Cumulative probability of N'"))+
+  plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme, colour = mixing_scheme)) + ggplot2::stat_ecdf(geom = "line") + ggplot2::ylab(expression("Cumulative probability of N'"))+
     ggplot2::theme_classic()+ ggplot2::xlab(expression("Total CFU after mixing (N')"))+ ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.70,0.25))+
     ggplot2::ggtitle(label = f_spr(l))+ ggthemes::scale_colour_colorblind()
   # + ggplot2::theme(plot.title = element_text(hjust = 0.5))

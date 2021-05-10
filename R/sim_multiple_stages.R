@@ -1,12 +1,12 @@
 ##' This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes with multiple stage of the mixing process.
 ##' @title The total number of colony-forming units in the mixed sample by the simulation results in the multiple mixing plan with multiple stages of the mixing process.
-##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution
+##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions/ primary samples
 ##' @param l number of revolutions/stages
 ##' @param rate concentration parameter changing rate in the each revolutions
-##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}
+##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param n_sim number of simulations
 ##' @return Estimates the total number of CFU in each revolution/stage.
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units.
@@ -20,12 +20,12 @@
 ##' }
 ##' @examples
 ##' rate <- 0.01
-##' l <- 800
+##' l <- 1500
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
-##' k <- c(10,20,30)
-##' distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
+##' k <- c(30,50,75)
+##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 20000
 ##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
 ##' @export
