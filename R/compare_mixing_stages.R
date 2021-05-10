@@ -54,7 +54,7 @@
 ##' rate <- 0.01
 ##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 2000
-##' compare_mixing_stages(mu, sigma, alpha_in, k, l=25000, rate, distribution, n_sim)
+##' compare_mixing_stages(mu, sigma, alpha_in, k, l=2000, rate, distribution, n_sim)
 ##' @export
 compare_mixing_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
   Total_CFU <- NULL
