@@ -35,7 +35,7 @@ mu <- 100
 sigma <- 0.8
 alpha <- 0.1
 k <- 30
-n_sim <- 20000
+n_sim <- 2000
 sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim)
 }
 \references{
