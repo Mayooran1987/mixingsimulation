@@ -25,7 +25,7 @@
 ##' l <- 1500
 ##' rate <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
-##' n_sim <- 20000
+##' n_sim <- 2000
 ##' no.stages <-c(1:l)
 ##' Prob_df <- data.frame(no.stages,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))
 ##' colnames(Prob_df) <- c("no.stages","CFU")
