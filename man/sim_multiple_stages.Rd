@@ -7,7 +7,7 @@
 sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
+\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -19,7 +19,7 @@ sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 
 \item{rate}{concentration parameter changing rate in the each revolutions}
 
-\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
+\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
 \item{n_sim}{number of simulations}
 }
@@ -37,12 +37,12 @@ This package will consider stage by stage of the mixing process and assume syste
 }
 \examples{
 rate <- 0.01
-l <- 800
+l <- 1500
 mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
-k <- c(10,20,30)
-distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
+k <- c(30,50,75)
+distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 n_sim <- 20000
 colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
 }

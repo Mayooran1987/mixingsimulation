@@ -7,7 +7,7 @@
 sim_single_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
+\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -19,7 +19,7 @@ sim_single_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 
 \item{rate}{concentration parameter changing rate in the each revolutions}
 
-\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
+\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
 \item{n_sim}{number of simulations}
 }
@@ -38,9 +38,9 @@ mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
-l <- 500
+l <- 1500
 rate <- 0.01
-distribution <-  "Lognormal-Type B"
+distribution <-  "Poisson lognormal-Type B"
 n_sim <- 20000
 no.stages <-c(1:l)
 Prob_df <- data.frame(no.stages,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))

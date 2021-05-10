@@ -7,7 +7,7 @@
 sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = TRUE)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
+\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -15,7 +15,7 @@ sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = TRUE)
 
 \item{k}{number of small portions/ primary samples}
 
-\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
+\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
 \item{n_sim}{number of simulations}
 
@@ -36,7 +36,7 @@ sigma <- 0.8
 alpha <- 0.1
 k <- 30
 n_sim <- 20000
-sim_single(mu, sigma, alpha, k, distribution = "Lognormal-Type B", n_sim)
+sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim)
 }
 \references{
 \itemize{

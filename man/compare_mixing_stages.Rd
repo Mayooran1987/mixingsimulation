@@ -7,7 +7,7 @@
 compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution}
+\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -19,7 +19,7 @@ compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 
 \item{rate}{concentration parameter changing rate in the each revolutions}
 
-\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"}}
+\item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
 \item{n_sim}{number of simulations}
 }
@@ -49,6 +49,12 @@ where \eqn{x_i} follows \eqn{Beta (\alpha,\alpha(k-i))} and also \eqn{\sum w_i} 
 \item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*w_i)}
 \item Case 3 (Lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 \item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,w_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
+\item Case 5 (Poisson lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i}
+
+follows \eqn{Poisson lognormal (\mu, \sigma)}
+\item Case 6 (Poisson lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,w_i)}; where  \eqn{M_i}
+
+follows \eqn{Poisson lognormal(\mu, \sigma)}
 }}
 
 
@@ -60,13 +66,12 @@ Let \eqn{l} be the number of stages or revolution of the mixture, also we assume
 \examples{
 mu <- 100
 sigma <- 0.8
-alpha_in <- 1
-k <- c(10,30,50)
-l <- 1000
+alpha_in <- 0.01
+k <- c(30,50,75)
 rate <- 0.01
-distribution <- c("Lognormal-Type B","Lognormal-Type B","Lognormal-Type B")
+distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 n_sim <- 20000
-compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+compare_mixing_stages(mu, sigma, alpha_in, k, l=25000, rate, distribution, n_sim)
 }
 \references{
 \itemize{
