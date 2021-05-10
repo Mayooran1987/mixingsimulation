@@ -124,7 +124,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mu</th>
-      <td><p>the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution</p></td>
+      <td><p>the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution</p></td>
     </tr>
     <tr>
       <th>sigma</th>
@@ -140,7 +140,7 @@
     </tr>
     <tr>
       <th>distribution</th>
-      <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code></p></td>
+      <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code> or <code>"Poisson lognormal-Type A"</code> or <code>"Poisson lognormal-Type B"</code></p></td>
     </tr>
     <tr>
       <th>n_sim</th>
@@ -174,9 +174,9 @@
 <span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span>
 <span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fl'>0.1</span>
 <span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fl'>30</span>
-<span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>200000</span>
-<span class='fu'>sim_single</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha</span>, <span class='va'>k</span>, distribution <span class='op'>=</span> <span class='st'>"Lognormal-Type B"</span>, <span class='va'>n_sim</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] 57.46314</div></pre>
+<span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span>
+<span class='fu'>sim_single</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha</span>, <span class='va'>k</span>, distribution <span class='op'>=</span> <span class='st'>"Poisson lognormal-Type B"</span>, <span class='va'>n_sim</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] 84.5117</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

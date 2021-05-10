@@ -124,7 +124,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mu</th>
-      <td><p>the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution</p></td>
+      <td><p>the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution</p></td>
     </tr>
     <tr>
       <th>sigma</th>
@@ -148,7 +148,7 @@
     </tr>
     <tr>
       <th>distribution</th>
-      <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code></p></td>
+      <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code> or <code>"Poisson lognormal-Type A"</code> or <code>"Poisson lognormal-Type B"</code></p></td>
     </tr>
     <tr>
       <th>n_sim</th>
@@ -179,9 +179,9 @@ This function provides simulated number of CFU after each stages of the mixing p
 <span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span>
 <span class='va'>alpha_in</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span>
 <span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fl'>30</span>
-<span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>500</span>
+<span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>1500</span>
 <span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span>
-<span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='st'>"Lognormal-Type B"</span>
+<span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='st'>"Poisson lognormal-Type B"</span>
 <span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span>
 <span class='va'>no.stages</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>l</span><span class='op'>)</span>
 <span class='va'>Prob_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='va'>no.stages</span>,<span class='fu'>sim_single_stages</span><span class='op'>(</span><span class='va'>mu</span>,<span class='va'>sigma</span>,<span class='va'>alpha_in</span>,<span class='va'>k</span>,<span class='va'>l</span>,<span class='va'>rate</span>,<span class='va'>distribution</span>,<span class='va'>n_sim</span><span class='op'>)</span><span class='op'>)</span>

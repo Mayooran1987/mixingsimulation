@@ -124,7 +124,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mu</th>
-      <td><p>the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a lognormal distribution</p></td>
+      <td><p>the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution</p></td>
     </tr>
     <tr>
       <th>sigma</th>
@@ -140,7 +140,7 @@
     </tr>
     <tr>
       <th>distribution</th>
-      <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code></p></td>
+      <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code> or <code>"Poisson lognormal-Type A"</code> or <code>"Poisson lognormal-Type B"</code></p></td>
     </tr>
     <tr>
       <th>n_sim</th>
@@ -168,16 +168,16 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fl'>100</span>
 <span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span>
-<span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>5</span><span class='op'>)</span>
 <span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>,<span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Lognormal-Type B"</span>,<span class='st'>"Lognormal-Type B"</span><span class='op'>)</span>
-<span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>200000</span>
+<span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Poisson lognormal-Type B"</span>,<span class='st'>"Poisson lognormal-Type B"</span><span class='op'>)</span>
+<span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>2000</span>
 <span class='va'>n_sim_df</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>n_simulations <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>n_sim</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>Prob_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind.data.frame</a></span><span class='op'>(</span><span class='va'>n_sim_df</span>,<span class='fu'>sim_multiple</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha</span>, <span class='va'>k</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>melten.Prob</span> <span class='op'>&lt;-</span> <span class='fu'>reshape2</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span><span class='va'>Prob_df</span>, id <span class='op'>=</span> <span class='st'>"n_simulations"</span>, variable.name <span class='op'>=</span> <span class='st'>"mixing_scheme"</span>,
 value.name <span class='op'>=</span> <span class='st'>"Total_CFU"</span><span class='op'>)</span>
 <span class='va'>plot_example</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>melten.Prob</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>n_simulations</span>,
-y <span class='op'>=</span> <span class='va'>Total_CFU</span>, group <span class='op'>=</span> <span class='va'>mixing_scheme</span>, colour <span class='op'>=</span> <span class='va'>mixing_scheme</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
+y <span class='op'>=</span> <span class='va'>Total_CFU</span>, group <span class='op'>=</span> <span class='va'>mixing_scheme</span>, colour <span class='op'>=</span> <span class='va'>mixing_scheme</span>,size <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
 <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span><span class='op'>(</span><span class='st'>"Number of simulations"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_classic</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>+</span>
 <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>hjust <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span>,legend.position <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.70</span>,<span class='fl'>0.90</span><span class='op'>)</span>,
 legend.box.background <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_rect</a></span><span class='op'>(</span><span class='op'>)</span>,legend.box.margin <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>margin</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span>
