@@ -12,6 +12,9 @@ The goal of mixingsimulation is to develop simulated results and
 comparing graphical displays for different mixing plans. Also,
 description of this package functions is available at
 <https://mayooran1987.github.io/mixingsimulation/reference/index.html>.
+(Note that the web page contains an older version of the package. The
+most recent version of the page, which is associated with the current
+version of the package, will be updated soon).
 
 ### Installation
 
@@ -23,7 +26,7 @@ package from [GitHub](https://github.com/) with just two lines of code:
 devtools::install_github("Mayooran1987/mixingsimulation")
 ```
 
-<!-- ### Explanation of the analytical sample preparation process for microorganisms testing -->
+<!-- #### Explanation of the analytical sample preparation process for microorganisms testing -->
 <!-- <center> -->
 <!-- ![Figure 1](F:/Package_mixing/analytical_sample.jpg){width=80%} -->
 <!-- </center> -->

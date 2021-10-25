@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mixingsimulation</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
       </span>
     </div>
 
@@ -171,7 +171,7 @@
 <span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>5</span><span class='op'>)</span>
 <span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10</span>,<span class='fl'>10</span><span class='op'>)</span>
 <span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Poisson lognormal-Type B"</span>,<span class='st'>"Poisson lognormal-Type B"</span><span class='op'>)</span>
-<span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>2000</span>
+<span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>200</span>
 <span class='va'>n_sim_df</span> <span class='op'>&lt;-</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>n_simulations <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>n_sim</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>Prob_df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind.data.frame</a></span><span class='op'>(</span><span class='va'>n_sim_df</span>,<span class='fu'>sim_multiple</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha</span>, <span class='va'>k</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span><span class='op'>)</span>
 <span class='va'>melten.Prob</span> <span class='op'>&lt;-</span> <span class='fu'>reshape2</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/reshape2/man/melt.html'>melt</a></span><span class='op'>(</span><span class='va'>Prob_df</span>, id <span class='op'>=</span> <span class='st'>"n_simulations"</span>, variable.name <span class='op'>=</span> <span class='st'>"mixing_scheme"</span>,

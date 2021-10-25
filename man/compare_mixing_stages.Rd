@@ -2,20 +2,20 @@
 % Please edit documentation in R/compare_mixing_stages.R
 \name{compare_mixing_stages}
 \alias{compare_mixing_stages}
-\title{The graphical comparison between different mixing schemes by the simulation results in the mixing process's multiple stages with varying mixing parameters.}
+\title{Graphical comparison of mixing plans based on cumulative distribution of expected total CFU in the mixing process.}
 \usage{
 compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
+\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
 \item{alpha_in}{concentration parameter at the initial stage}
 
-\item{k}{number of small portions/ primary samples}
+\item{k}{number of small portions / primary samples}
 
-\item{l}{number of revolutions/stages}
+\item{l}{number of revolutions / stages}
 
 \item{rate}{concentration parameter changing rate in the each revolutions}
 
@@ -27,7 +27,7 @@ compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 graphical comparison between different mixing schemes.
 }
 \description{
-This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes with multiple stages of mixing.
+This function provides a graphical display to compare mixing plans based on the cumulative distribution of expected total CFU in the mixing process using different mixing parameters such as type of distribution and number of primary samples.
 }
 \details{
 {Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units
@@ -61,17 +61,20 @@ follows \eqn{Poisson lognormal(\mu, \sigma)}
 The powder mixing process can be defined as breaking clusters stage by stage. Usually, it will be occurring systematically in the standard powder mixtures. For this package development, we assume that mixing parameters also systematically changing with a fixed rate in each stage of the mixing.
 The mixing parameter can be defined as revolutions instead of the mixing stage in general. Due to the lack of theoretical results to the dependent random variable sum's distribution, we have chosen simulation techniques for this modelling.
 
-Let \eqn{l} be the number of stages or revolution of the mixture, also we assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed that increasing at every stage of the mixing, which is possible to be systematically. Therefore this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.
+Let \eqn{l} be the number of stages or revolution of the mixture, also we assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed that increasing at every stage of the mixing, which is possible to be systematically.
+
+Therefore this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.
 }
 \examples{
 mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
-k <- c(30,50,75)
+k <- c(30,75)
+l <- 25000
 rate <- 0.01
-distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
-n_sim <- 2000
-compare_mixing_stages(mu, sigma, alpha_in, k, l=2000, rate, distribution, n_sim)
+distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
+n_sim <- 20000
+compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \references{
 \itemize{

@@ -1,7 +1,7 @@
 Package: mixingsimulation
 Type: Package
-Title: Simulation for powder mixing process
-Version: 0.0.0
+Title: Simulation results for the powder mixing process
+Version: 0.0.1
 Authors@R: c(
           person("Mayooran", "Thevaraja", email = "mayooran@eng.jfn.ac.lk", role = c("aut", "cre")),
           person("Kondaswamy", "Govindaraju", email = "k.govindaraju@massey.ac.nz", role = "aut"),
@@ -10,14 +10,14 @@ Authors@R: c(
 Authors: Mayooran Thevaraja [aut, cre], Kondaswamy Govindaraju [aut], Mark Bebbington [aut]
 URL: https://github.com/Mayooran1987/mixingsimulation 
 BugReports: https://github.com/Mayooran1987/mixingsimulation/issues
-Description: This package develops for simulating powder mixing process for microbial risk assessment in the bulk material production process.
+Description: This package develops for simulating the powder mixing process for microbial risk assessment in the bulk material production process.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
 Imports: ggplot2, ggthemes, plyr, reshape2, stats, VGAM 
 Suggests: 
     testthat
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: R (>= 4.0)
 Maintainer: Mayooran Thevaraja <mayooran@eng.jfn.ac.lk>
 Language: en-US

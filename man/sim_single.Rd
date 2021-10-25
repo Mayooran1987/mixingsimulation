@@ -2,30 +2,30 @@
 % Please edit documentation in R/sim_single.R
 \name{sim_single}
 \alias{sim_single}
-\title{The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing.}
+\title{The generated number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing.}
 \usage{
-sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = TRUE)
+sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = 1)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
+\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
 \item{alpha}{concentration parameter}
 
-\item{k}{number of small portions/ primary samples}
+\item{k}{number of small portions / primary samples}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
 \item{n_sim}{number of simulations}
 
-\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = FALSE} otherwise function provides mean value of the simulated \eqn{N'} ( default \code{summary = TRUE}).}
+\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample, respectively ( default \code{summary = 1}).}
 }
 \value{
 total number of colony forming units in the single mixing plan
 }
 \description{
-This function calculates the resulting total number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.
+This function calculates the resulting generated number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.
 }
 \details{
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.To more details, please refer the details section of  \link{compare_mixing_stages}. (to be finished later on)
@@ -35,7 +35,7 @@ mu <- 100
 sigma <- 0.8
 alpha <- 0.1
 k <- 30
-n_sim <- 2000
+n_sim <- 20000
 sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim)
 }
 \references{

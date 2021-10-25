@@ -2,20 +2,20 @@
 % Please edit documentation in R/sim_multiple_stages.R
 \name{sim_multiple_stages}
 \alias{sim_multiple_stages}
-\title{The total number of colony-forming units in the mixed sample by the simulation results in the multiple mixing plan with multiple stages of the mixing process.}
+\title{The expected total number of colony-forming units in the mixed sample in the multiple mixing schemes at each stage of the mixing process.}
 \usage{
 sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
+\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
 \item{alpha_in}{concentration parameter at the initial stage}
 
-\item{k}{number of small portions/ primary samples}
+\item{k}{number of small portions / primary samples}
 
-\item{l}{number of revolutions/stages}
+\item{l}{number of revolutions / stages}
 
 \item{rate}{concentration parameter changing rate in the each revolutions}
 
@@ -24,10 +24,10 @@ sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-Estimates the total number of CFU in each revolution/stage.
+the expected total number of CFU in each revolution / stage.
 }
 \description{
-This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes with multiple stage of the mixing process.
+This function calculates the resulting expected total number of colony-forming units in the mixed sample in the multiple mixing plans at each stage of the mixing process.
 }
 \details{
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units.
@@ -37,13 +37,13 @@ This package will consider stage by stage of the mixing process and assume syste
 }
 \examples{
 rate <- 0.01
-l <- 1500
+l <- 25000
 mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
-k <- c(30,50,75)
-distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
-n_sim <- 2000
+k <- c(30,75)
+distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
+n_sim <- 20000
 colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
 }
 \references{

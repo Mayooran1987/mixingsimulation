@@ -1,10 +1,10 @@
-##' This function provides the graphical displays for a different set of mixing parameters for comparison purpose of mixing schemes with multiple stages of mixing.
-##' @title The graphical comparison between different mixing schemes by the simulation results in the mixing process's multiple stages with varying mixing parameters.
-##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution
+##' This function provides a graphical display to compare mixing plans based on the cumulative distribution of expected total CFU in the mixing process using different mixing parameters such as type of distribution and number of primary samples.
+##' @title Graphical comparison of mixing plans based on cumulative distribution of expected total CFU in the mixing process.
+##' @param mu the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha_in concentration parameter at the initial stage
-##' @param k number of small portions/ primary samples
-##' @param l number of revolutions/stages
+##' @param k number of small portions / primary samples
+##' @param l number of revolutions / stages
 ##' @param rate concentration parameter changing rate in the each revolutions
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param n_sim number of simulations
@@ -40,7 +40,9 @@
 ##' The powder mixing process can be defined as breaking clusters stage by stage. Usually, it will be occurring systematically in the standard powder mixtures. For this package development, we assume that mixing parameters also systematically changing with a fixed rate in each stage of the mixing.
 ##' The mixing parameter can be defined as revolutions instead of the mixing stage in general. Due to the lack of theoretical results to the dependent random variable sum's distribution, we have chosen simulation techniques for this modelling.
 ##'
-##' Let \eqn{l} be the number of stages or revolution of the mixture, also we assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed that increasing at every stage of the mixing, which is possible to be systematically. Therefore this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.
+##' Let \eqn{l} be the number of stages or revolution of the mixture, also we assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed that increasing at every stage of the mixing, which is possible to be systematically.
+##'
+##' Therefore this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.
 ##' @seealso  \link{sim_single}, \link{sim_single_stages}, \link{sim_multiple_stages}
 ##' @references
 ##' \itemize{
@@ -50,11 +52,12 @@
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
-##' k <- c(30,50,75)
+##' k <- c(30,75)
+##' l <- 25000
 ##' rate <- 0.01
-##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
-##' n_sim <- 2000
-##' compare_mixing_stages(mu, sigma, alpha_in, k, l=2000, rate, distribution, n_sim)
+##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
+##' n_sim <- 20000
+##' compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 ##' @export
 compare_mixing_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
   Total_CFU <- NULL
@@ -68,7 +71,7 @@ compare_mixing_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution,
   stages <- 1:l
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(distribution))
   for(j in 1:length(distribution)){
-    sim.sum3[,j] <-  sim_single_stages(mu, sigma , alpha_in, k[j], l, rate, distribution[j], n_sim)
+    sim.sum3[,j] <-  sim_single_stages(mu, sigma , alpha_in, k[j], l, rate, distribution[j], n_sim, summary = 1)
     }
   result <- data.frame(stages, sim.sum3)
   colnames(result) <- c("stages", f_spri(mu, k, distribution))

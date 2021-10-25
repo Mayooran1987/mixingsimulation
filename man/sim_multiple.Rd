@@ -2,18 +2,18 @@
 % Please edit documentation in R/sim_multiple.R
 \name{sim_multiple}
 \alias{sim_multiple}
-\title{The total number of colony-forming units in the mixed sample by the simulation results in the multiple mixing plan with varying mixing parameters.}
+\title{The expected total number of colony-forming units in the mixed sample in the multiple mixing schemes at the single stage of the mixing process.}
 \usage{
 sim_multiple(mu, sigma, alpha, k, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
+\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
 \item{alpha}{concentration parameter}
 
-\item{k}{number of small portions/ primary samples}
+\item{k}{number of small portions / primary samples}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -23,30 +23,21 @@ sim_multiple(mu, sigma, alpha, k, distribution, n_sim)
 total number of colony forming units in the multiple mixing scheme
 }
 \description{
-This function calculates the resulting total number of colony forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
+This function calculates the resulting expected total number of colony-forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_stages}.
+Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing and \eqn{N' = \sum N_i}. This function provides the simulated resulting of the expected total number of colony-forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
+To more details, please refer the details section of  \link{compare_mixing_stages}.
 }
 \examples{
 mu <- 100
 sigma <- 0.8
 alpha <- c(0.1,5)
-k <- c(10,10)
+k <- c(30,30)
 distribution <-  c("Poisson lognormal-Type B","Poisson lognormal-Type B")
-n_sim <- 2000
-n_sim_df <-data.frame(n_simulations = c(1:n_sim))
-Prob_df <- cbind.data.frame(n_sim_df,sim_multiple(mu, sigma, alpha, k, distribution, n_sim))
-melten.Prob <- reshape2::melt(Prob_df, id = "n_simulations", variable.name = "mixing_scheme",
-value.name = "Total_CFU")
-plot_example <- ggplot2::ggplot(melten.Prob) + ggplot2::geom_point(ggplot2::aes(x = n_simulations,
-y = Total_CFU, group = mixing_scheme, colour = mixing_scheme,size = 1))+
-ggplot2::xlab(expression("Number of simulations"))+ ggplot2::theme_classic()+
-ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5),legend.position = c(0.70,0.90),
-legend.box.background = ggplot2::element_rect(),legend.box.margin = ggplot2::margin(1,1,1,1))+
-ggplot2::ylab(expression("Total number of CFU"))+
-ggthemes::scale_colour_colorblind()
-print(plot_example)
+n_sim <- 20000
+round(colMeans(sim_multiple(mu, sigma, alpha, k, distribution, n_sim)))
+# A further example can be found on the following page <https://rpubs.com/mayooran/sim_multiple>.
 }
 \references{
 \itemize{

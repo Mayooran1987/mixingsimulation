@@ -1,11 +1,11 @@
-##' This function calculates the resulting total number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.
-##' @title The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing.
-##' @param mu the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution
+##' This function calculates the resulting generated number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.
+##' @title The generated number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing.
+##' @param mu the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha concentration parameter
-##' @param k number of small portions/ primary samples
+##' @param k number of small portions / primary samples
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
-##' @param summary if we need to get all simulated \eqn{N'}, use \code{summary = FALSE} otherwise function provides mean value of the simulated \eqn{N'} ( default \code{summary = TRUE}).
+##' @param summary if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample, respectively ( default \code{summary = 1}).
 ##' @param n_sim number of simulations
 ##' @return total number of colony forming units in the single mixing plan
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.To more details, please refer the details section of  \link{compare_mixing_stages}. (to be finished later on)
@@ -19,10 +19,10 @@
 ##' sigma <- 0.8
 ##' alpha <- 0.1
 ##' k <- 30
-##' n_sim <- 2000
+##' n_sim <- 20000
 ##' sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim)
 ##' @export
-sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = TRUE){
+sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
   if (distribution == "Poisson-Type A") {
     sim <-  matrix(NA, nrow = n_sim, ncol = k)
     # for (i in 1:n_sim){
@@ -129,19 +129,25 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = TRU
       sim[,j] <- stats::rbinom(n_sim, M[,j], w[,j])
     }
     # }
-
-
-
   } else {
     print("please choose the one of the given distribution type with case sensitive such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'")
   }
-  if (summary == TRUE){
-    result <- sum(apply(sim, 2, mean))
+  if (summary == 1){
+    result <- round(sum(apply(sim, 2, mean)))
+    # result <- mean(apply(sim, 2, mean))
     #   St.D_N <- sqrt(sum(apply(sim, 2, var)))
     #   result <- data.frame(mean_N,St.D_N)
-  } else {
+  } else if (summary == 2){
     # result<- rowSums(sim)
-    result <-  apply(sim, 1, sum)
+    # result <-  apply(sim, 1, sum)
+    result <-  round(apply(sim, 2, mean))
+  } else if (summary == 3){
+    # result<- rowSums(sim)
+    # result <-  apply(sim, 1, sum)
+    # result <-  sim
+    result <-  round(apply(sim, 1, sum))
+    } else {
+      print("please include the summary value, which depends on your expected output")
   }
   # cat("Calculation took", proc.time()[1], "seconds.\n")
   return(result)

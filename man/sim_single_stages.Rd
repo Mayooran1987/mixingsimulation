@@ -4,24 +4,36 @@
 \alias{sim_single_stages}
 \title{The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with \eqn{l}  number of stages.}
 \usage{
-sim_single_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+sim_single_stages(
+  mu,
+  sigma,
+  alpha_in,
+  k,
+  l,
+  rate,
+  distribution,
+  n_sim,
+  summary = 1
+)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
+\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
 \item{alpha_in}{concentration parameter at the initial stage}
 
-\item{k}{number of small portions/ primary samples}
+\item{k}{number of small portions / primary samples}
 
-\item{l}{number of revolutions/stages}
+\item{l}{number of revolutions / stages}
 
 \item{rate}{concentration parameter changing rate in the each revolutions}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
 \item{n_sim}{number of simulations}
+
+\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample, respectively ( default \code{summary = 1}).}
 }
 \value{
 average number of colony forming units in the single mixing plan with \eqn{l} number of stages.
@@ -38,16 +50,23 @@ mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
-l <- 1500
+l <- 25000
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"
-n_sim <- 2000
-no.stages <-c(1:l)
-Prob_df <- data.frame(no.stages,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))
-colnames(Prob_df) <- c("no.stages","CFU")
-plot_example <- ggplot2::ggplot(Prob_df) + ggplot2::geom_line(ggplot2::aes(x = no.stages, y = CFU))+
-ggplot2::xlab(expression("Number of stages"))+ ggplot2::ylab(expression("Total number of CFU"))+
-ggplot2::theme_classic()+ ggplot2::ggtitle(label = "Number of CFU versus number of stages")+
+n_sim <- 20000
+no.revolutions <-c(1:l)
+Prob_df <-
+data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))
+colnames(Prob_df) <- c("no.revolutions","CFU")
+cummean <- function(x){cumsum(x)/seq_along(x)}
+cum_mean <- cummean(Prob_df[,2])
+plot_example <- ggplot2::ggplot(Prob_df) +
+ggplot2::geom_line(ggplot2::aes(x = no.revolutions, y = CFU))+
+ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = cum_mean), color = "red", size = .75)+
+ggplot2::xlab(expression("Number of revolutions"))+
+ggplot2::ylab(expression("Expected total number of CFU"))+
+ggplot2::theme_classic()+
+ggplot2::ggtitle(label = "Expected total number of CFU versus number of revolutions")+
 ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
 ggthemes::scale_colour_colorblind()
 print(plot_example)
