@@ -55,7 +55,7 @@ The prevalence is given by the following formula,
 where \eqn{p_d} is the probability of detection in each stage of the mixing process, for the comparison purpose, we have applied average prevalence after \eqn{l} number of revolutions in each mixing plan.
 The probability of detection at every stage of the mixing process can be estimated by employing function \link{sim_single_pd_stages}.
 
-However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function \link{sim_single_prevalence_stages}.
+However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function \link{sim_single_prevalence}.
 We can flexibly change the mixing parameters of this function which is depending on what purpose of the comparison is needed.
 }
 \examples{
@@ -77,5 +77,5 @@ compare_mixing_prevalence(mulower, muupper, sigma, alpha_in, k, l, rate, distrib
 }
 }
 \seealso{
-\link{sim_single_prevalence_stages}
+\link{sim_single_prevalence}
 }

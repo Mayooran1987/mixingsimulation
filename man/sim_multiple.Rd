@@ -30,14 +30,34 @@ Let \eqn{N'} be the number of colony-forming units in the mixed sample which is 
 To more details, please refer the details section of  \link{compare_mixing_stages}.
 }
 \examples{
-mu <- 100
 sigma <- 0.8
 alpha <- c(0.1,5)
 k <- c(30,30)
 distribution <-  c("Poisson lognormal-Type B","Poisson lognormal-Type B")
-n_sim <- 20000
-round(colMeans(sim_multiple(mu, sigma, alpha, k, distribution, n_sim)))
-# A further example can be found on the following page <https://rpubs.com/mayooran/sim_multiple>.
+n_sim <- 200000
+f_spr <- function(n_sim) {
+  sprintf("Simulation results (no.simulations = \%.0f)", n_sim)
+}
+f_spri <- function(alpha, distribution) {
+  sprintf("mixing plan (alpha = \%.1f, \%s)", alpha, distribution)
+}
+mu <- seq(100, 200, 0.1)
+sim.sum3 <- matrix(NA, nrow = length(mu), ncol = length(distribution))
+for(i in 1:nrow(sim.sum3)){
+  sim.sum3[i,] <-  colMeans(sim_multiple(mu[i], sigma, alpha, k, distribution, n_sim))
+}
+result <- data.frame(mu, sim.sum3)
+colnames(result) <- c("mu", f_spri(alpha, distribution))
+melten.Prob <- reshape2::melt(result, id = "mu", variable.name = "mixing_scheme",
+                              value.name = "Total_CFU")
+plot_example <-
+ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme,colour = mixing_scheme))+
+  ggplot2::geom_line(stat="density",ggplot2::aes(x = Total_CFU))+
+  ggplot2::ylab(expression("density"))+
+  ggplot2::theme_classic()+ ggplot2::xlab(expression("Expected total number of CFU"))+
+  ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.75))+
+  ggplot2::ggtitle(label = f_spr(n_sim))+ ggthemes::scale_colour_colorblind()
+  plot_example
 }
 \references{
 \itemize{

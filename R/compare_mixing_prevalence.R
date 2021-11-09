@@ -21,9 +21,9 @@
 ##' where \eqn{p_d} is the probability of detection in each stage of the mixing process, for the comparison purpose, we have applied average prevalence after \eqn{l} number of revolutions in each mixing plan.
 ##' The probability of detection at every stage of the mixing process can be estimated by employing function \link{sim_single_pd_stages}.
 ##'
-##' However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function \link{sim_single_prevalence_stages}.
+##' However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function \link{sim_single_prevalence}.
 ##' We can flexibly change the mixing parameters of this function which is depending on what purpose of the comparison is needed.
-##' @seealso \link{sim_single_prevalence_stages}
+##' @seealso \link{sim_single_prevalence}
 ##' @references
 ##' \itemize{
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
@@ -50,15 +50,13 @@ compare_mixing_prevalence <-  function(mulower, muupper, sigma , alpha_in, k, l,
   f_spr <- function(n_sim ) {
     sprintf("Simulation results (no.simulations = %.0f)", n_sim)
   }
-    mu <- seq(mulower, muupper, 0.1)
+    mu <- seq(mulower, muupper, 0.01)
     # stages <- 1:l
     sim.sum3 <- matrix(NA, nrow = length(mu), ncol = length(distribution))
-    # for(i in 1:length(mu)){
-    #   sim.sum3[i,] <-  sim_multiple_prevalence_stages(mu[i], sigma , alpha_in, k, l, rate, distribution, UL, n_sim)
-    # }
     for(i in 1:nrow(sim.sum3)){
       for(j in 1:ncol(sim.sum3)){
-        sim.sum3[i,j] <-  mean(sim_single_prevalence_stages(mu[i], sigma , alpha_in, k[j], l[j], rate, distribution[j], UL, n_sim))
+        sim.sum3[i,j] <-  sim_single_prevalence(mu[i], sigma , alpha_in, k[j], l[j], rate, distribution[j], UL, n_sim)
+
       }
     }
     result <- data.frame(mu, sim.sum3)
@@ -68,8 +66,8 @@ compare_mixing_prevalence <-  function(mulower, muupper, sigma , alpha_in, k, l,
       ggplot2::geom_line(ggplot2::aes(x = mu, y = Prevalence))+
       # theme_classic()
       ggplot2::ylab(expression("Prevalence"))+
-      ggplot2::theme_classic()+ ggplot2::xlab(expression("Mean concentration"))+
-        ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.20,0.75))+
+      ggplot2::theme_classic()+ ggplot2::xlab(expression("Mean concentration (" ~ mu*~")"))+
+        ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25))+
         ggplot2::ggtitle(label = f_spr(n_sim))+ ggthemes::scale_colour_colorblind()+
         ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
     # cat("Calculation took", proc.time()[1], "seconds.\n")
