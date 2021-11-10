@@ -18,11 +18,11 @@ compare_mixing_prevalence(
 )
 }
 \arguments{
-\item{mulower}{the lower value of the mean concentration (\eqn{\mu}), which is desired to use in the graphical display's x-axis.}
+\item{mulower}{the lower value of the mean concentration (\eqn{\mu}) for use in the graphical display's x-axis.}
 
-\item{muupper}{the upper value of the mean concentration (\eqn{\mu}), which is desired to use in the graphical display's x-axis.}
+\item{muupper}{the upper value of the mean concentration (\eqn{\mu}) for use in the graphical display's x-axis.}
 
-\item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
+\item{sigma}{the standard deviation of the colony-forming units (CFUs) in the mixed sample on the logarithmic scale (default value 0.8)}
 
 \item{alpha_in}{concentration parameter at the initial stage}
 
@@ -30,33 +30,30 @@ compare_mixing_prevalence(
 
 \item{l}{number of revolutions / stages}
 
-\item{rate}{concentration parameter changing rate in the each revolutions}
+\item{rate}{concentration parameter changing rate in each of the revolutions}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
-\item{UL}{the upper limit value of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
+\item{UL}{the upper limit value of the expected total CFUs, which can be found from a stabilising point when the mean is about standard deviation}
 
 \item{n_sim}{number of simulations}
 }
 \value{
-estimated average prevalence based graphical display to the comparison of mixing plans.
+Estimates the average prevalence-based graphical display for a comparison of mixing plans.
 }
 \description{
-This function provides a graphical display to compare mixing plans based on estimated average prevalence in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples.
+This function provides a graphical display to compare mixing plans based on the estimated average prevalence in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of revolutions in the mixing process.
-This function provides a graphical display to compares mixing plans based on estimated average prevalence in the mixing process with different input variables such as number of revolutions, type of distribution and number of primary samples.
+Let \eqn{N'} be the number of CFUs in the mixed sample, which is produced by a contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i},
+ and let \eqn{l} be the number of revolutions in the mixing. This function provides a graphical display to compare mixing plans based on the estimated average
+ prevalence in the mixing process with different input variables, such as number of revolutions, type of distribution and number of primary samples.
 
 The prevalence is given by the following formula,
 
-\deqn{Prevalence = 1- {(1-p_d)}^l ;}
+\deqn{Prevalence = 1- {(1-p_d)}^k ;}
 
-where \eqn{p_d} is the probability of detection in each stage of the mixing process, for the comparison purpose, we have applied average prevalence after \eqn{l} number of revolutions in each mixing plan.
-The probability of detection at every stage of the mixing process can be estimated by employing function \link{sim_single_pd_stages}.
-
-However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function \link{sim_single_prevalence}.
-We can flexibly change the mixing parameters of this function which is depending on what purpose of the comparison is needed.
+where \eqn{p_d} is the probability of detection in each stage of the mixing process. For comparison purposes, we have applied average prevalence after \eqn{l} number of revolutions in each mixing plan. The probability of detection at every stage of the mixing process can be estimated by employing function \link{sim_single_pd_stages}. However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function \link{sim_single_prevalence}. We can flexibly change the mixing parameters of this function, which depends on what purpose the comparison is needed for.
 }
 \examples{
 mulower <- 50

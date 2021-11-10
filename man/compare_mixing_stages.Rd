@@ -2,12 +2,12 @@
 % Please edit documentation in R/compare_mixing_stages.R
 \name{compare_mixing_stages}
 \alias{compare_mixing_stages}
-\title{Graphical comparison of mixing plans based on cumulative distribution of expected total CFU in the mixing process.}
+\title{Graphical comparison of mixing plans based on cumulative distribution of expected total CFUs in the mixing process.}
 \usage{
 compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
+\item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -24,23 +24,24 @@ compare_mixing_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-graphical comparison between different mixing schemes.
+Graphical comparison between different mixing schemes.
 }
 \description{
-This function provides a graphical display to compare mixing plans based on the cumulative distribution of expected total CFU in the mixing process using different mixing parameters such as type of distribution and number of primary samples.
+This function provides a graphical display to compare mixing plans based on the cumulative distribution of expected total CFUs in the mixing process using different mixing parameters, such as type of distribution and number of primary samples.
 }
 \details{
-{Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units
-in the \eqn{i^{th}} primary sample; where \eqn{i = 1,2,....k}.
+{Let \eqn{N'} be the number of CFUs in the mixed sample, which is produced by the mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}  and let \eqn{N_i} be the number of CFUs in the \eqn{i^{th}} primary sample;
+where \eqn{i = 1,2,....k}.
+
+For this package development, we have employed the notations 'Type-A' and 'Type-B' to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively;
+see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
 
 
-For this package development, we have employed the notations 'Type-A' and 'Type-B'  to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
+Following \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}, the contribution weight of contamination by each primary sample can be defined by the random variable \eqn{w_i},
+which is possible to be followed by either uniform distribution with parameter \eqn{1/k}or the joint distribution of \eqn{w_1,w_2,\cdots w_k} follows a Dirichlet distribution with concentration parameter \eqn{\alpha}.
+From the previous literature, a Dirichlet distribution can be formulated by beta or gamma algorithms, which have revealed the same results; see see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}..
 
-Following \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}, the contribution weight of contamination by each primary sample can be defined by the random variable \eqn{w_i}
-which is possible to be following either uniform distribution with parameter \eqn{1/k} or joint distribution of \eqn{w_1,w_2,\cdots w_k} follows Dirichlet distribution with concentration parameter \eqn{\alpha}.
-From the previous literature, Dirichlet distribution can be formulated by beta or gamma algorithm which are revealed the same results; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
-
-This function is developed based on the beta algorithm, and the following steps formulate it.
+This function is developed based on the beta algorithm and the following steps formulate it.
 \deqn{w_i = x_i {\prod_{j=1}^{i-1}{1-x_j}}~~~~ \forall i = 2,3,\cdots k} and \eqn{w_1=x_1};
 
 where \eqn{x_i} follows \eqn{Beta (\alpha,\alpha(k-i))} and also \eqn{\sum w_i} must be equal to one.
@@ -57,13 +58,12 @@ follows \eqn{Poisson lognormal (\mu, \sigma)}
 follows \eqn{Poisson lognormal(\mu, \sigma)}
 }}
 
+The powder-mixing process can be defined as breaking clusters stage-by-stage. Usually, it occurs systematically in the standard powder mixtures. For this package development, we assume that mixing parameters also systematically change with a fixed rate at each stage of the mixing.
+The mixing parameter can be defined as revolutions instead of the mixing stage in general. Due to the lack of theoretical results for the dependent random variable sum's distribution, we have chosen simulation techniques for this modelling.
 
-The powder mixing process can be defined as breaking clusters stage by stage. Usually, it will be occurring systematically in the standard powder mixtures. For this package development, we assume that mixing parameters also systematically changing with a fixed rate in each stage of the mixing.
-The mixing parameter can be defined as revolutions instead of the mixing stage in general. Due to the lack of theoretical results to the dependent random variable sum's distribution, we have chosen simulation techniques for this modelling.
+Let \eqn{l} be the number of stages or revolutions of the mixture, and we also assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed to increase at every stage of the mixing, which is possible to do systematically.
 
-Let \eqn{l} be the number of stages or revolution of the mixture, also we assumed a fixed concentration parameter value at the initial phase of the mixing process. Based on the literature in this area, the concentration parameter can be assumed that increasing at every stage of the mixing, which is possible to be systematically.
-
-Therefore this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.
+Therefore, this function exhibits the graphical display with different quantities of primary sample mixing as a large unit.
 }
 \examples{
 mu <- 100

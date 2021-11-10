@@ -2,12 +2,12 @@
 % Please edit documentation in R/sim_multiple_stages.R
 \name{sim_multiple_stages}
 \alias{sim_multiple_stages}
-\title{The expected total number of colony-forming units in the mixed sample in the multiple mixing schemes at each stage of the mixing process.}
+\title{The expected total number of CFUs in the mixed sample in the multiple mixing schemes at each stage of the mixing process.}
 \usage{
 sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
+\item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -24,16 +24,16 @@ sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-the expected total number of CFU in each revolution / stage.
+The expected total number of CFUs in each revolution/stage.
 }
 \description{
-This function calculates the resulting expected total number of colony-forming units in the mixed sample in the multiple mixing plans at each stage of the mixing process.
+This function calculates the resulting expected total number of CFUs in the mixed sample in the multiple mixing plans at each stage of the mixing process.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i} and \eqn{N_i} be the number of colony-forming units.
-For this package development, we have employed the notations 'Type-A' and 'Type-B'  to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
+Let \eqn{N'} be the number of CFUs in the mixed sample, which is produced by the mixing of \eqn{k}  primary samples and \eqn{N' = \sum N_i} and let \eqn{N_i} be the number of CFUs.
+For this package development, we have employed the notations 'Type-A' and 'Type-B' to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
 
-This package will consider stage by stage of the mixing process and assume systematically breaking clusters at every stage of the mixing. Therefore it can be assumed the concentration parameter also systematically changing with the concentration of the contribution.
+This package will consider stage-by-stage the mixing process and assumes systematically breaking clusters at every stage of the mixing. Therefore, it can be assumed the concentration parameter also systematically changes with the concentration of the contribution.
 }
 \examples{
 rate <- 0.01

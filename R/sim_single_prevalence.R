@@ -1,6 +1,6 @@
 ##' This function provides an estimated prevalence value in the mixing process of the single mixing scheme.
 ##' @title The estimated average prevalence value in the single mixing scheme.
-##' @param mu the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution
+##' @param mu the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions / primary samples
@@ -34,7 +34,7 @@ sim_single_prevalence <- function(mu, sigma , alpha_in, k, l, rate, distribution
     sprintf("mixing plan (mu = %.1f, k = %.0f, l = %.1f, %s)", mu, k, l, distribution)
   }
   pd <- sim_single_pd_stages(mu, sigma , alpha_in, k, l, rate, distribution, UL, n_sim)
-  Prevalence <- 1-(1-mean(pd))^l
+  Prevalence <- 1-(1-mean(pd))^k
   results <- Prevalence
   # colnames(results) <- f_spri(mu, k, l, distribution)
   return(results)

@@ -17,7 +17,7 @@ sim_multiple_prevalence(
 )
 }
 \arguments{
-\item{mu}{the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
+\item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -36,13 +36,13 @@ sim_multiple_prevalence(
 \item{n_sim}{number of simulations}
 }
 \value{
-the average prevalence in the mixing process after a specific number of revolutions.
+The average prevalence in the mixing process after a specific number of revolutions.
 }
 \description{
 This function estimates the average prevalence in the mixing process after a specific number of revolutions for different mixing schemes.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of stages in the mixing process. This function estimates the average prevalence value after a specific number of revolutions in each mixing scheme. However, we need to apply function \link{sim_single_prevalence} if we want to estimate individual prevalence values at each stage of the mixing process.
+Let \eqn{N'} be the number of CFUs in the mixed sample, which is produced by the contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and let \eqn{l} be the number of stages in the mixing process. This function estimates the average prevalence value after a specific number of revolutions in each mixing scheme. However, we need to apply function \link{sim_single_prevalence}  if we want to estimate individual prevalence values at each stage of the mixing process.
 }
 \examples{
 mu <- 100

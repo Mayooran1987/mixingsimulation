@@ -1,6 +1,6 @@
 ##' This function calculates the resulting expected total number of colony-forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
 ##' @title The expected total number of colony-forming units in the mixed sample in the multiple mixing schemes at the single stage of the mixing process.
-##' @param mu the average number of colony-forming units (\eqn{\mu}) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution
+##' @param mu the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha concentration parameter
 ##' @param k number of small portions / primary samples

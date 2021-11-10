@@ -7,7 +7,7 @@
 sim_single_pd_stages(mu, sigma, alpha_in, k, l, rate, distribution, UL, n_sim)
 }
 \arguments{
-\item{mu}{the average number of colony-forming units in the mixed sample, which is in logarithmic scale if we use a Lognormal/Poisson lognormal distribution}
+\item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
 
 \item{sigma}{the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)}
 
@@ -26,20 +26,20 @@ sim_single_pd_stages(mu, sigma, alpha_in, k, l, rate, distribution, UL, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-the probability of detection in the each stage of the mixing process.
+The probability of detection at each stage of the mixing process.
 }
 \description{
-This function gives a probability of detection in the each stage of the mixing process.
+This function gives a probability of detection at each stage of the mixing process.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of stages in the mixing process.
-This function provides probability of detection in the each stage of the mixing process. It can be determined by how many of the simulated samples exceed the upper limit set for the CFU at each stage of the mixing process.
+Let \eqn{N'} be the number of CFUs in the mixed sample, which is produced by the contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and let \eqn{l} be the number of stages in the mixing process.
+This function provides probability of detection at each stage of the mixing process. It can be determined by how many of the simulated samples exceed the upper limit set for the CFU at each stage of the mixing process.
 
 The probability of detection (\eqn{p_d}) can be estimated from following formula,
 
 \deqn{p_d = \frac{\textnormal{number of simulated samples which are greater than the upper-limit value}}{\textnormal{number of simulations}} ;}
 
-where upper limit value can be found from stabilising point in the graphical display of the expected total number of CFU versus number of revolutions when the mean is about standard deviation.
+where the upper limit value can be found from a stabilising point in the graphical display of the expected total number of CFUs versus the number of revolutions when the mean is about standard deviation.
 }
 \examples{
 mu <- 100
