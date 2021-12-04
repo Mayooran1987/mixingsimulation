@@ -8,7 +8,7 @@
 ##' @param summary if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample, respectively ( default \code{summary = 1}).
 ##' @param n_sim number of simulations
 ##' @return total number of colony forming units in the single mixing plan
-##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.To more details, please refer the details section of  \link{compare_mixing_stages}. (to be finished later on)
+##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_stages}. (to be finished later on)
 ##' @seealso  \link{compare_mixing_stages}
 ##' @references
 ##' \itemize{

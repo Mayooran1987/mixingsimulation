@@ -38,16 +38,16 @@ see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
 
 
 Following \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}, the contribution weight of contamination by each primary sample can be defined by the random variable \eqn{w_i},
-which is possible to be followed by either uniform distribution with parameter \eqn{1/k}or the joint distribution of \eqn{w_1,w_2,\cdots w_k} follows a Dirichlet distribution with concentration parameter \eqn{\alpha}.
-From the previous literature, a Dirichlet distribution can be formulated by beta or gamma algorithms, which have revealed the same results; see see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}..
+which is possible to be followed by either uniform distribution with parameter \eqn{1/k} or the joint distribution of \eqn{w_1,w_2,\cdots w_k} follows a Dirichlet distribution with concentration parameter \eqn{\alpha}.
+From the previous literature, a Dirichlet distribution can be formulated by beta or gamma algorithms, which have revealed the same results; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
 
 This function is developed based on the beta algorithm and the following steps formulate it.
-\deqn{w_i = x_i {\prod_{j=1}^{i-1}{1-x_j}}~~~~ \forall i = 2,3,\cdots k} and \eqn{w_1=x_1};
+\deqn{w_i = x_i {\prod_{j=1}^{i-1}{1-x_j}}~~~~ \forall i = 2,3,\cdots k,~~~~~ w_1=x_1};
 
 where \eqn{x_i} follows \eqn{Beta (\alpha,\alpha(k-i))} and also \eqn{\sum w_i} must be equal to one.
 \itemize{
 \item Case 1 (Poisson-Type A): \eqn{N_i} follows \eqn{Poisson(\mu/k)}
-\item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu*w_i)}
+\item Case 2 (Poisson-Type B): \eqn{N_i} follows \eqn{Poisson(\mu w_i)}
 \item Case 3 (Lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 \item Case 4 (Lognormal-Type B): \eqn{N_i}  follows \eqn{Binomial(M_i,w_i)}; where  \eqn{M_i} follows \eqn{Lognormal(\mu, \sigma)}
 \item Case 5 (Poisson lognormal-Type A): \eqn{N_i} follows \eqn{Binomial(M_i,1/k)}; where  \eqn{M_i}

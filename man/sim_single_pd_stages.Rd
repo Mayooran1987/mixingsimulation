@@ -4,7 +4,7 @@
 \alias{sim_single_pd_stages}
 \title{The estimated value of detection probability at each stage of the mixing process.}
 \usage{
-sim_single_pd_stages(mu, sigma, alpha_in, k, l, rate, distribution, UL, n_sim)
+sim_single_pd_stages(mu, sigma, alpha_in, k, l, rate, distribution, USL, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -21,7 +21,7 @@ sim_single_pd_stages(mu, sigma, alpha_in, k, l, rate, distribution, UL, n_sim)
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
-\item{UL}{the upper limit value of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
+\item{USL}{the upper stabilizing limit of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
 
 \item{n_sim}{number of simulations}
 }
@@ -37,9 +37,9 @@ This function provides probability of detection at each stage of the mixing proc
 
 The probability of detection (\eqn{p_d}) can be estimated from following formula,
 
-\deqn{p_d = \frac{\textnormal{number of simulated samples which are greater than the upper-limit value}}{\textnormal{number of simulations}} ;}
+\deqn{p_d = \frac{\textnormal{number of simulated samples which are greater than USL}}{\textnormal{number of simulations}} ;}
 
-where the upper limit value can be found from a stabilising point in the graphical display of the expected total number of CFUs versus the number of revolutions when the mean is about standard deviation.
+where the upper stabilizing limit can be found from a stabilising point in the graphical display of the expected total number of CFUs versus the number of revolutions when the mean is about standard deviation.
 }
 \examples{
 mu <- 100
@@ -49,11 +49,11 @@ k <- 30
 l <- 25000
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"
-UL <- 138
+USL <- 138
 n_sim <- 20000
 no.revolutions <-c(1:l)
 Prob_df <- data.frame(no.revolutions,
-sim_single_pd_stages(mu,sigma,alpha_in,k,l,rate,distribution,UL,n_sim))
+sim_single_pd_stages(mu,sigma,alpha_in,k,l,rate,distribution,USL,n_sim))
 colnames(Prob_df) <- c("no.revolutions","P_d")
 cummean <- function(x){cumsum(x)/seq_along(x)}
 cum_mean <- cummean(Prob_df[,2])

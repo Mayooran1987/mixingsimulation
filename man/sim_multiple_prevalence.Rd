@@ -12,7 +12,7 @@ sim_multiple_prevalence(
   l,
   rate,
   distribution,
-  UL,
+  USL,
   n_sim
 )
 }
@@ -31,7 +31,7 @@ sim_multiple_prevalence(
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
-\item{UL}{the upper limit value of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
+\item{USL}{the upper stabilizing limit of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
 
 \item{n_sim}{number of simulations}
 }
@@ -52,9 +52,9 @@ k <- c(30,75)
 l <- 25000
 rate <- 0.01
 distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
-UL <- 138
+USL <- 138
 n_sim <- 20000
-sim_multiple_prevalence(mu, sigma , alpha_in, k, l, rate, distribution, UL, n_sim)
+sim_multiple_prevalence(mu, sigma , alpha_in, k, l, rate, distribution, USL, n_sim)
 }
 \references{
 \itemize{

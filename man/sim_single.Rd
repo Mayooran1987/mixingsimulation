@@ -28,7 +28,7 @@ total number of colony forming units in the single mixing plan
 This function calculates the resulting generated number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.To more details, please refer the details section of  \link{compare_mixing_stages}. (to be finished later on)
+Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_stages}. (to be finished later on)
 }
 \examples{
 mu <- 100

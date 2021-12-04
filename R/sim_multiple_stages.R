@@ -8,7 +8,7 @@
 ##' @param rate concentration parameter changing rate in the each revolutions
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param n_sim number of simulations
-##' @return The expected total number of CFUs in each revolution/stage.
+##' @return The expected total number of CFUs in each revolution / stage.
 ##' @details Let \eqn{N'} be the number of CFUs in the mixed sample, which is produced by the mixing of \eqn{k}  primary samples and \eqn{N' = \sum N_i} and let \eqn{N_i} be the number of CFUs.
 ##'For this package development, we have employed the notations 'Type-A' and 'Type-B' to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively; see \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{Nauta (2005)}.
 ##'

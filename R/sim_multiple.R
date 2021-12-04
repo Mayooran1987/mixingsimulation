@@ -15,6 +15,7 @@
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
 ##' }
 ##' @examples
+##' set.seed(1350)
 ##' sigma <- 0.8
 ##' alpha <- c(0.1,5)
 ##' k <- c(30,30)
@@ -38,8 +39,8 @@
 ##' plot_example <-
 ##' ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme,colour = mixing_scheme))+
 ##'   ggplot2::geom_line(stat="density",ggplot2::aes(x = Total_CFU))+
-##'   ggplot2::ylab(expression("density"))+
-##'   ggplot2::theme_classic()+ ggplot2::xlab(expression("Expected total number of CFU"))+
+##'   ggplot2::ylab(expression("pmf"))+
+##'   ggplot2::theme_classic()+ ggplot2::xlab(expression("Total number of CFU in the mixed sample"))+
 ##'   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.75))+
 ##'   ggplot2::ggtitle(label = f_spr(n_sim))+ ggthemes::scale_colour_colorblind()
 ##'   plot_example

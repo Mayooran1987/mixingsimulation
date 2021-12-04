@@ -7,7 +7,7 @@
 ##' @param l number of revolutions /stages
 ##' @param rate concentration parameter changing rate in the each revolutions
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
-##' @param UL the upper limit value of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation
+##' @param USL the upper stabilizing limit of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation
 ##' @param n_sim number of simulations
 ##' @return The probability of detection at each stage of the mixing process.
 ##' @details Let \eqn{N'} be the number of CFUs in the mixed sample, which is produced by the contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and let \eqn{l} be the number of stages in the mixing process.
@@ -15,9 +15,9 @@
 ##'
 ##' The probability of detection (\eqn{p_d}) can be estimated from following formula,
 ##'
-##' \deqn{p_d = \frac{\textnormal{number of simulated samples which are greater than the upper-limit value}}{\textnormal{number of simulations}} ;}
+##' \deqn{p_d = \frac{\textnormal{number of simulated samples which are greater than USL}}{\textnormal{number of simulations}} ;}
 ##'
-##' where the upper limit value can be found from a stabilising point in the graphical display of the expected total number of CFUs versus the number of revolutions when the mean is about standard deviation.
+##' where the upper stabilizing limit can be found from a stabilising point in the graphical display of the expected total number of CFUs versus the number of revolutions when the mean is about standard deviation.
 ##'
 ##' @seealso \link{sim_single_stages}
 ##' @references
@@ -32,11 +32,11 @@
 ##' l <- 25000
 ##' rate <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
-##' UL <- 138
+##' USL <- 138
 ##' n_sim <- 20000
 ##' no.revolutions <-c(1:l)
 ##' Prob_df <- data.frame(no.revolutions,
-##' sim_single_pd_stages(mu,sigma,alpha_in,k,l,rate,distribution,UL,n_sim))
+##' sim_single_pd_stages(mu,sigma,alpha_in,k,l,rate,distribution,USL,n_sim))
 ##' colnames(Prob_df) <- c("no.revolutions","P_d")
 ##' cummean <- function(x){cumsum(x)/seq_along(x)}
 ##' cum_mean <- cummean(Prob_df[,2])
@@ -52,24 +52,15 @@
 ##'   ggthemes::scale_colour_colorblind()
 ##' print(plot_example)
 ##' @export
-sim_single_pd_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, UL, n_sim){
+sim_single_pd_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, USL, n_sim){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, l = %.1f, %s)", mu, k, l, distribution)
   }
-  # stages <- 1:l
-  # alpha <- matrix(NA, nrow =1 , ncol = l)
-  # for(j in 1:l){
-  #   if (j==1) {
-  #     alpha[,j] <- alpha_in
-  #   } else {
-  #     alpha[,j] <- alpha[,j-1]+ rate
-  #   }
-  # }
   X <- sim_single_stages(mu, sigma , alpha_in, k, l, rate, distribution, n_sim, summary = 3)
   sim.sum1 <- matrix(NA, nrow = l, ncol = 1)
   for(j in 1:l){
-    # sim.sum1[j,] <- length(which(sim_single(mu, sigma, alpha[1,j], k, distribution, n_sim, summary = FALSE) > UL))/n_sim
-    sim.sum1[j,] <- length(which(X[j,]> UL))/n_sim
+    # sim.sum1[j,] <- length(which(sim_single(mu, sigma, alpha[1,j], k, distribution, n_sim, summary = FALSE) > USL))/n_sim
+    sim.sum1[j,] <- length(which(X[j,]> USL))/n_sim
   }
   results <- sim.sum1
   # results <- data.frame(sim.sum1)

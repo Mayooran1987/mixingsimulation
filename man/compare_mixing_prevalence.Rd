@@ -13,7 +13,7 @@ compare_mixing_prevalence(
   l,
   rate,
   distribution,
-  UL,
+  USL,
   n_sim
 )
 }
@@ -34,7 +34,7 @@ compare_mixing_prevalence(
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
-\item{UL}{the upper limit value of the expected total CFUs, which can be found from a stabilising point when the mean is about standard deviation}
+\item{USL}{the upper stabilizing limit of the expected total CFUs, which can be found from a stabilising point when the mean is about standard deviation}
 
 \item{n_sim}{number of simulations}
 }
@@ -56,7 +56,7 @@ The prevalence is given by the following formula,
 where \eqn{p_d} is the probability of detection in each stage of the mixing process. For comparison purposes, we have applied average prevalence after \eqn{l} number of revolutions in each mixing plan. The probability of detection at every stage of the mixing process can be estimated by employing function \link{sim_single_pd_stages}. However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function \link{sim_single_prevalence}. We can flexibly change the mixing parameters of this function, which depends on what purpose the comparison is needed for.
 }
 \examples{
-mulower <- 50
+mulower <- 0
 muupper <- 200
 sigma <- 0.8
 alpha_in <- 0.01
@@ -64,9 +64,9 @@ k <- c(30,30)
 l <- c(500,25000)
 rate <- 0.01
 distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
-UL <- 138
+USL <- 138
 n_sim <- 2000
-compare_mixing_prevalence(mulower, muupper, sigma, alpha_in, k, l, rate, distribution, UL, n_sim)
+compare_mixing_prevalence(mulower, muupper, sigma, alpha_in, k, l, rate, distribution, USL, n_sim)
 }
 \references{
 \itemize{

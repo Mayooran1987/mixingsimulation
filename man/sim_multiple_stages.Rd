@@ -24,7 +24,7 @@ sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-The expected total number of CFUs in each revolution/stage.
+The expected total number of CFUs in each revolution / stage.
 }
 \description{
 This function calculates the resulting expected total number of CFUs in the mixed sample in the multiple mixing plans at each stage of the mixing process.

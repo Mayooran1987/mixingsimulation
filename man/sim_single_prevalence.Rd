@@ -4,7 +4,17 @@
 \alias{sim_single_prevalence}
 \title{The estimated average prevalence value in the single mixing scheme.}
 \usage{
-sim_single_prevalence(mu, sigma, alpha_in, k, l, rate, distribution, UL, n_sim)
+sim_single_prevalence(
+  mu,
+  sigma,
+  alpha_in,
+  k,
+  l,
+  rate,
+  distribution,
+  USL,
+  n_sim
+)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -15,13 +25,13 @@ sim_single_prevalence(mu, sigma, alpha_in, k, l, rate, distribution, UL, n_sim)
 
 \item{k}{number of small portions / primary samples}
 
-\item{l}{number of revolutions /stages}
+\item{l}{number of revolutions / stages}
 
 \item{rate}{concentration parameter changing rate in the each revolutions}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
-\item{UL}{the upper limit value of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
+\item{USL}{the upper stabilizing limit of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
 
 \item{n_sim}{number of simulations}
 }
@@ -43,9 +53,9 @@ k <- 30
 l <- 25000
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"
-UL <- 138
+USL <- 138
 n_sim <- 2000
-sim_single_prevalence(mu, sigma , alpha_in, k, l, rate, distribution, UL, n_sim)
+sim_single_prevalence(mu, sigma , alpha_in, k, l, rate, distribution, USL, n_sim)
 }
 \references{
 \itemize{
