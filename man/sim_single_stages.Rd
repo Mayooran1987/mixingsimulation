@@ -39,11 +39,11 @@ sim_single_stages(
 average number of colony forming units in the single mixing plan with \eqn{l} number of stages.
 }
 \description{
-This function gives a simulated number of CFU after each stage of the mixing process.
+This function gives a simulated number of CFUs after each stage of the mixing process.
 }
 \details{
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of stages in the mixing process.
-This function provides simulated number of CFU after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_stages}.
+This function provides simulated number of CFUs after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_stages}.
 }
 \examples{
 mu <- 100

@@ -1,6 +1,6 @@
 Package: mixingsimulation
 Type: Package
-Title: Simulation results for the powder mixing process
+Title: Microbiological Risk Assessment of Powder Mixing Process by Simulation Results
 Version: 0.0.1
 Authors@R: c(
           person("Mayooran", "Thevaraja", email = "mayooran@eng.jfn.ac.lk", role = c("aut", "cre")),
@@ -10,11 +10,11 @@ Authors@R: c(
 Authors: Mayooran Thevaraja [aut, cre], Kondaswamy Govindaraju [aut], Mark Bebbington [aut]
 URL: https://github.com/Mayooran1987/mixingsimulation 
 BugReports: https://github.com/Mayooran1987/mixingsimulation/issues
-Description: This package develops for simulating the powder mixing process for microbial risk assessment in the bulk material production process.
+Description: This package develops to study microbiological risk assessment of mixing primary samples in the powdered products using simulation results.
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-Imports: ggplot2, ggthemes, plyr, reshape2, stats, VGAM 
+Imports: ggplot2, ggthemes, gridExtra, magrittr, plyr, purrr, reshape2, stats, VGAM 
 Suggests: 
     testthat
 RoxygenNote: 7.1.2

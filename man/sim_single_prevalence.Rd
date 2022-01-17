@@ -2,7 +2,7 @@
 % Please edit documentation in R/sim_single_prevalence.R
 \name{sim_single_prevalence}
 \alias{sim_single_prevalence}
-\title{The estimated average prevalence value in the single mixing scheme.}
+\title{The estimated average prevalence in the single mixing scheme.}
 \usage{
 sim_single_prevalence(
   mu,
@@ -12,7 +12,7 @@ sim_single_prevalence(
   l,
   rate,
   distribution,
-  USL,
+  UDL,
   n_sim
 )
 }
@@ -31,7 +31,7 @@ sim_single_prevalence(
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
-\item{USL}{the upper stabilizing limit of the expected total CFU, which can be found from stabilising point when the mean is about standard deviation}
+\item{UDL}{the upper decision limit of the expected total CFUs, which can be found from stabilising point when the mean is about standard deviation}
 
 \item{n_sim}{number of simulations}
 }
@@ -53,9 +53,9 @@ k <- 30
 l <- 25000
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"
-USL <- 138
-n_sim <- 2000
-sim_single_prevalence(mu, sigma , alpha_in, k, l, rate, distribution, USL, n_sim)
+UDL <- 138
+n_sim <- 20000
+sim_single_prevalence(mu, sigma , alpha_in, k, l, rate, distribution, UDL, n_sim)
 }
 \references{
 \itemize{

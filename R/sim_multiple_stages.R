@@ -37,7 +37,7 @@ sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n
 # sim.sum <- matrix(NA, nrow = n_sim, ncol = length(k))
 # for(i in 1:length(k)){
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(k))
-  for(j in 1:length(k)){
+  for (j in 1:length(k)) {
     sim.sum3[,j] <-  sim_single_stages(mu, sigma, alpha_in, k[j], l, rate, distribution[j], n_sim)
   }
   result <- data.frame(sim.sum3)

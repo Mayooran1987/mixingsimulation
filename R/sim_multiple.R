@@ -20,7 +20,7 @@
 ##' alpha <- c(0.1,5)
 ##' k <- c(30,30)
 ##' distribution <-  c("Poisson lognormal-Type B","Poisson lognormal-Type B")
-##' n_sim <- 200000
+##' n_sim <- 20000
 ##' f_spr <- function(n_sim) {
 ##'   sprintf("Simulation results (no.simulations = %.0f)", n_sim)
 ##' }
@@ -42,18 +42,18 @@
 ##'   ggplot2::ylab(expression("pmf"))+
 ##'   ggplot2::theme_classic()+ ggplot2::xlab(expression("Total number of CFU in the mixed sample"))+
 ##'   ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.75))+
-##'   ggplot2::ggtitle(label = f_spr(n_sim))+ ggthemes::scale_colour_colorblind()
+##'   ggthemes::scale_colour_colorblind()
 ##'   plot_example
 ##' @export
 sim_multiple <- function(mu, sigma, alpha, k, distribution, n_sim){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
     }
-  if (length(alpha)!=length(k)) {
+  if (length(alpha) != length(k)) {
     warning("length of alpha and length of k are must be equal")
     } else {
       sim.sum1 <- matrix(NA, nrow = n_sim, ncol = length(k))
-      for(j in 1:length(k)){
+      for (j in 1:length(k)) {
         sim.sum1[,j] <-  sim_single(mu, sigma, alpha[j], k[j], distribution[j], n_sim, summary = 3)
       }
       }

@@ -1,4 +1,4 @@
-##' This function gives a simulated number of CFU after each stage of the mixing process.
+##' This function gives a simulated number of CFUs after each stage of the mixing process.
 ##' @title The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with \eqn{l}  number of stages.
 ##' @param l the maximum number of stages in the mixing process
 ##' @param mu the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution
@@ -12,7 +12,7 @@
 ##' @param n_sim number of simulations
 ##' @return average number of colony forming units in the single mixing plan with \eqn{l} number of stages.
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of stages in the mixing process.
-##' This function provides simulated number of CFU after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_stages}.
+##' This function provides simulated number of CFUs after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_stages}.
 ##' @seealso \link{sim_single}
 ##' @references
 ##' \itemize{
@@ -48,32 +48,32 @@ sim_single_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, n_
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, l = %.1f, %s)", mu, k, l, distribution)
   }
-  stages <- 1:l
-  alpha <- matrix(NA, nrow =1 , ncol = l)
-  for(j in 1:l){
-    if (j==1) {
+  # stages <- 1:l
+  alpha <- matrix(NA, nrow = 1 , ncol = l)
+  for (j in 1:l) {
+    if (j == 1) {
       alpha[,j] <- alpha_in
     } else {
-      alpha[,j] <- alpha[,j-1]+ rate
+      alpha[,j] <- alpha[,j - 1] + rate
     }
   }
-  if (summary == 1){
+  if (summary == 1) {
     sim.sum1 <- matrix(NA, nrow = l, ncol = 1)
-    for(j in 1:length(alpha)){
+    for (j in 1:length(alpha)) {
       sim.sum1[j,] <- sim_single(mu, sigma, alpha[1,j], k, distribution, n_sim, summary = 1)
     }
     results <- sim.sum1
     colnames(results) <- f_spri(mu, k, l, distribution)
-  } else if (summary == 2){
+  } else if (summary == 2) {
     sim.sum1 <- matrix(NA, nrow = l, ncol = k)
-    for(j in 1:length(alpha)){
+    for (j in 1:length(alpha)) {
       sim.sum1[j,] <- sim_single(mu, sigma, alpha[,j], k, distribution, n_sim, summary = 2)
     }
     results <- sim.sum1
-  } else if (summary == 3){
+  } else if (summary == 3) {
     sim.sum1 <- matrix(NA, nrow = l, ncol = n_sim)
     # result <- round(sum(apply(sim_single(mu, sigma , alpha , k, distribution, n_sim, summary = 3), 1, sum)))
-    for(j in 1:length(alpha)){
+    for (j in 1:length(alpha)) {
       sim.sum1[j,] <- sim_single(mu, sigma, alpha[,j], k, distribution, n_sim, summary = 3)
     }
     results <- sim.sum1

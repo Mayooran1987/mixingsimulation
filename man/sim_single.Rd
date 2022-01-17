@@ -19,7 +19,7 @@ sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = 1)
 
 \item{n_sim}{number of simulations}
 
-\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample, respectively ( default \code{summary = 1}).}
+\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2} or \code{summary = 4}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample or mean and variance values of the simulated \eqn{N'}, respectively ( default \code{summary = 1}).}
 }
 \value{
 total number of colony forming units in the single mixing plan
