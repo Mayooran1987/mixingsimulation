@@ -76,19 +76,19 @@ n_sim <- 20000
 plot1 <- compare_mixing_stages(mu, sigma, alpha_in, k , l = 50,rate, distribution,n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
 legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm'))
+legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
 plot2 <- compare_mixing_stages(mu, sigma, alpha_in, k , l = 500, rate, distribution, n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
 legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm'))
+legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
 plot3 <- compare_mixing_stages(mu, sigma, alpha_in, k, l = 5000,rate , distribution,n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
 legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm'))
+legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
 plot4 <- compare_mixing_stages(mu, sigma , alpha_in , k , l = 25000, rate , distribution ,n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
 legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm'))
+legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
 gridExtra::grid.arrange(plot1, plot2, plot3, plot4, ncol = 2, nrow = 2)
 }
 \references{
