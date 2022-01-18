@@ -124,7 +124,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mu</th>
-      <td><p>the average number of colony-forming units (\(\mu\)) in the mixed sample, which is in logarithmic scale if we use a Lognormal / Poisson lognormal distribution</p></td>
+      <td><p>the average number of CFUs (\(\mu\)) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution</p></td>
     </tr>
     <tr>
       <th>sigma</th>
@@ -148,7 +148,7 @@
     </tr>
     <tr>
       <th>summary</th>
-      <td><p>if we need to get all simulated \(N'\), use <code>summary = 3</code>; otherwise, if we use <code>summary = 1</code> or <code>summary = 2</code>, the function provides the mean value of the simulated \(N'\) or generated CFUs in each primary sample, respectively ( default <code>summary = 1</code>).</p></td>
+      <td><p>if we need to get all simulated \(N'\), use <code>summary = 3</code>; otherwise, if we use <code>summary = 1</code> or <code>summary = 2</code> or <code>summary = 4</code>, the function provides the mean value of the simulated \(N'\) or generated CFUs in each primary sample or mean and variance values of the simulated \(N'\), respectively ( default <code>summary = 1</code>).</p></td>
     </tr>
     </table>
 
@@ -157,7 +157,7 @@
     <p>total number of colony forming units in the single mixing plan</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Let \(N'\) be the number of colony-forming units in the mixed sample which is produced by mixing of \(k\) primary samples and \(N' = \sum N_i\).To more details, please refer the details section of  <a href='compare_mixing_stages.html'>compare_mixing_stages</a>. (to be finished later on)</p>
+    <p>Let \(N'\) be the number of colony-forming units in the mixed sample which is produced by mixing of \(k\) primary samples and \(N' = \sum N_i\). To more details, please refer the details section of  <a href='compare_mixing_stages.html'>compare_mixing_stages</a>. (to be finished later on)</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -176,7 +176,7 @@
 <span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fl'>30</span></span>
 <span class='r-in'><span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span></span>
 <span class='r-in'><span class='fu'>sim_single</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha</span>, <span class='va'>k</span>, distribution <span class='op'>=</span> <span class='st'>"Poisson lognormal-Type B"</span>, <span class='va'>n_sim</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 159</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 139</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

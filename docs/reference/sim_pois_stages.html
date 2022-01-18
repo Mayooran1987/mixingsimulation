@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Graphical comparison of mixing plans based on estimated average prevalence in the mixing process. — compare_mixing_prevalence • mixingsimulation</title>
+<title>A graphical display of the mean and variance changes at each mixing stage. — sim_pois_stages • mixingsimulation</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Graphical comparison of mixing plans based on estimated average prevalence in the mixing process. — compare_mixing_prevalence" />
-<meta property="og:description" content="This function provides a graphical display to compare mixing plans based on the estimated average prevalence in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples." />
+<meta property="og:title" content="A graphical display of the mean and variance changes at each mixing stage. — sim_pois_stages" />
+<meta property="og:description" content="This function creates a graphical display of the mean and variance changes at each mixing stage." />
 
 
 
@@ -108,42 +108,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Graphical comparison of mixing plans based on estimated average prevalence in the mixing process.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/compare_mixing_prevalence.R'><code>R/compare_mixing_prevalence.R</code></a></small>
-    <div class="hidden name"><code>compare_mixing_prevalence.Rd</code></div>
+    <h1>A graphical display of the mean and variance changes at each mixing stage.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/sim_pois_stages.R'><code>R/sim_pois_stages.R</code></a></small>
+    <div class="hidden name"><code>sim_pois_stages.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function provides a graphical display to compare mixing plans based on the estimated average prevalence in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples.</p>
+    <p>This function creates a graphical display of the mean and variance changes at each mixing stage.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compare_mixing_prevalence</span><span class='op'>(</span>
-  <span class='va'>mulower</span>,
-  <span class='va'>muupper</span>,
-  <span class='va'>sigma</span>,
-  <span class='va'>alpha_in</span>,
-  <span class='va'>k</span>,
-  <span class='va'>l</span>,
-  <span class='va'>rate</span>,
-  <span class='va'>distribution</span>,
-  <span class='va'>UDL</span>,
-  <span class='va'>n_sim</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sim_pois_stages</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mulower</th>
-      <td><p>the lower value of the mean concentration (\(\mu\)) for use in the graphical display's x-axis.</p></td>
-    </tr>
-    <tr>
-      <th>muupper</th>
-      <td><p>the upper value of the mean concentration (\(\mu\)) for use in the graphical display's x-axis.</p></td>
+      <th>mu</th>
+      <td><p>the average number of CFUs (\(\mu\)) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution</p></td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td><p>the standard deviation of the colony-forming units (CFUs) in the mixed sample on the logarithmic scale (default value 0.8)</p></td>
+      <td><p>the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)</p></td>
     </tr>
     <tr>
       <th>alpha_in</th>
@@ -166,10 +151,6 @@
       <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code> or <code>"Poisson lognormal-Type A"</code> or <code>"Poisson lognormal-Type B"</code></p></td>
     </tr>
     <tr>
-      <th>UDL</th>
-      <td><p>the upper decision limit of the expected total CFUs, which can be found from a stabilising point when the mean is about standard deviation</p></td>
-    </tr>
-    <tr>
       <th>n_sim</th>
       <td><p>number of simulations</p></td>
     </tr>
@@ -177,39 +158,23 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Estimates the average prevalence-based graphical display for a comparison of mixing plans.</p>
+    <p>Mean and variance changes at each mixing stage.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Let \(N'\) be the number of CFUs in the mixed sample, which is produced by a contribution of \(k\) primary samples mixing, \(N' = \sum N_i\),
- and let \(l\) be the number of revolutions in the mixing. This function provides a graphical display to compare mixing plans based on the estimated average
- prevalence in the mixing process with different input variables, such as number of revolutions, type of distribution and number of primary samples.</p>
-<p>The prevalence is given by the following formula,</p>
-<p>$$Prevalence = 1- {(1-p_d)}^k ;$$</p>
-<p>where \(p_d\) is the probability of detection in each stage of the mixing process. For comparison purposes, we have applied average prevalence after \(l\) number of revolutions in each mixing plan. The probability of detection at every stage of the mixing process can be estimated by employing function <a href='sim_single_pd_stages.html'>sim_single_pd_stages</a>. However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function <a href='sim_single_prevalence.html'>sim_single_prevalence</a>. We can flexibly change the mixing parameters of this function, which depends on what purpose the comparison is needed for.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    
-<ul>
-<li><p>Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, <a href='https://doi.org/10.1016/j.ijfoodmicro.2004.10.027'>311-322</a>.</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><a href='sim_single_prevalence.html'>sim_single_prevalence</a></p></div>
+    <p>Let \(N'\) be the number of colony-forming units in the mixed sample which is produced by mixing of \(k\) primary samples and \(N' = \sum N_i\).
+This function produces a graphical display of the mean and variance changes at each mixing stage. It is helpful to identify the optimal number of revolutions of the mixture, which is a point of mixing that initiates Poisson-like homogeneity.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='va'>mulower</span> <span class='op'>&lt;-</span> <span class='fl'>0</span></span>
-<span class='r-in'><span class='va'>muupper</span> <span class='op'>&lt;-</span> <span class='fl'>200</span></span>
+    <pre class="examples"><span class='r-in'><span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fl'>100</span></span>
 <span class='r-in'><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span></span>
 <span class='r-in'><span class='va'>alpha_in</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
-<span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>30</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>500</span>,<span class='fl'>25000</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
-<span class='r-in'><span class='va'>distribution</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Poisson lognormal-Type B"</span>,<span class='st'>"Poisson lognormal-Type B"</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>UDL</span> <span class='op'>&lt;-</span> <span class='fl'>138</span></span>
+<span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fl'>30</span></span>
+<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>5000</span></span>
+<span class='r-in'><span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.001</span></span>
+<span class='r-in'><span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='st'>"Poisson lognormal-Type B"</span></span>
 <span class='r-in'><span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span></span>
-<span class='r-in'><span class='fu'>compare_mixing_prevalence</span><span class='op'>(</span><span class='va'>mulower</span>, <span class='va'>muupper</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>UDL</span>, <span class='va'>n_sim</span><span class='op'>)</span><span class='op'>}</span></span>
+<span class='r-in'><span class='fu'>sim_pois_stages</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span> , <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span></span>
+<span class='r-plt img'><img src='sim_pois_stages-1.png' alt='' width='700' height='433' /></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Graphical comparison of mixing plans based on estimated average prevalence in the mixing process. — compare_mixing_prevalence • mixingsimulation</title>
+<title>The estimated average prevalence value in the multiple mixing plans. — sim_multiple_prevalence • mixingsimulation</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Graphical comparison of mixing plans based on estimated average prevalence in the mixing process. — compare_mixing_prevalence" />
-<meta property="og:description" content="This function provides a graphical display to compare mixing plans based on the estimated average prevalence in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples." />
+<meta property="og:title" content="The estimated average prevalence value in the multiple mixing plans. — sim_multiple_prevalence" />
+<meta property="og:description" content="This function estimates the average prevalence in the mixing process after a specific number of revolutions for different mixing schemes." />
 
 
 
@@ -108,18 +108,17 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Graphical comparison of mixing plans based on estimated average prevalence in the mixing process.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/compare_mixing_prevalence.R'><code>R/compare_mixing_prevalence.R</code></a></small>
-    <div class="hidden name"><code>compare_mixing_prevalence.Rd</code></div>
+    <h1>The estimated average prevalence value in the multiple mixing plans.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/sim_multiple_prevalence.R'><code>R/sim_multiple_prevalence.R</code></a></small>
+    <div class="hidden name"><code>sim_multiple_prevalence.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function provides a graphical display to compare mixing plans based on the estimated average prevalence in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples.</p>
+    <p>This function estimates the average prevalence in the mixing process after a specific number of revolutions for different mixing schemes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>compare_mixing_prevalence</span><span class='op'>(</span>
-  <span class='va'>mulower</span>,
-  <span class='va'>muupper</span>,
+    <pre class="usage"><span class='fu'>sim_multiple_prevalence</span><span class='op'>(</span>
+  <span class='va'>mu</span>,
   <span class='va'>sigma</span>,
   <span class='va'>alpha_in</span>,
   <span class='va'>k</span>,
@@ -134,16 +133,12 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mulower</th>
-      <td><p>the lower value of the mean concentration (\(\mu\)) for use in the graphical display's x-axis.</p></td>
-    </tr>
-    <tr>
-      <th>muupper</th>
-      <td><p>the upper value of the mean concentration (\(\mu\)) for use in the graphical display's x-axis.</p></td>
+      <th>mu</th>
+      <td><p>the average number of CFUs (\(\mu\)) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution</p></td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td><p>the standard deviation of the colony-forming units (CFUs) in the mixed sample on the logarithmic scale (default value 0.8)</p></td>
+      <td><p>the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)</p></td>
     </tr>
     <tr>
       <th>alpha_in</th>
@@ -159,7 +154,7 @@
     </tr>
     <tr>
       <th>rate</th>
-      <td><p>concentration parameter changing rate in each of the revolutions</p></td>
+      <td><p>concentration parameter changing rate in the each revolutions</p></td>
     </tr>
     <tr>
       <th>distribution</th>
@@ -167,7 +162,7 @@
     </tr>
     <tr>
       <th>UDL</th>
-      <td><p>the upper decision limit of the expected total CFUs, which can be found from a stabilising point when the mean is about standard deviation</p></td>
+      <td><p>the upper decision limit of the expected total CFUs, which can be found from stabilising point when the mean is about standard deviation</p></td>
     </tr>
     <tr>
       <th>n_sim</th>
@@ -177,15 +172,10 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Estimates the average prevalence-based graphical display for a comparison of mixing plans.</p>
+    <p>The average prevalence in the mixing process after a specific number of revolutions.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Let \(N'\) be the number of CFUs in the mixed sample, which is produced by a contribution of \(k\) primary samples mixing, \(N' = \sum N_i\),
- and let \(l\) be the number of revolutions in the mixing. This function provides a graphical display to compare mixing plans based on the estimated average
- prevalence in the mixing process with different input variables, such as number of revolutions, type of distribution and number of primary samples.</p>
-<p>The prevalence is given by the following formula,</p>
-<p>$$Prevalence = 1- {(1-p_d)}^k ;$$</p>
-<p>where \(p_d\) is the probability of detection in each stage of the mixing process. For comparison purposes, we have applied average prevalence after \(l\) number of revolutions in each mixing plan. The probability of detection at every stage of the mixing process can be estimated by employing function <a href='sim_single_pd_stages.html'>sim_single_pd_stages</a>. However, if we want to estimate prevalence values in each revolution of the mixing process of each plan, we have to utilise function <a href='sim_single_prevalence.html'>sim_single_prevalence</a>. We can flexibly change the mixing parameters of this function, which depends on what purpose the comparison is needed for.</p>
+    <p>Let \(N'\) be the number of CFUs in the mixed sample, which is produced by the contribution of \(k\) primary samples mixing, \(N' = \sum N_i\) and let \(l\) be the number of stages in the mixing process. This function estimates the average prevalence value after a specific number of revolutions in each mixing scheme. However, we need to apply function <a href='sim_single_prevalence.html'>sim_single_prevalence</a>  if we want to estimate individual prevalence values at each stage of the mixing process.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -198,18 +188,17 @@
     <div class='dont-index'><p><a href='sim_single_prevalence.html'>sim_single_prevalence</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='va'>mulower</span> <span class='op'>&lt;-</span> <span class='fl'>0</span></span>
-<span class='r-in'><span class='va'>muupper</span> <span class='op'>&lt;-</span> <span class='fl'>200</span></span>
+    <pre class="examples"><span class='r-in'><span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fl'>100</span></span>
 <span class='r-in'><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span></span>
 <span class='r-in'><span class='va'>alpha_in</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
-<span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>30</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>500</span>,<span class='fl'>25000</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>75</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>25000</span></span>
 <span class='r-in'><span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
 <span class='r-in'><span class='va'>distribution</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Poisson lognormal-Type B"</span>,<span class='st'>"Poisson lognormal-Type B"</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>UDL</span> <span class='op'>&lt;-</span> <span class='fl'>138</span></span>
 <span class='r-in'><span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span></span>
-<span class='r-in'><span class='fu'>compare_mixing_prevalence</span><span class='op'>(</span><span class='va'>mulower</span>, <span class='va'>muupper</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>UDL</span>, <span class='va'>n_sim</span><span class='op'>)</span><span class='op'>}</span></span>
+<span class='r-in'><span class='fu'>sim_multiple_prevalence</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span> , <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>UDL</span>, <span class='va'>n_sim</span><span class='op'>)</span></span>
+<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error:</span> cannot allocate vector of size 3.7 Gb</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
