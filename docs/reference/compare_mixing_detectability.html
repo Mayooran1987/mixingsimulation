@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The expected total number of CFUs in the mixed sample in the multiple mixing schemes at each stage of the mixing process. — sim_multiple_stages • mixingsimulation</title>
+<title>Graphical comparison of mixing plans based on estimated detectability in the mixing process. — compare_mixing_detectability • mixingsimulation</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="The expected total number of CFUs in the mixed sample in the multiple mixing schemes at each stage of the mixing process. — sim_multiple_stages" />
-<meta property="og:description" content="This function calculates the resulting expected total number of CFUs in the mixed sample in the multiple mixing plans at each stage of the mixing process." />
+<meta property="og:title" content="Graphical comparison of mixing plans based on estimated detectability in the mixing process. — compare_mixing_detectability" />
+<meta property="og:description" content="This function provides a graphical display to compare mixing plans based on the estimated detectability in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples." />
 
 
 
@@ -108,27 +108,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>The expected total number of CFUs in the mixed sample in the multiple mixing schemes at each stage of the mixing process.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/sim_multiple_stages.R'><code>R/sim_multiple_stages.R</code></a></small>
-    <div class="hidden name"><code>sim_multiple_stages.Rd</code></div>
+    <h1>Graphical comparison of mixing plans based on estimated detectability in the mixing process.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/compare_mixing_detectability.R'><code>R/compare_mixing_detectability.R</code></a></small>
+    <div class="hidden name"><code>compare_mixing_detectability.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function calculates the resulting expected total number of CFUs in the mixed sample in the multiple mixing plans at each stage of the mixing process.</p>
+    <p>This function provides a graphical display to compare mixing plans based on the estimated detectability in the mixing process using different mixing parameters such as revolutions, type of distribution and number of primary samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sim_multiple_stages</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>compare_mixing_detectability</span><span class='op'>(</span>
+  <span class='va'>mulower</span>,
+  <span class='va'>muupper</span>,
+  <span class='va'>sigma</span>,
+  <span class='va'>alpha_in</span>,
+  <span class='va'>k</span>,
+  <span class='va'>l</span>,
+  <span class='va'>rate</span>,
+  <span class='va'>distribution</span>,
+  <span class='va'>UDL</span>,
+  <span class='va'>n_sim</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>mu</th>
-      <td><p>the average number of CFUs (\(\mu\)) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution</p></td>
+      <th>mulower</th>
+      <td><p>the lower value of the mean concentration (\(\mu\)) for use in the graphical display's x-axis.</p></td>
+    </tr>
+    <tr>
+      <th>muupper</th>
+      <td><p>the upper value of the mean concentration (\(\mu\)) for use in the graphical display's x-axis.</p></td>
     </tr>
     <tr>
       <th>sigma</th>
-      <td><p>the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)</p></td>
+      <td><p>the standard deviation of the colony-forming units (CFUs) in the mixed sample on the logarithmic scale (default value 0.8)</p></td>
     </tr>
     <tr>
       <th>alpha_in</th>
@@ -144,11 +159,15 @@
     </tr>
     <tr>
       <th>rate</th>
-      <td><p>concentration parameter changing rate in the each revolutions</p></td>
+      <td><p>concentration parameter changing rate in each of the revolutions</p></td>
     </tr>
     <tr>
       <th>distribution</th>
       <td><p>what suitable distribution type we have employed for simulation such as <code>"Poisson-Type A"</code> or <code>"Poisson-Type B"</code> or <code>"Lognormal-Type A"</code> or <code>"Lognormal-Type B"</code> or <code>"Poisson lognormal-Type A"</code> or <code>"Poisson lognormal-Type B"</code></p></td>
+    </tr>
+    <tr>
+      <th>UDL</th>
+      <td><p>the upper decision limit of the expected total CFUs, which can be found from a stabilising point when the mean is about standard deviation</p></td>
     </tr>
     <tr>
       <th>n_sim</th>
@@ -158,37 +177,40 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The expected total number of CFUs in each revolution / stage.</p>
+    <p>Estimates the detectability-based graphical display for a comparison of mixing plans.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Let \(N'\) be the number of CFUs in the mixed sample, which is produced by the mixing of \(k\)  primary samples and \(N' = \sum N_i\) and let \(N_i\) be the number of CFUs.
-For this package development, we have employed the notations 'Type-A' and 'Type-B' to indicate the type of distributions, which are applied in the previous literature as 'fair' and 'beta', respectively; see <a href='https://doi.org/10.1016/j.ijfoodmicro.2004.10.027'>Nauta (2005)</a>.</p>
-<p>This package will consider stage-by-stage the mixing process and assumes systematically breaking clusters at every stage of the mixing. Therefore, it can be assumed the concentration parameter also systematically changes with the concentration of the contribution.</p>
+    <p>Let \(N'\) be the number of CFUs in the mixed sample, which is produced by a contribution of \(k\) primary samples mixing, \(N' = \sum N_i\),
+ and let \(l\) be the number of revolutions in the mixing. This function provides a graphical display to compare mixing plans based on the estimated average
+ detectability in the mixing process with different input variables, such as number of revolutions, type of distribution and number of primary samples.</p>
+<p>The detectability is given by the following formula,</p>
+<p>$$detectability = 1- {(1-p_d)}^k ;$$</p>
+<p>where \(p_d\) is the average probability of detection after \(l\) number of revolutions in each mixing plan. The probability of detection at every stage of the mixing process can be estimated by employing function <a href='sim_single_pd_stages.html'>sim_single_pd_stages</a>. However, if we want to estimate detectability values in each revolution of the mixing process of each plan, we have to utilise function <a href='sim_single_detectability.html'>sim_single_detectability</a>. We can flexibly change the mixing parameters of this function, which depends on what purpose the comparison is needed for.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
 <ul>
 <li><p>Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, <a href='https://doi.org/10.1016/j.ijfoodmicro.2004.10.027'>311-322</a>.</p></li>
+<li><p>McCallum DA (2005) A conceptual guide to detection probability for point counts and other count-based survey methods. USDA Forest Service General Technical Report PSW-GTR-191, <a href='https://www.fs.usda.gov/treesearch/pubs/32063'>pp 754-761</a>.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='sim_single.html'>sim_single</a></p></div>
+    <div class='dont-index'><p><a href='sim_single_detectability.html'>sim_single_detectability</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
-<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>25000</span></span>
-<span class='r-in'><span class='va'>mu</span> <span class='op'>&lt;-</span> <span class='fl'>100</span></span>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='va'>mulower</span> <span class='op'>&lt;-</span> <span class='fl'>0</span></span>
+<span class='r-in'><span class='va'>muupper</span> <span class='op'>&lt;-</span> <span class='fl'>200</span></span>
 <span class='r-in'><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span></span>
 <span class='r-in'><span class='va'>alpha_in</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
-<span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>75</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>30</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>500</span>,<span class='fl'>25000</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
 <span class='r-in'><span class='va'>distribution</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Poisson lognormal-Type B"</span>,<span class='st'>"Poisson lognormal-Type B"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>UDL</span> <span class='op'>&lt;-</span> <span class='fl'>138</span></span>
 <span class='r-in'><span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>2000</span></span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/colSums.html'>colMeans</a></span><span class='op'>(</span><span class='fu'>sim_multiple_stages</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> mixing plan (mu = 100.0, k = 30, Poisson lognormal-Type B) </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                   137.5473 </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> mixing plan (mu = 100.0, k = 75, Poisson lognormal-Type B) </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>                                                   137.6977 </span>
+<span class='r-in'><span class='fu'>compare_mixing_detectability</span><span class='op'>(</span><span class='va'>mulower</span>,<span class='va'>muupper</span>,<span class='va'>sigma</span>,<span class='va'>alpha_in</span>,<span class='va'>k</span>,<span class='va'>l</span>,<span class='va'>rate</span>,<span class='va'>distribution</span>,<span class='va'>UDL</span>,<span class='va'>n_sim</span><span class='op'>)</span><span class='op'>}</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
