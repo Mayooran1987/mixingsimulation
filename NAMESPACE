@@ -1,2 +1,2 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("stats", "rbinom", "rlnorm", "rpois", "var", "density")
+importFrom("stats", "rnorm", "rbinom", "rlnorm", "rpois", "var", "density")

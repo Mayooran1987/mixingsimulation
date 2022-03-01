@@ -12,7 +12,7 @@
 ##' @param n_sim number of simulations
 ##' @return average number of colony forming units in the single mixing plan with \eqn{l} number of stages.
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of stages in the mixing process.
-##' This function provides simulated number of CFUs after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_stages}.
+##' This function provides simulated number of CFUs after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_3}.
 ##' @seealso \link{sim_single}
 ##' @references
 ##' \itemize{
@@ -26,7 +26,7 @@
 ##' l <- 25000
 ##' rate <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
-##' n_sim <- 20000
+##' n_sim <- 2000
 ##' no.revolutions <-c(1:l)
 ##' Prob_df <-
 ##' data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))
@@ -37,7 +37,7 @@
 ##' ggplot2::geom_line(ggplot2::aes(x = no.revolutions, y = CFU))+
 ##' ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = cum_mean), color = "red", size = .75)+
 ##' ggplot2::xlab(expression("Number of revolutions"))+
-##' ggplot2::ylab(expression("Expected total number of CFU"))+
+##' ggplot2::ylab(expression("Expected total number of CFUs"))+
 ##' ggplot2::theme_classic()+
 ##' ggplot2::ggtitle(label = "Expected total number of CFU versus number of revolutions")+
 ##' ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
@@ -60,7 +60,7 @@ sim_single_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, n_
   if (summary == 1) {
     sim.sum1 <- matrix(NA, nrow = l, ncol = 1)
     for (j in 1:length(alpha)) {
-      sim.sum1[j,] <- sim_single(mu, sigma, alpha[1,j], k, distribution, n_sim, summary = 1)
+      sim.sum1[j,] <- sim_single(mu, sigma, alpha[,j], k, distribution, n_sim, summary = 1)
     }
     results <- sim.sum1
     colnames(results) <- f_spri(mu, k, l, distribution)

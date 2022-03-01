@@ -27,7 +27,7 @@ This function calculates the resulting expected total number of colony-forming u
 }
 \details{
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing and \eqn{N' = \sum N_i}. This function provides the simulated resulting of the expected total number of colony-forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
-To more details, please refer the details section of  \link{compare_mixing_stages}.
+To more details, please refer the details section of  \link{compare_mixing_3}.
 }
 \examples{
 set.seed(1350)
@@ -66,5 +66,5 @@ ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme,colou
 }
 }
 \seealso{
-\link{sim_single}, \link{compare_mixing_stages}
+\link{sim_single}, \link{compare_mixing_3}
 }

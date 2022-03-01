@@ -16,10 +16,10 @@
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- 30
-##' l <- 5000
+##' l <- 2500
 ##' rate <- 0.001
 ##' distribution <-  "Poisson lognormal-Type B"
-##' n_sim <- 20000
+##' n_sim <- 2000
 ##' sim_pois_stages(mu, sigma , alpha_in, k, l, rate, distribution, n_sim)
 ##' @export
 sim_pois_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, n_sim){

@@ -43,7 +43,7 @@ This function gives a simulated number of CFUs after each stage of the mixing pr
 }
 \details{
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing, \eqn{N' = \sum N_i} and \eqn{l} be the number of stages in the mixing process.
-This function provides simulated number of CFUs after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_stages}.
+This function provides simulated number of CFUs after each stages of the mixing process. To more details, please refer the details section of  \link{compare_mixing_3}.
 }
 \examples{
 mu <- 100
@@ -53,7 +53,7 @@ k <- 30
 l <- 25000
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"
-n_sim <- 20000
+n_sim <- 2000
 no.revolutions <-c(1:l)
 Prob_df <-
 data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))
@@ -64,7 +64,7 @@ plot_example <- ggplot2::ggplot(Prob_df) +
 ggplot2::geom_line(ggplot2::aes(x = no.revolutions, y = CFU))+
 ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = cum_mean), color = "red", size = .75)+
 ggplot2::xlab(expression("Number of revolutions"))+
-ggplot2::ylab(expression("Expected total number of CFU"))+
+ggplot2::ylab(expression("Expected total number of CFUs"))+
 ggplot2::theme_classic()+
 ggplot2::ggtitle(label = "Expected total number of CFU versus number of revolutions")+
 ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+

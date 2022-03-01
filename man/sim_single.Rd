@@ -19,7 +19,9 @@ sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = 1)
 
 \item{n_sim}{number of simulations}
 
-\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2} or \code{summary = 4}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample or mean and variance values of the simulated \eqn{N'}, respectively ( default \code{summary = 1}).}
+\item{summary}{need to select one number from the list 1 to 5 which depends on what simulated observations are needed (default 1). If \code{summary = 1}, the function provides the expected total number of the simulated \eqn{N'} after \code{n_sim} simulations are run.
+If \code{summary = 2}, the function provides generated CFUs in each primary sample after \code{n_sim} simulations are run. If \code{summary = 3}, the function provides the expected total number of the simulated \eqn{N'} at each simulation run.
+If \code{summary = 4}, the function provides the mean and variance values of the simulated samples. If \code{summary = 5}, the function provides all simulated observations in the \code{n_sim} * \code{k} matrix.}
 }
 \value{
 total number of colony forming units in the single mixing plan
@@ -28,7 +30,7 @@ total number of colony forming units in the single mixing plan
 This function calculates the resulting generated number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.
 }
 \details{
-Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_stages}. (to be finished later on)
+Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_3}.
 }
 \examples{
 mu <- 100
@@ -36,7 +38,7 @@ sigma <- 0.8
 alpha <- 0.1
 k <- 30
 n_sim <- 20000
-sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim)
+sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim, summary = 2)
 }
 \references{
 \itemize{
@@ -44,5 +46,5 @@ sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim
 }
 }
 \seealso{
-\link{compare_mixing_stages}
+\link{compare_mixing_3}
 }

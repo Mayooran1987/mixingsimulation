@@ -8,8 +8,8 @@
 ##' @param n_sim number of simulations
 ##' @return total number of colony forming units in the multiple mixing scheme
 ##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by contribution of \eqn{k} primary samples mixing and \eqn{N' = \sum N_i}. This function provides the simulated resulting of the expected total number of colony-forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
-##' To more details, please refer the details section of  \link{compare_mixing_stages}.
-##' @seealso \link{sim_single}, \link{compare_mixing_stages}
+##' To more details, please refer the details section of  \link{compare_mixing_3}.
+##' @seealso \link{sim_single}, \link{compare_mixing_3}
 ##' @references
 ##' \itemize{
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
