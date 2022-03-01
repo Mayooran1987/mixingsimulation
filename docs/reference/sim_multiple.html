@@ -154,7 +154,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Let \(N'\) be the number of colony-forming units in the mixed sample which is produced by contribution of \(k\) primary samples mixing and \(N' = \sum N_i\). This function provides the simulated resulting of the expected total number of colony-forming units in the mixed sample in the multiple mixing plans at the single stage of the mixing process.
-To more details, please refer the details section of  <a href='compare_mixing_stages.html'>compare_mixing_stages</a>.</p>
+To more details, please refer the details section of  <a href='compare_mixing_3.html'>compare_mixing_3</a>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -164,7 +164,7 @@ To more details, please refer the details section of  <a href='compare_mixing_st
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='sim_single.html'>sim_single</a>, <a href='compare_mixing_stages.html'>compare_mixing_stages</a></p></div>
+    <div class='dont-index'><p><a href='sim_single.html'>sim_single</a>, <a href='compare_mixing_3.html'>compare_mixing_3</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1350</span><span class='op'>)</span></span>
@@ -172,7 +172,7 @@ To more details, please refer the details section of  <a href='compare_mixing_st
 <span class='r-in'><span class='va'>alpha</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>5</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>30</span><span class='op'>)</span></span>
 <span class='r-in'><span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Poisson lognormal-Type B"</span>,<span class='st'>"Poisson lognormal-Type B"</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>200</span></span>
+<span class='r-in'><span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span></span>
 <span class='r-in'><span class='va'>f_spr</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>n_sim</span><span class='op'>)</span> <span class='op'>{</span></span>
 <span class='r-in'>  <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span><span class='op'>(</span><span class='st'>"Simulation results (no.simulations = %.0f)"</span>, <span class='va'>n_sim</span><span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
