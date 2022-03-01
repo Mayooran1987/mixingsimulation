@@ -12,9 +12,8 @@ The goal of mixingsimulation is to develop simulated results and
 comparing graphical displays for different mixing plans. Also,
 description of this package functions is available at
 <https://mayooran1987.github.io/mixingsimulation/reference/index.html>.
-(Note that the web page contains an older version of the package. The
-most recent version of the page, which is associated with the current
-version of the package, will be updated soon).
+
+<!-- (Note that the web page contains an older version of the package. The most recent version of the page, which is associated with the current version of the package, will be updated soon). -->
 
 ### Installation
 
@@ -26,9 +25,14 @@ package from [GitHub](https://github.com/) with just two lines of code:
 devtools::install_github("Mayooran1987/mixingsimulation")
 ```
 
-<!-- #### Explanation of the analytical sample preparation process for microorganisms testing -->
+### User manual
+
+This package’s user manual can be seen at
+<https://github.com/Mayooran1987/mixingsimulation/blob/main/mixingsimulation_0.0.1.pdf>
+
+<!-- ### An analytical sample preparation process for microorganisms  -->
 <!-- <center> -->
-<!-- ![Figure 1](F:/Package_mixing/analytical_sample.jpg){width=80%} -->
+<!-- ![](C:/Users/mthevara/OneDrive - Massey University/Desktop/mixingsimulation/New folder/analytical_sample.png){width=80%} -->
 <!-- </center> -->
 <!-- The homogenisation occurs stage-by-stage in the powder-mixing process, which is illustrated in the following Figure. -->
 <!-- ```{r, fig.cap="\\label{Figure 1} Explanation of the analytical sample preparation process for microorganisms testing"} -->
