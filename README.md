@@ -28,7 +28,7 @@ devtools::install_github("Mayooran1987/mixingsimulation")
 ### User manual
 
 This package’s user manual can be seen at
-<https://github.com/Mayooran1987/mixingsimulation/blob/main/mixingsimulation_0.0.1.pdf>
+<https://github.com/Mayooran1987/mixingsimulation/raw/main/mixingsimulation_0.0.1.pdf>
 
 <!-- ### An analytical sample preparation process for microorganisms  -->
 <!-- <center> -->
