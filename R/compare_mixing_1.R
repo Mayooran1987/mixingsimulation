@@ -10,7 +10,6 @@
 ##' @param UDL the upper decision limit, which depends on the type of microorganisms and testing regulations.
 ##' @param n_sim number of simulations
 ##' @return graphical display of estimated probability of detection at each revolution in the mixing.
-##' @details
 ##' @seealso \link{sim_single_pd_stages}
 ##' @references
 ##' \itemize{

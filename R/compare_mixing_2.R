@@ -10,7 +10,6 @@
 ##' @param UDL the upper decision limit, which depends on the type of microorganisms and testing regulations.
 ##' @param n_sim number of simulations
 ##' @return graphical display of estimated probability of detection at the end of the mixing with different revolutions.
-##' @details
 ##' @seealso \link{sim_single_pd_stages}
 ##' @references
 ##' \itemize{
@@ -53,6 +52,7 @@ compare_mixing_2 <-  function(mulower, muupper, sigma , alpha_in, k, l, rate, di
   plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(prob.detection, group = mixing_scheme, colour = mixing_scheme)) +
     # ggplot2::geom_line(ggplot2::aes(x = mu, y = detectability))+
     ggplot2::geom_smooth(stat = "smooth",  method = 'gam', formula = y ~ s(x, bs = "cs"), mapping = ggplot2::aes(x = mu, y = prob.detection), se = FALSE) +
+    ggplot2::ylim(0,1) +
     ggplot2::ylab(expression("Prob.detection at end of the mixing"~ (P[d]))) +
     ggplot2::theme_classic() + ggplot2::xlab(expression("Mean concentration (" ~ mu*~")")) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
