@@ -14,7 +14,7 @@ Description: This package develops to study microbiological risk assessment of m
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
-Imports: ggplot2, ggthemes, gridExtra, magrittr, plyr, purrr, reshape2, stats 
+Imports: DescTools, ggplot2, ggthemes, gridExtra, magrittr, plyr, purrr, reshape2, stats
 Suggests: 
     testthat
 RoxygenNote: 7.1.2

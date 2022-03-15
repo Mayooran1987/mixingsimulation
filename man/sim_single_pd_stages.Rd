@@ -50,7 +50,8 @@ Prob_df <- data.frame(no.revolutions,
 sim_single_pd_stages(mu,sigma,alpha_in,k,l,rate,distribution,UDL,n_sim))
 colnames(Prob_df) <- c("stages","prob.detection")
 plot_example <- ggplot2::ggplot(Prob_df) +
-ggplot2::stat_smooth(geom =  "smooth",  method = "gam", mapping = ggplot2::aes(x = stages, y = prob.detection), se = FALSE, n = 1000) +
+ggplot2::stat_smooth(geom =  "smooth",  method = "gam", mapping = ggplot2::aes(x = stages,
+y = prob.detection), se = FALSE, n = 1000) +
 ggplot2::ylab(expression("Prob.detection"~ (P[d]))) +
 ggplot2::theme_classic() + ggplot2::xlab(expression("No. of revolutions")) +
 ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
