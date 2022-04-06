@@ -22,16 +22,17 @@
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- 30
-##' l <- 250
+##' l <- 25000
 ##' rate <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
-##' n_sim <- 20
+##' n_sim <- 2000
 ##' mixing_usl(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 ##' @export
 mixing_usl <-  function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
   no.revolutions <- NULL
   CFU <- NULL
   no.revolutions <- c(1:l)
+  # set.seed(1, kind = "L'Ecuyer-CMRG")
   Prob_df <-
     data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))
   colnames(Prob_df) <- c("no.revolutions","CFU")
@@ -40,6 +41,7 @@ mixing_usl <-  function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
   #DescTools::Mode(cum_mean)
   Prob_df1 <- data.frame(Prob_df,cum_mean)
   plot1 <- ggplot2::ggplot(Prob_df1) +
+    # ggplot2::geom_point(ggplot2::aes(x = no.revolutions, y = CFU)) +
     ggplot2::geom_line(ggplot2::aes(x = no.revolutions, y = CFU)) +
     ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = cum_mean), color = "red", size = .75) +
     ggplot2::xlab(expression("Number of revolutions")) +

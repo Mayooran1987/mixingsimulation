@@ -29,6 +29,7 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
   # #x <- matrix(stats::rgamma(k,alpha), ncol = k, nrow = 1)
   # #sm <- x%*%rep(1, k)
   # #w <- x/as.vector(sm)
+  # set.seed(seed, kind = "L'Ecuyer-CMRG")
   x <-  matrix(NA, nrow = 1, ncol = k) # If we want to apply a beta algorithm to generate Dirichlet distribution's random numbers.
   for (j in 1:k) {
     x[,j] <- stats::rbeta(1,alpha, alpha*(k - j))
@@ -38,6 +39,7 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
     w[,1] <- x[,1]
     w[,j] <- x[,j] %*% prod(1 - x[,1:(j - 1)])
   }
+  #x
   # sum(w)
   # stick_breaking_process <-  function(num_weights, alpha) {
   #   betas <-  stats::rbeta(num_weights, 1, alpha)
@@ -100,6 +102,7 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
     M <- matrix(NA, ncol = k, nrow = 1)
     for (j in 1:k) {
       # M[,j] <- as.integer(stats::rnorm(1,  mu, sigma)) # normal distribution
+      set.seed(1, kind = "L'Ecuyer-CMRG")
       M[,j] <- as.integer(stats::rlnorm(1, meanlog = log(mu), sdlog = sigma)) # lognormal distribution
     }
     sim <-  matrix(NA, nrow = n_sim, ncol = k)
@@ -112,6 +115,7 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
     M <- matrix(NA, ncol = k, nrow = 1)
     for (j in 1:k) {
       # M[,j] <- as.integer(stats::rnorm(1,  mu, sigma)) # normal distribution
+      set.seed(1, kind = "L'Ecuyer-CMRG")
       M[,j] <- as.integer(stats::rlnorm(1, meanlog = log(mu), sdlog = sigma)) # lognormal distribution
     }
     # M <- matrix(as.integer(stats::rlnorm(k, meanlog = log(mu), sdlog = sigma)), ncol = k, nrow = 1)
@@ -130,6 +134,7 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
     #   M[,j] <- as.integer(VGAM::rpolono(1, meanlog = log(mu), sdlog = sigma)) # poisson lognormal distribution
     #
     # }
+    set.seed(1, kind = "L'Ecuyer-CMRG")
     M <- matrix(rpoislog( k, log(mu), sigma, keep0 = TRUE), ncol = k, nrow = 1)
     sim <-  matrix(NA, nrow = n_sim, ncol = k)
     for (i in 1:n_sim) {
@@ -146,8 +151,9 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
     # M <- matrix(as.integer(stats::rlnorm(k, meanlog = log(mu), sdlog = sigma)), ncol = 1, nrow = k)
     # M <- matrix(VGAM::rpolono(k, meanlog = log(mu), sdlog = sigma), ncol = k, nrow = 1)
     # M <- matrix(sads::rpoilog( k, log(mu), sig = sigma), ncol = k, nrow = 1)
-
+    #set.seed(1, kind = "L'Ecuyer-CMRG")
     M <- matrix(rpoislog( k, log(mu), sigma, keep0 = TRUE), ncol = k, nrow = 1)
+    # set.seed(1, kind = "L'Ecuyer-CMRG")
     sim <-  matrix(NA, nrow = n_sim, ncol = k)
     for (i in 1:n_sim) {
       for (j in 1:k) {
@@ -184,7 +190,3 @@ sim_single <- function(mu, sigma , alpha , k, distribution, n_sim, summary = 1){
   # cat("Calculation took", proc.time()[1], "seconds.\n")
   return(result)
 }
-
-
-
-

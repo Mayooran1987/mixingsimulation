@@ -2,7 +2,7 @@
 % Please edit documentation in R/compare_mixing_1.R
 \name{compare_mixing_1}
 \alias{compare_mixing_1}
-\title{Graphical comparison of mixing plans based on the estimated probability of detection at each revolution.}
+\title{Graphical comparison of mixing plans based on the estimated cumulative average probability of detection at each revolution.}
 \usage{
 compare_mixing_1(mu, sigma, alpha_in, k, l, rate, distribution, UDL, n_sim)
 }
@@ -26,16 +26,16 @@ compare_mixing_1(mu, sigma, alpha_in, k, l, rate, distribution, UDL, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-graphical display of estimated probability of detection at each revolution in the mixing.
+graphical display of estimated cumulative average probability of detection at each revolution in the mixing.
 }
 \description{
-This function provides a graphical display to compare mixing plans based on the estimated probability of detection at each revolution of the mixing process.
+This function provides a graphical display to compare mixing plans based on the estimated cumulative average probability of detection at each revolution of the mixing process.
 }
 \examples{
 mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
-k <- c(30,50,75)
+k <- c(10,30,60)
 l <- 25000
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"

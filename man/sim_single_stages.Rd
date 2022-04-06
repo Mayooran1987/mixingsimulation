@@ -66,7 +66,6 @@ ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = cum_mean), color = "red
 ggplot2::xlab(expression("Number of revolutions"))+
 ggplot2::ylab(expression("Expected total number of CFUs"))+
 ggplot2::theme_classic()+
-ggplot2::ggtitle(label = "Expected total number of CFU versus number of revolutions")+
 ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
 ggthemes::scale_colour_colorblind()
 print(plot_example)

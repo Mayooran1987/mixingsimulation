@@ -36,6 +36,7 @@ sim_single_pd <- function(mu, sigma , alpha , k, distribution, UDL, n_sim){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
   }
+  # set.seed(1, kind = "L'Ecuyer-CMRG")
   p_d <- length(which(sim_single(mu, sigma , alpha , k, distribution, n_sim, summary = 2) > UDL))/k
   # sim_single(mu, sigma , alpha , k, distribution, n_sim, summary = 5)
   # p_d <-length(which( X > UDL))/n_sim

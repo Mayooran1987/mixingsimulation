@@ -39,6 +39,7 @@ sim_pois_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, n_si
     }
   }
   sim.sum1 <- matrix(NA, nrow = l, ncol = 2)
+  #set.seed(1, kind = "L'Ecuyer-CMRG")
   for (j in 1:l) {
     sim.sum1[j,1] <- sim_single(mu, sigma, alpha[1,j], k, distribution, n_sim, summary = 4)[,1]
     sim.sum1[j,2] <- sim_single(mu, sigma, alpha[1,j], k, distribution, n_sim, summary = 4)[,2]
@@ -46,7 +47,8 @@ sim_pois_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, n_si
   result <- data.frame(stages,sim.sum1)
   colnames(result) <- c("Revolutions", "Mean","Variance")
   melten.Prob <- reshape2::melt(result, id = "Revolutions", variable.name = "summary", value.name = "Value")
-  plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(Value, group = summary, colour = summary)) +
+  plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(x = Revolutions, y = Value, group = summary, colour = summary)) +
+    # ggplot2::geom_count()+
     # ggplot2::geom_line(ggplot2::aes(x = Revolutions, y = Value))+
     # ggplot2::geom_smooth(stat = "smooth",  method = 'gam', formula = y ~ s(x, bs = "cs"), mapping = ggplot2::aes(x = Revolutions, y = Value), se = FALSE) +
     ggplot2::geom_smooth(stat = "smooth",  method = 'gam', formula = y ~ s(x, bs = "cs"), mapping = ggplot2::aes(x = Revolutions, y = Value), se = TRUE) +

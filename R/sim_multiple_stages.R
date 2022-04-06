@@ -24,7 +24,7 @@
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
-##' k <- c(30,75)
+##' k <- c(30,60)
 ##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 2000
 ##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
@@ -37,6 +37,7 @@ sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n
 # sim.sum <- matrix(NA, nrow = n_sim, ncol = length(k))
 # for(i in 1:length(k)){
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(k))
+  # set.seed(1, kind = "L'Ecuyer-CMRG")
   for (j in 1:length(k)) {
     sim.sum3[,j] <-  sim_single_stages(mu, sigma, alpha_in, k[j], l, rate, distribution[j], n_sim)
   }

@@ -1,5 +1,5 @@
-##' This function provides a graphical display to compare mixing plans based on the estimated probability of detection at each revolution of the mixing process.
-##' @title Graphical comparison of mixing plans based on the estimated probability of detection at each revolution.
+##' This function provides a graphical display to compare mixing plans based on the estimated cumulative average probability of detection at each revolution of the mixing process.
+##' @title Graphical comparison of mixing plans based on the estimated cumulative average probability of detection at each revolution.
 ##' @param mu the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units (CFUs) in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha_in concentration parameter at the initial stage
@@ -9,7 +9,7 @@
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param UDL the upper decision limit, which depends on the type of microorganisms and testing regulations.
 ##' @param n_sim number of simulations
-##' @return graphical display of estimated probability of detection at each revolution in the mixing.
+##' @return graphical display of estimated cumulative average probability of detection at each revolution in the mixing.
 ##' @seealso \link{sim_single_pd_stages}
 ##' @references
 ##' \itemize{
@@ -19,7 +19,7 @@
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
-##' k <- c(30,50,75)
+##' k <- c(10,30,60)
 ##' l <- 25000
 ##' rate <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
@@ -33,15 +33,19 @@ compare_mixing_1 <-  function(mu,sigma , alpha_in, k, l, rate, distribution, UDL
   f_spri <- function(l, k, distribution) {
     sprintf("mixing plan (k = %.0f, l = %.0f, %s)", k, l, distribution)
   }
+  cummean <- function(x){cumsum(x)/seq_along(x)} # to get a cumulative average calculation
   # f_spr <- function(n_sim ) {
   #   sprintf("Simulation results (no.simulations = %.0f)", n_sim)
   # }
   # mu <- seq(mulower, muupper, 0.1)
   # stages <- 1:l
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(k))
+  set.seed(1, kind = "L'Ecuyer-CMRG")
   # for (i in 1:nrow(sim.sum3)) {
   for (j in 1:ncol(sim.sum3)) {
-    sim.sum3[,j] <-  sim_single_pd_stages(mu, sigma , alpha_in, k[j], l, rate, distribution, UDL, n_sim)
+    #set.seed(1000+j)
+    # sim.sum3[,j] <-  sim_single_pd_stages(mu, sigma , alpha_in, k[j], l, rate, distribution, UDL, n_sim)
+    sim.sum3[,j] <-  cummean(sim_single_pd_stages(mu, sigma , alpha_in, k[j], l, rate, distribution, UDL, n_sim))
   }
   # }
   stages <- 1:l
@@ -52,10 +56,11 @@ compare_mixing_1 <-  function(mu,sigma , alpha_in, k, l, rate, distribution, UDL
   colnames(result) <- c("stages", f_spri(l, k, distribution))
   melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "prob.detection")
   plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(prob.detection, group = mixing_scheme, colour = mixing_scheme)) +
-    # ggplot2::geom_point(ggplot2::aes(x = stages, y = prob.detection)) +
-    ggplot2::stat_smooth(geom =  "smooth",  method = "gam", mapping = ggplot2::aes(x = stages, y = prob.detection), se = FALSE, n = 1000) +
-    ggplot2::ylab(expression("Prob.detection"~ (P[d]))) +
-    ggplot2::theme_classic() + ggplot2::xlab(expression("No. of revolutions")) +
+    ggplot2::geom_line(ggplot2::aes(x = stages, y = prob.detection)) +
+    # ggplot2::stat_smooth(geom =  "smooth",  method = "gam", mapping = ggplot2::aes(x = stages, y = prob.detection), se = TRUE, n = 1000) +
+    ggplot2::ylim(NA,1) +
+    ggplot2::ylab(expression("Cumulative mean of prob. detection" ~~ (bar(P[d[l]])))) +
+    ggplot2::theme_classic() + ggplot2::xlab(expression("No. of revolutions"~~(l))) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
     # ggplot2::ggtitle(label = f_spr(n_sim))+
     ggthemes::scale_colour_colorblind()

@@ -36,10 +36,10 @@ mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
-l <- 250
+l <- 25000
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"
-n_sim <- 20
+n_sim <- 2000
 mixing_usl(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 }
 \references{

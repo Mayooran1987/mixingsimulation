@@ -41,7 +41,7 @@ l <- 25000
 mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
-k <- c(30,75)
+k <- c(30,60)
 distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
 n_sim <- 2000
 colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))

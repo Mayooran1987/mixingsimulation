@@ -52,10 +52,10 @@
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
-##' k <- c(30,50,75)
+##' k <- c(10,30,60)
 ##' rate <- 0.01
 ##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
-##' n_sim <- 2000
+##' n_sim <- 20000
 ##' plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,rate, distribution,n_sim) +
 ##' ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
 ##' legend.title = ggplot2::element_text(size = 5),
@@ -87,6 +87,7 @@ compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_si
   # }
   stages <- 1:l
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(distribution))
+  # set.seed(1, kind = "L'Ecuyer-CMRG")
   for (j in 1:length(distribution)) {
     sim.sum3[,j] <-  sim_single_stages(mu, sigma , alpha_in, k[j], l, rate, distribution[j], n_sim, summary = 1)
   }
@@ -106,9 +107,9 @@ compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_si
       data.frame(x = dens$x, y = dens$y, cd = cumsum(dens$y)/sum(dens$y), mixing_scheme = d$mixing_scheme[1])
     })
   plot1 <- ggplot2::ggplot() +
-    # ggplot2::geom_line(data = dens, ggplot2::aes(x, cd, colour = mixing_scheme)) +
-    ggplot2::stat_smooth(data = dens,size = 0.5, method = 'gam', formula = y ~ s(x, bs = "cs") , ggplot2::aes(x, cd, colour = mixing_scheme),se = FALSE) +
-    # ggplot2::ylim(0,1) +
+     ggplot2::geom_line(data = dens, ggplot2::aes(x, cd, colour = mixing_scheme)) +
+    # ggplot2::stat_smooth(data = dens,size = 0.5, method = 'gam', formula = y ~ s(x, bs = "cs") , ggplot2::aes(x, cd, colour = mixing_scheme),se = FALSE) +
+     # ggplot2::ylim(0,1) +
     ggplot2::ylab(expression("P(Total CFUs after mixing " <= " N')")) +
     ggplot2::theme_classic() + ggplot2::xlab(expression("Total CFUs after mixing (N')")) + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.70,0.25)) +
     # ggplot2::ggtitle(label = f_spr(l))+
