@@ -2,7 +2,7 @@
 % Please edit documentation in R/compare_mixing_2.R
 \name{compare_mixing_2}
 \alias{compare_mixing_2}
-\title{This function provides a graphical display to compare mixing plans using a different number of revolutions based on the estimated average probability of detection after mixing is ended.}
+\title{Graphical comparison of mixing plans based on estimated average probability of detection at the end of the mixing with different revolutions}
 \usage{
 compare_mixing_2(
   mulower,
@@ -50,7 +50,7 @@ muupper <- 200
 sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
-l <- c(50,5000)
+l <- c(500,5000)
 rate <- 0.01
 distribution <-  "Poisson lognormal-Type B"
 UDL <- 0

@@ -1,4 +1,5 @@
 ##' This function provides a graphical display to compare mixing plans using a different number of revolutions based on the estimated average probability of detection after mixing is ended.
+##' @title Graphical comparison of mixing plans based on estimated average probability of detection at the end of the mixing with different revolutions
 ##' @param mulower the lower value of the mean concentration (\eqn{\mu}) for use in the graphical display's x-axis.
 ##' @param muupper the upper value of the mean concentration (\eqn{\mu}) for use in the graphical display's x-axis.
 ##' @param sigma the standard deviation of the colony-forming units (CFUs) in the mixed sample on the logarithmic scale (default value 0.8)
@@ -21,7 +22,7 @@
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- 30
-##' l <- c(50,5000)
+##' l <- c(500,5000)
 ##' rate <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
 ##' UDL <- 0
@@ -52,7 +53,7 @@ compare_mixing_2 <-  function(mulower, muupper, sigma , alpha_in, k, l, rate, di
   colnames(result) <- c("mu", f_spri(l, k, distribution))
   melten.Prob <- reshape2::melt(result, id = "mu", variable.name = "mixing_scheme", value.name = "prob.detection")
   plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(prob.detection, group = mixing_scheme, colour = mixing_scheme)) +
-    # ggplot2::geom_line(ggplot2::aes(x = mu, y = prob.detection)) +
+    ggplot2::geom_line(ggplot2::aes(x = mu, y = prob.detection)) +
     ggplot2::geom_smooth(stat = "smooth",  method = 'gam', formula = y ~ s(x, bs = "cs"), mapping = ggplot2::aes(x = mu, y = prob.detection), se = FALSE) +
     ggplot2::ylim(0,1) +
     ggplot2::ylab(expression(" Average prob.detection after"~~l~~ "revolutions"~~ (bar(P[d[l]])))) +
