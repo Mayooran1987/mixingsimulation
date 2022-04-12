@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Graphical comparison of mixing plans based on estimated probability of detection at each revolution in the mixing. — compare_mixing_1 • mixingsimulation</title>
+<title>Graphical comparison of mixing plans based on the estimated cumulative average probability of detection at each revolution. — compare_mixing_1 • mixingsimulation</title>
 
 
 <!-- jquery -->
@@ -108,13 +108,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Graphical comparison of mixing plans based on estimated probability of detection at each revolution in the mixing.</h1>
+    <h1>Graphical comparison of mixing plans based on the estimated cumulative average probability of detection at each revolution.</h1>
     <small class="dont-index">Source: <a href='https://github.com/Mayooran1987/mixingsimulation/blob/master/R/compare_mixing_1.R'><code>R/compare_mixing_1.R</code></a></small>
     <div class="hidden name"><code>compare_mixing_1.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function provides a graphical display to compare mixing plans based on the estimated probability of detection at each revolution of the mixing process.</p>
+    <p>This function provides a graphical display to compare mixing plans based on the estimated cumulative average probability of detection at each revolution of the mixing process.</p>
     </div>
 
     <pre class="usage"><span class='fu'>compare_mixing_1</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>UDL</span>, <span class='va'>n_sim</span><span class='op'>)</span></pre>
@@ -162,7 +162,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>graphical display of estimated probability of detection at each revolution in the mixing.</p>
+    <p>graphical display of estimated cumulative average probability of detection at each revolution in the mixing.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -179,7 +179,7 @@
 <span class='r-in'><span class='va'>sigma</span> <span class='op'>&lt;-</span> <span class='fl'>0.8</span></span>
 <span class='r-in'><span class='va'>alpha_in</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
 <span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>30</span>,<span class='fl'>50</span>,<span class='fl'>75</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>25000</span></span>
+<span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>2500</span></span>
 <span class='r-in'><span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
 <span class='r-in'><span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='st'>"Poisson lognormal-Type B"</span></span>
 <span class='r-in'><span class='va'>UDL</span> <span class='op'>&lt;-</span> <span class='fl'>0</span></span>
