@@ -4,7 +4,7 @@
 \alias{sim_single_pd_stages}
 \title{The estimated value of detection probability at each stage (or revolution) of the mixing process.}
 \usage{
-sim_single_pd_stages(mu, sigma, alpha_in, k, l, rate, distribution, UDL, n_sim)
+sim_single_pd_stages(mu, sigma, alpha_in, k, l, r, distribution, UDL, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -17,7 +17,7 @@ sim_single_pd_stages(mu, sigma, alpha_in, k, l, rate, distribution, UDL, n_sim)
 
 \item{l}{number of revolutions /stages}
 
-\item{rate}{concentration parameter changing rate in the each revolutions}
+\item{r}{the rate of the concentration parameter changes at each mixing stage}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -40,24 +40,28 @@ mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
-l <- 2500
-rate <- 0.01
-distribution <-  "Poisson lognormal-Type B"
+l <- 25000
+r <- 0.01
+distribution <- "Poisson lognormal-Type B"
 UDL <- 0
 n_sim <- 2000
-no.revolutions <-c(1:l)
+no.revolutions <- c(1:l)
+cummean <- function(x){cumsum(x)/seq_along(x)}
+cum_mean <- cummean(Prob_df[,2])
 Prob_df <- data.frame(no.revolutions,
-sim_single_pd_stages(mu,sigma,alpha_in,k,l,rate,distribution,UDL,n_sim))
+sim_single_pd_stages(mu,sigma,alpha_in,k,l,r,distribution,UDL,n_sim))
 colnames(Prob_df) <- c("stages","prob.detection")
 plot_example <- ggplot2::ggplot(Prob_df) +
-ggplot2::stat_smooth(geom =  "smooth",  method = "gam", mapping = ggplot2::aes(x = stages,
-y = prob.detection), se = FALSE, n = 1000) +
-ggplot2::ylab(expression("Prob.detection"~ (P[d]))) +
+# ggplot2::geom_point(ggplot2::aes(x = stages, y = prob.detection)) +
+ggplot2::geom_line(ggplot2::aes(x = stages, y = cummean(prob.detection))) +
+# ggplot2::stat_smooth(geom = "smooth", method = "gam", mapping = ggplot2::aes(x = stages,
+#   y = prob.detection), se = FALSE, n = 1000) +
+ggplot2::ylab(expression("cumulative moving average of prob. detection" ~~ (bar(P[d[l]])))) +
 ggplot2::theme_classic() + ggplot2::xlab(expression("No. of revolutions")) +
 ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
-  # ggplot2::ggtitle(label = f_spr(n_sim))+
-  ggthemes::scale_colour_colorblind()
-  print(plot_example)
+# ggplot2::ggtitle(label = f_spr(n_sim))+
+ggthemes::scale_colour_colorblind()
+print(plot_example)
 }
 \references{
 \itemize{

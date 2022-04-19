@@ -4,7 +4,7 @@
 \alias{sim_pois_stages}
 \title{A graphical display of the mean and variance changes at each mixing stage.}
 \usage{
-sim_pois_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+sim_pois_stages(mu, sigma, alpha_in, k, l, r, distribution, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -17,7 +17,7 @@ sim_pois_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 
 \item{l}{number of revolutions / stages}
 
-\item{rate}{concentration parameter changing rate in each of the revolutions}
+\item{r}{the rate of the concentration parameter changes at each mixing stage}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -27,7 +27,7 @@ sim_pois_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 Mean and variance changes at each mixing stage.
 }
 \description{
-This function creates a graphical display of the mean and variance changes at each mixing stage.
+This function creates a graphical display of the mean and variance changes at each mixing stage. To the comparison purpose, estimated cumulative moving average (CMA) of mean and variance are
 }
 \details{
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.
@@ -39,8 +39,8 @@ sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
 l <- 2500
-rate <- 0.001
+r <- 0.001
 distribution <-  "Poisson lognormal-Type B"
 n_sim <- 2000
-sim_pois_stages(mu, sigma , alpha_in, k, l, rate, distribution, n_sim)
+sim_pois_stages(mu, sigma , alpha_in, k, l, r, distribution, n_sim)
 }

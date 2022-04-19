@@ -5,7 +5,7 @@
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions / primary samples
 ##' @param l number of revolutions /stages
-##' @param rate concentration parameter changing rate in the each revolutions
+##' @param r the rate of the concentration parameter changes at each mixing stage
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param UDL the upper decision limit, which depends on the type of microorganisms and testing regulations.
 ##' @param n_sim number of simulations
@@ -22,26 +22,30 @@
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- 30
-##' l <- 2500
-##' rate <- 0.01
-##' distribution <-  "Poisson lognormal-Type B"
+##' l <- 25000
+##' r <- 0.01
+##' distribution <- "Poisson lognormal-Type B"
 ##' UDL <- 0
 ##' n_sim <- 2000
-##' no.revolutions <-c(1:l)
+##' no.revolutions <- c(1:l)
+##' cummean <- function(x){cumsum(x)/seq_along(x)}
+##' cum_mean <- cummean(Prob_df[,2])
 ##' Prob_df <- data.frame(no.revolutions,
-##' sim_single_pd_stages(mu,sigma,alpha_in,k,l,rate,distribution,UDL,n_sim))
+##' sim_single_pd_stages(mu,sigma,alpha_in,k,l,r,distribution,UDL,n_sim))
 ##' colnames(Prob_df) <- c("stages","prob.detection")
 ##' plot_example <- ggplot2::ggplot(Prob_df) +
-##' ggplot2::stat_smooth(geom =  "smooth",  method = "gam", mapping = ggplot2::aes(x = stages,
-##' y = prob.detection), se = FALSE, n = 1000) +
-##' ggplot2::ylab(expression("Prob.detection"~ (P[d]))) +
+##' # ggplot2::geom_point(ggplot2::aes(x = stages, y = prob.detection)) +
+##' ggplot2::geom_line(ggplot2::aes(x = stages, y = cummean(prob.detection))) +
+##' # ggplot2::stat_smooth(geom = "smooth", method = "gam", mapping = ggplot2::aes(x = stages,
+##' #   y = prob.detection), se = FALSE, n = 1000) +
+##' ggplot2::ylab(expression("cumulative moving average of prob. detection" ~~ (bar(P[d[l]])))) +
 ##' ggplot2::theme_classic() + ggplot2::xlab(expression("No. of revolutions")) +
 ##' ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
-##'   # ggplot2::ggtitle(label = f_spr(n_sim))+
-##'   ggthemes::scale_colour_colorblind()
-##'   print(plot_example)
+##' # ggplot2::ggtitle(label = f_spr(n_sim))+
+##' ggthemes::scale_colour_colorblind()
+##' print(plot_example)
 ##' @export
-sim_single_pd_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, UDL, n_sim){
+sim_single_pd_stages <- function(mu, sigma , alpha_in, k, l, r, distribution, UDL, n_sim){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
   }
@@ -51,7 +55,7 @@ sim_single_pd_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution,
     if (j == 1) {
       alpha[,j] <- alpha_in
     } else {
-      alpha[,j] <- alpha[,j - 1] + rate
+      alpha[,j] <- alpha[,j - 1] + r
     }
   }
   sim.sum1 <- matrix(NA, nrow = l, ncol = 1)

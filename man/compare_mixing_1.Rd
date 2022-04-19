@@ -2,9 +2,9 @@
 % Please edit documentation in R/compare_mixing_1.R
 \name{compare_mixing_1}
 \alias{compare_mixing_1}
-\title{Graphical comparison of mixing plans based on the estimated cumulative average probability of detection at each revolution.}
+\title{Graphical comparison of mixing plans based on the estimated cumulative moving average (CMA) of detection probability at each revolution.}
 \usage{
-compare_mixing_1(mu, sigma, alpha_in, k, l, rate, distribution, UDL, n_sim)
+compare_mixing_1(mu, sigma, alpha_in, k, l, r, distribution, UDL, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -17,7 +17,7 @@ compare_mixing_1(mu, sigma, alpha_in, k, l, rate, distribution, UDL, n_sim)
 
 \item{l}{number of revolutions / stages}
 
-\item{rate}{concentration parameter changing rate in each of the revolutions}
+\item{r}{the rate of the concentration parameter changes at each mixing stage}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -26,10 +26,10 @@ compare_mixing_1(mu, sigma, alpha_in, k, l, rate, distribution, UDL, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-graphical display of estimated cumulative average probability of detection at each revolution in the mixing.
+graphical display of estimated cumulative moving average (CMA) of detection probability at each revolution in the mixing.
 }
 \description{
-This function provides a graphical display to compare mixing plans based on the estimated cumulative average probability of detection at each revolution of the mixing process.
+This function provides a graphical display to compare mixing plans based on the estimated cumulative moving average (CMA) of detection probability at each revolution of the mixing process.
 }
 \examples{
 mu <- 100
@@ -37,11 +37,11 @@ sigma <- 0.8
 alpha_in <- 0.01
 k <- c(10,30,60)
 l <- 25000
-rate <- 0.01
+r <- 0.01
 distribution <-  "Poisson lognormal-Type B"
 UDL <- 0
 n_sim <- 2000
-compare_mixing_1(mu,sigma , alpha_in, k, l, rate, distribution, UDL, n_sim)
+compare_mixing_1(mu,sigma , alpha_in, k, l, r, distribution, UDL, n_sim)
 }
 \references{
 \itemize{

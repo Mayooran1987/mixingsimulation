@@ -5,7 +5,7 @@
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions / primary samples
 ##' @param l number of revolutions / stages
-##' @param rate concentration parameter changing rate in the each revolutions
+##' @param r the rate of the concentration parameter changes at each mixing stage
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param n_sim number of simulations
 ##' @return Graphical comparison between different mixing schemes.
@@ -53,32 +53,32 @@
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- c(10,30,60)
-##' rate <- 0.01
+##' r <- 0.01
 ##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 20000
-##' plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,rate, distribution,n_sim) +
-##' ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-##' legend.title = ggplot2::element_text(size = 5),
-##' legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
-##' plot2 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 500, rate, distribution, n_sim) +
-##' ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-##' legend.title = ggplot2::element_text(size = 5),
-##' legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
-##' plot3 <- compare_mixing_3(mu, sigma, alpha_in, k, l = 5000,rate , distribution,n_sim) +
-##' ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-##' legend.title = ggplot2::element_text(size = 5),
-##' legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
-##' plot4 <- compare_mixing_3(mu, sigma , alpha_in , k , l = 25000, rate , distribution ,n_sim) +
-##' ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-##' legend.title = ggplot2::element_text(size = 5),
-##' legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
+##' plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,r, distribution,n_sim) +
+##' ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
+##' legend.title = ggplot2::element_text(size = 7.5),
+##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+##' plot2 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 500, r, distribution, n_sim) +
+##' ggplot2::theme(legend.title = ggplot2::element_text(size = 7.5),
+##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+##' plot3 <- compare_mixing_3(mu, sigma, alpha_in, k, l = 5000,r , distribution,n_sim) +
+##' ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
+##' legend.title = ggplot2::element_text(size = 7.5),
+##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+##' plot4 <- compare_mixing_3(mu, sigma , alpha_in , k , l = 25000, r , distribution ,n_sim) +
+##' ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
+##' legend.title = ggplot2::element_text(size = 7.5),
+##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
 ##' gridExtra::grid.arrange(plot1, plot2, plot3, plot4, ncol = 2, nrow = 2)
 ##' @export
-compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
+compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, r, distribution, n_sim){
   "Total_CFU" <- NULL
   mixing_scheme <- NULL
   x <- NULL
   cd <- NULL
+  set.seed(1, kind = "L'Ecuyer-CMRG")
   f_spri <- function(l, k, distribution) {
     sprintf("mixing plan (l = %.0f, k = %.0f, %s)",l, k, distribution)
   }
@@ -89,7 +89,7 @@ compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_si
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(distribution))
   # set.seed(1, kind = "L'Ecuyer-CMRG")
   for (j in 1:length(distribution)) {
-    sim.sum3[,j] <-  sim_single_stages(mu, sigma , alpha_in, k[j], l, rate, distribution[j], n_sim, summary = 1)
+    sim.sum3[,j] <-  sim_single_stages(mu, sigma , alpha_in, k[j], l, r, distribution[j], n_sim, summary = 1)
   }
   result <- data.frame(stages, sim.sum3)
   colnames(result) <- c("stages", f_spri(l, k, distribution))

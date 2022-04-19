@@ -2,7 +2,7 @@
 % Please edit documentation in R/compare_mixing_2.R
 \name{compare_mixing_2}
 \alias{compare_mixing_2}
-\title{Graphical comparison of mixing plans based on estimated average probability of detection at the end of the mixing with different revolutions}
+\title{Graphical comparison of mixing plans based on estimated probability of detection at the end of the mixing with different revolutions}
 \usage{
 compare_mixing_2(
   mulower,
@@ -11,7 +11,7 @@ compare_mixing_2(
   alpha_in,
   k,
   l,
-  rate,
+  r,
   distribution,
   UDL,
   n_sim
@@ -30,7 +30,7 @@ compare_mixing_2(
 
 \item{l}{number of revolutions / stages}
 
-\item{rate}{concentration parameter changing rate in each of the revolutions}
+\item{r}{the rate of the concentration parameter changes at each mixing stage}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -39,10 +39,10 @@ compare_mixing_2(
 \item{n_sim}{number of simulations}
 }
 \value{
-graphical display compares mixing plans using a different number of revolutions based on the estimated average probability of detection after mixing is ended.
+graphical display compares mixing plans using a different number of revolutions based on the estimated probability of detection at the end of the mixing.
 }
 \description{
-This function provides a graphical display to compare mixing plans using a different number of revolutions based on the estimated average probability of detection after mixing is ended.
+This function provides a graphical display to compare mixing plans using a different number of revolutions based on the estimated probability of detection at the end of mixing.
 }
 \examples{
 mulower <- 0.1
@@ -51,11 +51,11 @@ sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
 l <- c(500,5000)
-rate <- 0.01
+r <- 0.01
 distribution <-  "Poisson lognormal-Type B"
 UDL <- 0
 n_sim <- 2000
-compare_mixing_2(mulower, muupper, sigma , alpha_in, k, l, rate, distribution, UDL, n_sim)
+compare_mixing_2(mulower, muupper, sigma , alpha_in, k, l, r, distribution, UDL, n_sim)
 }
 \references{
 \itemize{

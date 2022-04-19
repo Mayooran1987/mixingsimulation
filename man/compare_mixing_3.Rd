@@ -4,7 +4,7 @@
 \alias{compare_mixing_3}
 \title{Graphical comparison of mixing plans based on cumulative distribution of expected total CFUs in the mixing process.}
 \usage{
-compare_mixing_3(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+compare_mixing_3(mu, sigma, alpha_in, k, l, r, distribution, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -17,7 +17,7 @@ compare_mixing_3(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 
 \item{l}{number of revolutions / stages}
 
-\item{rate}{concentration parameter changing rate in the each revolutions}
+\item{r}{the rate of the concentration parameter changes at each mixing stage}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -70,25 +70,24 @@ mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- c(10,30,60)
-rate <- 0.01
+r <- 0.01
 distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 n_sim <- 20000
-plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,rate, distribution,n_sim) +
-ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
-plot2 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 500, rate, distribution, n_sim) +
-ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
-plot3 <- compare_mixing_3(mu, sigma, alpha_in, k, l = 5000,rate , distribution,n_sim) +
-ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
-plot4 <- compare_mixing_3(mu, sigma , alpha_in , k , l = 25000, rate , distribution ,n_sim) +
-ggplot2::theme(legend.text = ggplot2::element_text(size = 5),
-legend.title = ggplot2::element_text(size = 5),
-legend.key.size = ggplot2::unit(2, 'mm')) + ggplot2::xlim(0,300)
+plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,r, distribution,n_sim) +
+ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
+legend.title = ggplot2::element_text(size = 7.5),
+legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+plot2 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 500, r, distribution, n_sim) +
+ggplot2::theme(legend.title = ggplot2::element_text(size = 7.5),
+legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+plot3 <- compare_mixing_3(mu, sigma, alpha_in, k, l = 5000,r , distribution,n_sim) +
+ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
+legend.title = ggplot2::element_text(size = 7.5),
+legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+plot4 <- compare_mixing_3(mu, sigma , alpha_in , k , l = 25000, r , distribution ,n_sim) +
+ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
+legend.title = ggplot2::element_text(size = 7.5),
+legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
 gridExtra::grid.arrange(plot1, plot2, plot3, plot4, ncol = 2, nrow = 2)
 }
 \references{

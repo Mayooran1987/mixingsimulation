@@ -6,7 +6,7 @@
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions / primary samples
 ##' @param l number of revolutions / stages
-##' @param rate concentration parameter changing rate in the each revolutions
+##' @param r the rate of the concentration parameter changes at each mixing stage
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param summary if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample, respectively ( default \code{summary = 1}).
 ##' @param n_sim number of simulations
@@ -24,12 +24,12 @@
 ##' alpha_in <- 0.01
 ##' k <- 30
 ##' l <- 25000
-##' rate <- 0.01
+##' r <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
 ##' n_sim <- 2000
 ##' no.revolutions <-c(1:l)
 ##' Prob_df <-
-##' data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,rate,distribution,n_sim))
+##' data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,r,distribution,n_sim))
 ##' colnames(Prob_df) <- c("no.revolutions","CFU")
 ##' cummean <- function(x){cumsum(x)/seq_along(x)}
 ##' cum_mean <- cummean(Prob_df[,2])
@@ -43,7 +43,7 @@
 ##' ggthemes::scale_colour_colorblind()
 ##' print(plot_example)
 ##' @export
-sim_single_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, n_sim, summary = 1){
+sim_single_stages <- function(mu, sigma , alpha_in, k, l, r, distribution, n_sim, summary = 1){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, l = %.1f, %s)", mu, k, l, distribution)
   }
@@ -53,7 +53,7 @@ sim_single_stages <- function(mu, sigma , alpha_in, k, l, rate, distribution, n_
     if (j == 1) {
       alpha[,j] <- alpha_in
     } else {
-      alpha[,j] <- alpha[,j - 1] + rate
+      alpha[,j] <- alpha[,j - 1] + r
     }
   }
   if (summary == 1) {

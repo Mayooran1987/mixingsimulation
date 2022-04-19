@@ -4,7 +4,7 @@
 \alias{sim_multiple_stages}
 \title{The expected total number of CFUs in the mixed sample in the multiple mixing schemes at each stage of the mixing process.}
 \usage{
-sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+sim_multiple_stages(mu, sigma, alpha_in, k, l, r, distribution, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -17,7 +17,7 @@ sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 
 \item{l}{number of revolutions / stages}
 
-\item{rate}{concentration parameter changing rate in the each revolutions}
+\item{r}{the rate of the concentration parameter changes at each mixing stage}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -36,15 +36,15 @@ For this package development, we have employed the notations 'Type-A' and 'Type-
 This package will consider stage-by-stage the mixing process and assumes systematically breaking clusters at every stage of the mixing. Therefore, it can be assumed the concentration parameter also systematically changes with the concentration of the contribution.
 }
 \examples{
-rate <- 0.01
-l <- 25000
 mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- c(30,60)
+l <- 25000
+r <- 0.01
 distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
 n_sim <- 2000
-colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
+colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, r, distribution, n_sim))
 }
 \references{
 \itemize{

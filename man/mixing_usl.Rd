@@ -4,7 +4,7 @@
 \alias{mixing_usl}
 \title{Graphical display to find out upper stabilizing limit (USL).}
 \usage{
-mixing_usl(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+mixing_usl(mu, sigma, alpha_in, k, l, r, distribution, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -17,7 +17,7 @@ mixing_usl(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
 
 \item{l}{number of revolutions / stages}
 
-\item{rate}{concentration parameter changing rate in the each revolutions}
+\item{r}{the rate of the concentration parameter changes at each mixing stage}
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
@@ -37,10 +37,10 @@ sigma <- 0.8
 alpha_in <- 0.01
 k <- 30
 l <- 25000
-rate <- 0.01
+r <- 0.01
 distribution <-  "Poisson lognormal-Type B"
 n_sim <- 2000
-mixing_usl(mu, sigma, alpha_in, k, l, rate, distribution, n_sim)
+mixing_usl(mu, sigma, alpha_in, k, l, r, distribution, n_sim)
 }
 \references{
 \itemize{

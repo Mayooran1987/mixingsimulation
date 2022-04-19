@@ -5,7 +5,7 @@
 ##' @param alpha_in concentration parameter at the initial stage
 ##' @param k number of small portions / primary samples
 ##' @param l number of revolutions / stages
-##' @param rate concentration parameter changing rate in the each revolutions
+##' @param r the rate of the concentration parameter changes at each mixing stage
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
 ##' @param n_sim number of simulations
 ##' @return The expected total number of CFUs in each revolution / stage.
@@ -19,17 +19,17 @@
 ##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
 ##' }
 ##' @examples
-##' rate <- 0.01
-##' l <- 25000
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- c(30,60)
+##' l <- 25000
+##' r <- 0.01
 ##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 2000
-##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
+##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, r, distribution, n_sim))
 ##' @export
-sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n_sim){
+sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, r, distribution, n_sim){
   f_spri <- function(mu, k, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, %s)", mu, k, distribution)
     }
@@ -39,7 +39,7 @@ sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, rate, distribution, n
   sim.sum3 <- matrix(NA, nrow = l, ncol = length(k))
   # set.seed(1, kind = "L'Ecuyer-CMRG")
   for (j in 1:length(k)) {
-    sim.sum3[,j] <-  sim_single_stages(mu, sigma, alpha_in, k[j], l, rate, distribution[j], n_sim)
+    sim.sum3[,j] <-  sim_single_stages(mu, sigma, alpha_in, k[j], l, r, distribution[j], n_sim)
   }
   result <- data.frame(sim.sum3)
   colnames(result) <- f_spri(mu, k, distribution)
