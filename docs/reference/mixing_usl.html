@@ -121,7 +121,7 @@ the cumulative mean persists in the same value after a particular number of stag
 a stabilizing point in the graphical display of the expected total number of CFUs versus the number of revolutions when the cumulative mean remains stable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mixing_usl</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mixing_usl</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>r</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,8 +147,8 @@ a stabilizing point in the graphical display of the expected total number of CFU
       <td><p>number of revolutions / stages</p></td>
     </tr>
     <tr>
-      <th>rate</th>
-      <td><p>concentration parameter changing rate in the each revolutions</p></td>
+      <th>r</th>
+      <td><p>the rate of the concentration parameter changes at each mixing stage</p></td>
     </tr>
     <tr>
       <th>distribution</th>
@@ -180,7 +180,7 @@ a stabilizing point in the graphical display of the expected total number of CFU
 <span class='r-in'><span class='va'>alpha_in</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
 <span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fl'>30</span></span>
 <span class='r-in'><span class='va'>l</span> <span class='op'>&lt;-</span> <span class='fl'>25000</span></span>
-<span class='r-in'><span class='va'>rate</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
+<span class='r-in'><span class='va'>r</span> <span class='op'>&lt;-</span> <span class='fl'>0.01</span></span>
 <span class='r-in'><span class='va'>distribution</span> <span class='op'>&lt;-</span>  <span class='st'>"Poisson lognormal-Type B"</span></span>
 <span class='r-in'><span class='va'>n_sim</span> <span class='op'>&lt;-</span> <span class='fl'>20000</span></span>
 <span class='r-in'><span class='fu'>mixing_usl</span><span class='op'>(</span><span class='va'>mu</span>, <span class='va'>sigma</span>, <span class='va'>alpha_in</span>, <span class='va'>k</span>, <span class='va'>l</span>, <span class='va'>rate</span>, <span class='va'>distribution</span>, <span class='va'>n_sim</span><span class='op'>)</span></span>
