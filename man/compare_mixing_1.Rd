@@ -36,7 +36,7 @@ mu <- 100
 sigma <- 0.8
 alpha_in <- 0.01
 k <- c(10,30,60)
-l <- 25000
+l <- 2500
 r <- 0.01
 distribution <-  "Poisson lognormal-Type B"
 UDL <- 0

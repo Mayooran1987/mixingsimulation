@@ -27,7 +27,7 @@ sim_pois_stages(mu, sigma, alpha_in, k, l, r, distribution, n_sim)
 Mean and variance changes at each mixing stage.
 }
 \description{
-This function creates a graphical display of the mean and variance changes at each mixing stage. To the comparison purpose, estimated cumulative moving average (CMA) of mean and variance are
+This function displays the mean and variance changes at each mixing stage by using the estimated cumulative moving average (CMA) of mean and variance.
 }
 \details{
 Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.

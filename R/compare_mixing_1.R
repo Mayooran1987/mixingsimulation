@@ -20,7 +20,7 @@
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
 ##' k <- c(10,30,60)
-##' l <- 25000
+##' l <- 2500
 ##' r <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
 ##' UDL <- 0
@@ -30,8 +30,8 @@
 compare_mixing_1 <-  function(mu,sigma , alpha_in, k, l, r, distribution, UDL, n_sim){
   mixing_scheme <- NULL
   prob.detection <- NULL
-  f_spri <- function(l, k, distribution) {
-    sprintf("mixing plan (k = %.0f, l = %.0f, %s)", k, l, distribution)
+  f_spri <- function(k, distribution) {
+    sprintf("mixing plan (k = %.0f, %s)", k, distribution)
   }
   cummean <- function(x){cumsum(x)/seq_along(x)} # to get a cumulative average calculation
   # f_spr <- function(n_sim ) {
@@ -53,7 +53,7 @@ compare_mixing_1 <-  function(mu,sigma , alpha_in, k, l, r, distribution, UDL, n
   # p_a <- (1-p_d)^k
   # result <- data.frame(stages,p_d,p_a)
   result <- data.frame(stages, sim.sum3)
-  colnames(result) <- c("stages", f_spri(l, k, distribution))
+  colnames(result) <- c("stages", f_spri(k, distribution))
   melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "prob.detection")
   plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(prob.detection, group = mixing_scheme, colour = mixing_scheme)) +
     ggplot2::geom_line(ggplot2::aes(x = stages, y = prob.detection)) +

@@ -1,4 +1,4 @@
-##' This function creates a graphical display of the mean and variance changes at each mixing stage. To the comparison purpose, estimated cumulative moving average (CMA) of mean and variance are
+##' This function displays the mean and variance changes at each mixing stage by using the estimated cumulative moving average (CMA) of mean and variance.
 ##' @title A graphical display of the mean and variance changes at each mixing stage.
 ##' @param mu the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
