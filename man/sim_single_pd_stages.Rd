@@ -45,21 +45,23 @@ r <- 0.01
 distribution <- "Poisson lognormal-Type B"
 UDL <- 0
 n_sim <- 2000
-no.revolutions <- c(1:l)
-cummean <- function(x){cumsum(x)/seq_along(x)}
-cum_mean <- cummean(Prob_df[,2])
-Prob_df <- data.frame(no.revolutions,
-sim_single_pd_stages(mu,sigma,alpha_in,k,l,r,distribution,UDL,n_sim))
-colnames(Prob_df) <- c("stages","prob.detection")
+stages <- c(1:l)
+Prob_df <-
+data.frame(stages,sim_single_pd_stages(mu,sigma,alpha_in,k,l,r,distribution,UDL,n_sim))
+colnames(Prob_df) <- c("no.revolutions","prob.detection")
 plot_example <- ggplot2::ggplot(Prob_df) +
-# ggplot2::geom_point(ggplot2::aes(x = stages, y = prob.detection)) +
-ggplot2::geom_line(ggplot2::aes(x = stages, y = cummean(prob.detection))) +
-# ggplot2::stat_smooth(geom = "smooth", method = "gam", mapping = ggplot2::aes(x = stages,
-#   y = prob.detection), se = FALSE, n = 1000) +
-ggplot2::ylab(expression("cumulative moving average of prob. detection" ~~ (bar(P[d[l]])))) +
+ggplot2::geom_line(ggplot2::aes(x = stages, y = prob.detection)) +
+#ggplot2::stat_smooth(geom = "smooth", method = "gam", mapping = ggplot2::aes(x = no.revolutions,
+#y = prob.detection), se = FALSE, n = 1000) +
+ggplot2::ylab(expression("Prob. detection" ~~ (P[d[l]]))) +
 ggplot2::theme_classic() + ggplot2::xlab(expression("No. of revolutions")) +
 ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
-# ggplot2::ggtitle(label = f_spr(n_sim))+
+#ggplot2::ggtitle(label = f_spr(n_sim))+
+ggplot2::geom_vline(xintercept = which.max(Prob_df$prob.detection),
+linetype = "dashed",colour = "blue") +
+ggplot2::annotate("text", x = which.max(Prob_df$prob.detection), y = 0,
+label = sprintf("\n Maximum detection at  \%0.0f",round(which.max(Prob_df$prob.detection)))
+, size = 3)+
 ggthemes::scale_colour_colorblind()
 print(plot_example)
 }

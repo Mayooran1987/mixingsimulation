@@ -2,7 +2,7 @@
 % Please edit documentation in R/compare_mixing_1.R
 \name{compare_mixing_1}
 \alias{compare_mixing_1}
-\title{Graphical comparison of mixing plans based on the estimated cumulative moving average (CMA) of detection probability at each revolution.}
+\title{Graphical comparison of mixing plans based on the estimated detection probability at each revolution.}
 \usage{
 compare_mixing_1(mu, sigma, alpha_in, k, l, r, distribution, UDL, n_sim)
 }
@@ -26,10 +26,10 @@ compare_mixing_1(mu, sigma, alpha_in, k, l, r, distribution, UDL, n_sim)
 \item{n_sim}{number of simulations}
 }
 \value{
-graphical display of estimated cumulative moving average (CMA) of detection probability at each revolution in the mixing.
+graphical display of estimated detection probability at each revolution in the mixing.
 }
 \description{
-This function provides a graphical display to compare mixing plans based on the estimated cumulative moving average (CMA) of detection probability at each revolution of the mixing process.
+This function provides a graphical display to compare mixing plans based on the estimated detection probability at each revolution of the mixing process.
 }
 \examples{
 mu <- 100

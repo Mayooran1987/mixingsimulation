@@ -54,15 +54,16 @@ l <- 25000
 r <- 0.01
 distribution <-  "Poisson lognormal-Type B"
 n_sim <- 2000
-no.revolutions <-c(1:l)
+stages <-c(1:l)
 Prob_df <-
-data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,r,distribution,n_sim))
+data.frame(stages,sim_single_stages(mu,sigma,alpha_in,k,l,r,distribution,n_sim))
 colnames(Prob_df) <- c("no.revolutions","CFU")
-cummean <- function(x){cumsum(x)/seq_along(x)}
-cum_mean <- cummean(Prob_df[,2])
+MA <- function(x, n = 5){stats::filter(x, rep(1 / n, n), sides = 2)}
+moving_average <- MA(Prob_df[,2],500)
 plot_example <- ggplot2::ggplot(Prob_df) +
 ggplot2::geom_line(ggplot2::aes(x = no.revolutions, y = CFU))+
-ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = cum_mean), color = "red", size = .75)+
+ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = moving_average),
+color = "red", size = .75)+
 ggplot2::xlab(expression("Number of revolutions"))+
 ggplot2::ylab(expression("Expected total number of CFUs"))+
 ggplot2::theme_classic()+

@@ -72,7 +72,7 @@ alpha_in <- 0.01
 k <- c(10,30,60)
 r <- 0.01
 distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
-n_sim <- 20000
+n_sim <- 2000
 plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,r, distribution,n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
 legend.title = ggplot2::element_text(size = 7.5),

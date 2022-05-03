@@ -4,7 +4,7 @@
 \alias{sim_single}
 \title{The generated number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing.}
 \usage{
-sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = 1)
+sim_single(mu, sigma, alpha, k, distribution, summary, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -17,11 +17,9 @@ sim_single(mu, sigma, alpha, k, distribution, n_sim, summary = 1)
 
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
-\item{n_sim}{number of simulations}
+\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = 2}; otherwise, if we use \code{summary = 1}, the function provides the mean value of the simulated \eqn{N'}.}
 
-\item{summary}{need to select one number from the list 1 to 5 which depends on what simulated observations are needed (default 1). If \code{summary = 1}, the function provides the expected total number of the simulated \eqn{N'} after \code{n_sim} simulations are run.
-If \code{summary = 2}, the function provides generated CFUs in each primary sample after \code{n_sim} simulations are run. If \code{summary = 3}, the function provides the expected total number of the simulated \eqn{N'} at each simulation run.
-If \code{summary = 4}, the function provides the mean and variance values of the simulated samples. If \code{summary = 5}, the function provides all simulated observations in the \code{n_sim} * \code{k} matrix.}
+\item{n_sim}{number of simulations}
 }
 \value{
 total number of colony forming units in the single mixing plan
@@ -38,7 +36,7 @@ sigma <- 0.8
 alpha <- 0.1
 k <- 30
 n_sim <- 20000
-sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", n_sim, summary = 2)
+sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", summary = 1, n_sim)
 }
 \references{
 \itemize{

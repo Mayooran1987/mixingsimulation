@@ -22,12 +22,12 @@
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha_in <- 0.01
-##' k <- c(30,60)
-##' l <- 25000
-##' r <- 0.01
+##' k <- c(30,75)
+##' l <- 2500
+##' rate <- 0.01
 ##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 2000
-##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, r, distribution, n_sim))
+##' colMeans(sim_multiple_stages(mu, sigma, alpha_in, k, l, rate, distribution, n_sim))
 ##' @export
 sim_multiple_stages <- function(mu, sigma, alpha_in, k, l, r, distribution, n_sim){
   f_spri <- function(mu, k, distribution) {

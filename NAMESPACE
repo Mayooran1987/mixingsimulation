@@ -1,2 +1,16 @@
 exportPattern("^[[:alpha:]]+")
 importFrom("stats", "rnorm", "rbinom", "rlnorm", "rpois", "var", "density")
+importFrom("gridExtra", "grid.arrange")
+export(compare_mixing_1)
+export(compare_mixing_2)
+export(compare_mixing_3)
+export(sim_multiple)
+export(sim_multiple_stages)
+export(sim_meanvar)
+export(sim_meanvar_stages)
+export(sim_single)
+export(sim_single_stages)
+export(sim_single_pd)
+export(sim_single_pd_stages)
+
+

@@ -13,7 +13,7 @@
 ##'
 ##' Therefore, the probability of detection (\eqn{p_d}) can be estimated from following formula,
 ##'
-##' \deqn{p_d = \frac{\textnormal{Number of simulated primary samples which contain CFUs greater than UDL}}{\textnormal{Number of primary samples}} ;}
+##' \deqn{p_d = \frac{\textnormal{Number of primary samples which contain CFUs greater than UDL}}{\textnormal{Number of primary samples}} ;}
 ##'
 ##' where the upper decision limit (UDL) depends on microorganisms and testing regulations. For example, UDL should be equal to 0 for testing Salmonella in milk powder sample if we consider 25g primary sample.
 ##'
@@ -33,15 +33,98 @@
 ##' sim_single_pd(mu, sigma , alpha , k, distribution, UDL, n_sim)
 ##' @export
 sim_single_pd <- function(mu, sigma , alpha , k, distribution, UDL, n_sim){
+  i <- NULL
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
   }
+  sim_single_pd <- function(mu, sigma , alpha , k, distribution){
+    # set.seed(1, kind = "L'Ecuyer-CMRG")
+    rpoislog <- function(S, mu, sig, nu = 1, condS = FALSE, keep0 = FALSE){
+      sim <- function(nr) {
+        lamx <- rnorm(nr)
+        x <- rpois(nr, exp(sig * lamx + mu + log(nu)))
+        if (!keep0)
+          x <- x[x > 0]
+        return(x)
+      }
+      if (S < 1)
+        stop("S is not positive")
+      if (!is.finite(S))
+        stop("S is not finite")
+      if ((S/trunc(S)) != 1)
+        stop("S is not an integer")
+      if (sig < 0)
+        stop("sig is not positive")
+      if (nu < 0)
+        stop("nu is not positive")
+      if (condS) {
+        simVec <- vector("numeric", 0)
+        fac <- 2
+        nr <- S
+        while (length(simVec) < S) {
+          simvals <- sim(nr * fac)
+          simVec <- c(simVec, simvals)
+          fac <- (1/(length(simvals)/(nr * fac))) * 2
+          fac <- ifelse(is.finite(fac), fac, 1000)
+          nr <- S - length(simvals)
+        }
+        simVec <- simVec[1:S]
+      }
+      else simVec <- sim(S)
+      return(simVec)
+    }
+    x <-  matrix(NA, nrow = 1, ncol = k) # If we want to apply a beta algorithm to generate Dirichlet distribution's random numbers.
+    for (j in 1:k) {
+      x[,j] <- stats::rbeta(1,alpha, alpha*(k - j))
+    }
+    w <-  matrix(NA, nrow = 1, ncol = k)
+    for (j in 2:k) {
+      w[,1] <- x[,1]
+      w[,j] <- x[,j] %*% prod(1 - x[,1:(j - 1)])
+    }
+    if (distribution == "Poisson-Type A") {
+      sim <-  matrix(NA, nrow = 1, ncol = k)
+      for (j in 1:k) {
+        sim[,j] <- stats::rpois(1, mu/k)
+      }
+    } else if (distribution == "Poisson-Type B") {
+      sim <-  matrix(NA, nrow = 1, ncol = k)
+      for (j in 1:k) {
+        sim[,j] <- stats::rpois(1, mu*w[,j])
+      }
+    } else if (distribution == "Lognormal-Type A") {
+      M <- matrix(round(stats::rlnorm(k, meanlog = log(mu), sdlog = sigma)), ncol = k, nrow = 1)
+      sim <-  matrix(NA, nrow = 1, ncol = k)
+      for (j in 1:k) {
+        sim[,j] <- stats::rbinom(1, M[,j], 1/k)
+      }
+    } else if (distribution == "Lognormal-Type B") {
+      M <- matrix(round(stats::rlnorm(k, meanlog = log(mu), sdlog = sigma)), ncol = k, nrow = 1)
+      sim <-  matrix(NA, nrow = 1, ncol = k)
+      for (j in 1:k) {
+        sim[i,j] <- stats::rbinom(1, M[,j], w[,j])
+      }
+    } else if (distribution == "Poisson lognormal-Type A") {
+      M <- matrix(rpoislog( k, log(mu), sigma, keep0 = TRUE), ncol = k, nrow = 1)
+      sim <-  matrix(NA, nrow = 1, ncol = k)
+      for (j in 1:k) {
+        sim[,j] <- stats::rbinom(1, M[,j], 1/k)
+      }
+    } else if (distribution == "Poisson lognormal-Type B") {
+      M <- matrix(rpoislog( k, log(mu), sigma, keep0 = TRUE), ncol = k, nrow = 1)
+      sim <-  matrix(NA, nrow = 1, ncol = k)
+      for (j in 1:k) {
+        sim[,j] <- stats::rbinom(1, M[,j], w[,j])
+      }
+    } else {
+      print("please choose the one of the given distribution type with case sensitive such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'")
+    }
+    result <- length(which(sim > UDL))/k
+    # cat("Calculation took", proc.time()[1], "seconds.\n")
+    return(result)
+  }
   # set.seed(1, kind = "L'Ecuyer-CMRG")
-  p_d <- length(which(sim_single(mu, sigma , alpha , k, distribution, n_sim, summary = 2) > UDL))/k
-  # sim_single(mu, sigma , alpha , k, distribution, n_sim, summary = 5)
-  # p_d <-length(which( X > UDL))/n_sim
-  results <- p_d
-  # results <- data.frame(sim.sum1)
+  results <- mean(as.numeric(lapply(1:n_sim, function(i){sim_single_pd(mu, sigma , alpha , k, distribution)})))
   # colnames(results) <- f_spri(mu, k, alpha, distribution)
   return(results)
 }

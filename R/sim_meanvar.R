@@ -1,30 +1,29 @@
-##' This function calculates the resulting generated number of colony forming units in the mixed sample in the single mixing plan with single stage of the mixing.
-##' @title The generated number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with a single stage of the mixing.
+##' This function provides the mean and variance of the expected number of CFUs in the single mixing stage.
+##' @title Mean and variance of the expected number of CFUs in the single mixing stage.
 ##' @param mu the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution
 ##' @param sigma the standard deviation of the colony-forming units in the mixed sample on the logarithmic scale (default value 0.8)
 ##' @param alpha concentration parameter
 ##' @param k number of small portions / primary samples
 ##' @param distribution what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}
-##' @param summary if we need to get all simulated \eqn{N'}, use \code{summary = 2}; otherwise, if we use \code{summary = 1}, the function provides the mean value of the simulated \eqn{N'}.
 ##' @param n_sim number of simulations
-##' @return total number of colony forming units in the single mixing plan
-##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}. To more details, please refer the details section of  \link{compare_mixing_3}.
-##' @seealso  \link{compare_mixing_3}
-##' @references
-##' \itemize{
-##' \item Nauta, M.J., 2005. Microbiological risk assessment models for partitioning and mixing during food handling. International Journal of Food Microbiology 100, \href{https://doi.org/10.1016/j.ijfoodmicro.2004.10.027}{311-322}.
-##' }
+##' @return Mean and variance changes in the single mixing stage.
+##' @details Let \eqn{N'} be the number of colony-forming units in the mixed sample which is produced by mixing of \eqn{k} primary samples and \eqn{N' = \sum N_i}.
+##' This function produces a graphical display of the mean and variance changes at each mixing stage. It is helpful to identify the optimal number of revolutions of the mixture, which is a point of mixing that initiates Poisson-like homogeneity.
 ##' @examples
 ##' mu <- 100
 ##' sigma <- 0.8
 ##' alpha <- 0.1
 ##' k <- 30
-##' n_sim <- 20000
-##' sim_single(mu, sigma, alpha, k, distribution = "Poisson lognormal-Type B", summary = 1, n_sim)
+##' distribution <-  "Poisson lognormal-Type B"
+##' n_sim <- 2000
+##' sim_meanvar(mu, sigma , alpha , k, distribution, n_sim)
 ##' @export
-sim_single <- function(mu, sigma , alpha , k, distribution, summary, n_sim){
+sim_meanvar <- function(mu, sigma , alpha , k, distribution, n_sim){
+  # f_spri <- function(mu, k, alpha, distribution) {
+  #   sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
+  # }
   i <- NULL
-  sim_single_1 <- function(mu, sigma , alpha , k, distribution){
+  sim_meanvar_1 <- function(mu, sigma , alpha , k, distribution){
     # set.seed(1, kind = "L'Ecuyer-CMRG")
     rpoislog <- function(S, mu, sig, nu = 1, condS = FALSE, keep0 = FALSE){
       sim <- function(nr) {
@@ -106,18 +105,20 @@ sim_single <- function(mu, sigma , alpha , k, distribution, summary, n_sim){
     } else {
       print("please choose the one of the given distribution type with case sensitive such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'")
     }
-    result <- sum(sim)
-
+    mean_N <- apply(sim, 1, mean)
+    Var_N <- apply(sim, 1, var)
+    # result <- data.frame(mean_N,Var_N)
+    result <- c(mean_N,Var_N)
+    # cat("Calculation took", proc.time()[1], "seconds.\n")
     return(result)
   }
-  if (summary == 1) {
-    results <- round(mean(as.integer(lapply(1:n_sim, function(i){sim_single_1(mu, sigma , alpha , k, distribution)}))))
-} else if (summary == 2) {
-  results <- as.integer(lapply(1:n_sim, function(i){sim_single_1(mu, sigma , alpha , k, distribution)}))
-} else {
-  print("please include the summary value, which depends on your expected output")
-}
-  # cat("Calculation took", proc.time()[1], "seconds.\n")
+  # set.seed(1, kind = "L'Ecuyer-CMRG")
+  result1 <- sapply(1:n_sim, function(i){sim_meanvar_1(mu, sigma , alpha , k, distribution)})
+  mean_N <- mean(result1[1,])
+  Var_N <- mean(result1[2,])
+  results <- as.matrix(c(mean_N,Var_N),nrow = 1,ncol = 2)
   return(results)
 }
+
+
 

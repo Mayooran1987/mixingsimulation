@@ -27,15 +27,16 @@
 ##' r <- 0.01
 ##' distribution <-  "Poisson lognormal-Type B"
 ##' n_sim <- 2000
-##' no.revolutions <-c(1:l)
+##' stages <-c(1:l)
 ##' Prob_df <-
-##' data.frame(no.revolutions,sim_single_stages(mu,sigma,alpha_in,k,l,r,distribution,n_sim))
+##' data.frame(stages,sim_single_stages(mu,sigma,alpha_in,k,l,r,distribution,n_sim))
 ##' colnames(Prob_df) <- c("no.revolutions","CFU")
-##' cummean <- function(x){cumsum(x)/seq_along(x)}
-##' cum_mean <- cummean(Prob_df[,2])
+##' MA <- function(x, n = 5){stats::filter(x, rep(1 / n, n), sides = 2)}
+##' moving_average <- MA(Prob_df[,2],500)
 ##' plot_example <- ggplot2::ggplot(Prob_df) +
 ##' ggplot2::geom_line(ggplot2::aes(x = no.revolutions, y = CFU))+
-##' ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = cum_mean), color = "red", size = .75)+
+##' ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = moving_average),
+##' color = "red", size = .75)+
 ##' ggplot2::xlab(expression("Number of revolutions"))+
 ##' ggplot2::ylab(expression("Expected total number of CFUs"))+
 ##' ggplot2::theme_classic()+
@@ -56,29 +57,13 @@ sim_single_stages <- function(mu, sigma , alpha_in, k, l, r, distribution, n_sim
       alpha[,j] <- alpha[,j - 1] + r
     }
   }
-  if (summary == 1) {
+  # if (summary == 1) {
     sim.sum1 <- matrix(NA, nrow = l, ncol = 1)
     for (j in 1:length(alpha)) {
       sim.sum1[j,] <- sim_single(mu, sigma, alpha[,j], k, distribution, n_sim, summary = 1)
     }
     results <- sim.sum1
     colnames(results) <- f_spri(mu, k, l, distribution)
-  } else if (summary == 2) {
-    sim.sum1 <- matrix(NA, nrow = l, ncol = k)
-    for (j in 1:length(alpha)) {
-      sim.sum1[j,] <- sim_single(mu, sigma, alpha[,j], k, distribution, n_sim, summary = 2)
-    }
-    results <- sim.sum1
-  } else if (summary == 3) {
-    sim.sum1 <- matrix(NA, nrow = l, ncol = n_sim)
-    # result <- round(sum(apply(sim_single(mu, sigma , alpha , k, distribution, n_sim, summary = 3), 1, sum)))
-    for (j in 1:length(alpha)) {
-      sim.sum1[j,] <- sim_single(mu, sigma, alpha[,j], k, distribution, n_sim, summary = 3)
-    }
-    results <- sim.sum1
-  } else {
-    print("please include the summary value, which depends on your expected output")
-  }
   # cat("Calculation took", proc.time()[1], "seconds.\n")
   return(results)
 

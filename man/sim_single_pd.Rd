@@ -33,7 +33,7 @@ This function provides the probability of detection at each stage of the mixing 
 
 Therefore, the probability of detection (\eqn{p_d}) can be estimated from following formula,
 
-\deqn{p_d = \frac{\textnormal{Number of simulated primary samples which contain CFUs greater than UDL}}{\textnormal{Number of primary samples}} ;}
+\deqn{p_d = \frac{\textnormal{Number of primary samples which contain CFUs greater than UDL}}{\textnormal{Number of primary samples}} ;}
 
 where the upper decision limit (UDL) depends on microorganisms and testing regulations. For example, UDL should be equal to 0 for testing Salmonella in milk powder sample if we consider 25g primary sample.
 }
