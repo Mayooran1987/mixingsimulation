@@ -37,7 +37,7 @@ sim_single_pd <- function(mu, sigma , alpha , k, distribution, UDL, n_sim){
   f_spri <- function(mu, k, alpha, distribution) {
     sprintf("mixing plan (mu = %.1f, k = %.0f, alpha = %.1f, %s)", mu, k, alpha, distribution)
   }
-  sim_single_pd <- function(mu, sigma , alpha , k, distribution){
+  sim_single_pd_1 <- function(mu, sigma , alpha , k, distribution,UDL){
     # set.seed(1, kind = "L'Ecuyer-CMRG")
     rpoislog <- function(S, mu, sig, nu = 1, condS = FALSE, keep0 = FALSE){
       sim <- function(nr) {
@@ -112,10 +112,12 @@ sim_single_pd <- function(mu, sigma , alpha , k, distribution, UDL, n_sim){
       }
     } else if (distribution == "Poisson lognormal-Type B") {
       M <- matrix(rpoislog( k, log(mu), sigma, keep0 = TRUE), ncol = k, nrow = 1)
-      sim <-  matrix(NA, nrow = 1, ncol = k)
+      sim1 <-  matrix(NA, nrow = 2000, ncol = k)
+      # to get a precise estimation, we used 2000 generated binomial random variables.
       for (j in 1:k) {
-        sim[,j] <- stats::rbinom(1, M[,j], w[,j])
+        sim1[,j] <- stats::rbinom(2000, M[,j], w[,j])
       }
+      sim <- round(apply(sim1, 2, mean))
     } else {
       print("please choose the one of the given distribution type with case sensitive such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'")
     }
@@ -124,8 +126,9 @@ sim_single_pd <- function(mu, sigma , alpha , k, distribution, UDL, n_sim){
     return(result)
   }
   # set.seed(1, kind = "L'Ecuyer-CMRG")
-  results <- mean(as.numeric(lapply(1:n_sim, function(i){sim_single_pd(mu, sigma , alpha , k, distribution)})))
+  results <- mean(as.numeric(lapply(1:n_sim, function(i){sim_single_pd_1(mu, sigma , alpha , k, distribution,UDL)})))
   # colnames(results) <- f_spri(mu, k, alpha, distribution)
+  # message("Probability of detection at a single stage")
   return(results)
 }
 

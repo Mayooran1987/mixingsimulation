@@ -4,17 +4,7 @@
 \alias{sim_single_stages}
 \title{The total number of colony-forming units in the mixed sample by the simulation results in the single mixing plan with \eqn{l}  number of stages.}
 \usage{
-sim_single_stages(
-  mu,
-  sigma,
-  alpha_in,
-  k,
-  l,
-  r,
-  distribution,
-  n_sim,
-  summary = 1
-)
+sim_single_stages(mu, sigma, alpha_in, k, l, r, distribution, n_sim)
 }
 \arguments{
 \item{mu}{the average number of CFUs (\eqn{\mu}) in the mixed sample, which is in a logarithmic scale if we use a Lognormal / Poisson lognormal distribution}
@@ -32,8 +22,6 @@ sim_single_stages(
 \item{distribution}{what suitable distribution type we have employed for simulation such as \code{"Poisson-Type A"} or \code{"Poisson-Type B"} or \code{"Lognormal-Type A"} or \code{"Lognormal-Type B"} or \code{"Poisson lognormal-Type A"} or \code{"Poisson lognormal-Type B"}}
 
 \item{n_sim}{number of simulations}
-
-\item{summary}{if we need to get all simulated \eqn{N'}, use \code{summary = 3}; otherwise, if we use \code{summary = 1} or \code{summary = 2}, the function provides the mean value of the simulated \eqn{N'} or generated CFUs in each primary sample, respectively ( default \code{summary = 1}).}
 }
 \value{
 average number of colony forming units in the single mixing plan with \eqn{l} number of stages.
@@ -58,18 +46,15 @@ stages <-c(1:l)
 Prob_df <-
 data.frame(stages,sim_single_stages(mu,sigma,alpha_in,k,l,r,distribution,n_sim))
 colnames(Prob_df) <- c("no.revolutions","CFU")
-MA <- function(x, n = 5){stats::filter(x, rep(1 / n, n), sides = 2)}
-moving_average <- MA(Prob_df[,2],500)
-plot_example <- ggplot2::ggplot(Prob_df) +
-ggplot2::geom_line(ggplot2::aes(x = no.revolutions, y = CFU))+
-ggplot2::geom_line( ggplot2::aes(x = no.revolutions, y = moving_average),
-color = "red", size = .75)+
-ggplot2::xlab(expression("Number of revolutions"))+
-ggplot2::ylab(expression("Expected total number of CFUs"))+
-ggplot2::theme_classic()+
-ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))+
+plot_sim_single_stages <- ggplot2::ggplot(Prob_df,ggplot2::aes(x = no.revolutions, y = CFU)) +
+ggplot2::geom_line() +
+tidyquant::geom_ma(ma_fun = SMA, n = 50, linetype = 1, colour = "red") +
+ggplot2::xlab(expression("Number of revolutions")) +
+ggplot2::ylab(expression("Expected total number of CFUs")) +
+ggplot2::theme_classic() +
+ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)) +
 ggthemes::scale_colour_colorblind()
-print(plot_example)
+print(plot_sim_single_stages)
 }
 \references{
 \itemize{

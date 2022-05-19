@@ -73,21 +73,22 @@ k <- c(10,30,60)
 r <- 0.01
 distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 n_sim <- 2000
-plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,r, distribution,n_sim) +
+plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 250,r, distribution,n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
 legend.title = ggplot2::element_text(size = 7.5),
-legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+legend.key.size = ggplot2::unit(4, 'mm'))
+#+ ggplot2::xlim(0,300)
 plot2 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 500, r, distribution, n_sim) +
 ggplot2::theme(legend.title = ggplot2::element_text(size = 7.5),
-legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+legend.key.size = ggplot2::unit(4, 'mm'))
 plot3 <- compare_mixing_3(mu, sigma, alpha_in, k, l = 5000,r , distribution,n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
 legend.title = ggplot2::element_text(size = 7.5),
-legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+legend.key.size = ggplot2::unit(4, 'mm'))
 plot4 <- compare_mixing_3(mu, sigma , alpha_in , k , l = 25000, r , distribution ,n_sim) +
 ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
 legend.title = ggplot2::element_text(size = 7.5),
-legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+legend.key.size = ggplot2::unit(4, 'mm'))
 gridExtra::grid.arrange(plot1, plot2, plot3, plot4, ncol = 2, nrow = 2)
 }
 \references{

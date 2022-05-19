@@ -99,10 +99,12 @@ sim_single <- function(mu, sigma , alpha , k, distribution, summary, n_sim){
       }
     } else if (distribution == "Poisson lognormal-Type B") {
       M <- matrix(rpoislog( k, log(mu), sigma, keep0 = TRUE), ncol = k, nrow = 1)
-      sim <-  matrix(NA, nrow = 1, ncol = k)
+      sim1 <-  matrix(NA, nrow = 2000, ncol = k)
+      # to get a precise estimation, we used 2000 generated binomial random variables.
       for (j in 1:k) {
-        sim[,j] <- stats::rbinom(1, M[,j], w[,j])
+        sim1[,j] <- stats::rbinom(2000, M[,j], w[,j])
       }
+      sim <- round(apply(sim1, 2, mean))
     } else {
       print("please choose the one of the given distribution type with case sensitive such as 'Poisson-Type A' or 'Poisson-Type B' or 'Lognormal-Type A' or 'Lognormal-Type B'")
     }

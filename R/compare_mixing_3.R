@@ -56,26 +56,29 @@
 ##' r <- 0.01
 ##' distribution <- c("Poisson lognormal-Type B","Poisson lognormal-Type B","Poisson lognormal-Type B")
 ##' n_sim <- 2000
-##' plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 50,r, distribution,n_sim) +
+##' plot1 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 250,r, distribution,n_sim) +
 ##' ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
 ##' legend.title = ggplot2::element_text(size = 7.5),
-##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+##' legend.key.size = ggplot2::unit(4, 'mm'))
+##' #+ ggplot2::xlim(0,300)
 ##' plot2 <- compare_mixing_3(mu, sigma, alpha_in, k , l = 500, r, distribution, n_sim) +
 ##' ggplot2::theme(legend.title = ggplot2::element_text(size = 7.5),
-##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+##' legend.key.size = ggplot2::unit(4, 'mm'))
 ##' plot3 <- compare_mixing_3(mu, sigma, alpha_in, k, l = 5000,r , distribution,n_sim) +
 ##' ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
 ##' legend.title = ggplot2::element_text(size = 7.5),
-##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+##' legend.key.size = ggplot2::unit(4, 'mm'))
 ##' plot4 <- compare_mixing_3(mu, sigma , alpha_in , k , l = 25000, r , distribution ,n_sim) +
 ##' ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),
 ##' legend.title = ggplot2::element_text(size = 7.5),
-##' legend.key.size = ggplot2::unit(4, 'mm')) + ggplot2::xlim(0,300)
+##' legend.key.size = ggplot2::unit(4, 'mm'))
 ##' gridExtra::grid.arrange(plot1, plot2, plot3, plot4, ncol = 2, nrow = 2)
 ##' @export
 compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, r, distribution, n_sim){
   Total_CFU <- NULL
   mixing_scheme <- NULL
+  x <- NULL
+  cd <- NULL
   # set.seed(1, kind = "L'Ecuyer-CMRG")
   f_spri <- function(l, k, distribution) {
     sprintf("mixing plan (l = %.0f, k = %.0f, %s)",l, k, distribution)
@@ -89,14 +92,34 @@ compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, r, distribution, n_sim){
   colnames(result) <- c("stages", f_spri(l, k, distribution))
   # return(result)
   melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "Total_CFU")
-  plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme, colour = mixing_scheme)) + ggplot2::stat_ecdf(geom = "line") +
+  # plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme, colour = mixing_scheme)) + ggplot2::stat_ecdf(geom = "smooth") +
+  #   ggplot2::ylab(expression("P(Total CFUs after mixing " <= " N')")) +
+  #   ggplot2::theme_classic() + ggplot2::xlab(expression("Total CFUs after mixing (N')")) +
+  #   ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),legend.title = ggplot2::element_text(size = 7.5),legend.key.size = ggplot2::unit(4, 'mm'),
+  #                  legend.position = c(0.70,0.25)) +
+  #   ggthemes::scale_colour_colorblind()
+  # melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "Total_CFU")
+  # ggplot2::ggplot(df, aes(Total_CFU)) + stat_ecdf(geom = "point")+ theme_classic()
+  dat <- cbind.data.frame(melten.Prob[,3],melten.Prob[,2])
+  colnames(dat) <- c("x", "mixing_scheme")
+  # Split the data by group and calculate the smoothed cumulative density for each group
+  `%>%` <- magrittr::`%>%`
+  dens <-  split(dat, dat$mixing_scheme) %>%
+    purrr::map_df(function(d) {
+      dens <-  stats::density(d$x, adjust = 0.1, from = min(dat$x) ,
+                              to = max(dat$x))
+      data.frame(x = dens$x, y = dens$y, cd = cumsum(dens$y)/sum(dens$y), mixing_scheme = d$mixing_scheme[1])
+    })
+  plot1 <- ggplot2::ggplot(data = dens, ggplot2::aes(x, cd, colour = mixing_scheme)) +
+    # ggplot2::geom_line() +
+    ggplot2::stat_smooth(data = dens,size = 0.5, method = 'gam', formula = y ~ s(x, bs = "cs") , ggplot2::aes(x, cd, colour = mixing_scheme),se = FALSE, na.rm = TRUE) +
+    ggplot2::ylim(0,1) +
     ggplot2::ylab(expression("P(Total CFUs after mixing " <= " N')")) +
-    ggplot2::theme_classic() + ggplot2::xlab(expression("Total CFUs after mixing (N')")) +
-    ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),legend.title = ggplot2::element_text(size = 7.5),legend.key.size = ggplot2::unit(4, 'mm'),
-                   legend.position = c(0.70,0.25)) +
+    ggplot2::theme_classic() + ggplot2::xlab(expression("Total CFUs after mixing (N')")) + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.70,0.25)) +
+    # ggplot2::ggtitle(label = f_spr(l))+
+    # ggplot2::scale_fill_discrete(name="mixing scheme")+
     ggthemes::scale_colour_colorblind()
   # cat("Calculation took", proc.time()[1], "seconds.\n")
   return(plot1)
 }
-
 
