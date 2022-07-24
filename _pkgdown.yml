@@ -1,0 +1,7 @@
+template:
+  params:
+    bootswatch: cosmo
+figures:
+  dev: grDevices::svg
+  fig.ext: svg
+  fig.retina: 2

@@ -36,12 +36,19 @@ compare_mixing_2 <-  function(mulower, muupper, sigma , alpha_in, k, l, r, distr
     sprintf("mixing plan (k = %.0f, l = %.0f, %s)", k, l, distribution)
   }
   mu <- seq(mulower, muupper, 0.1)
-  sim.sum3 <- matrix(NA, nrow = length(mu), ncol = length(l))
+  # sim.sum3 <- matrix(NA, nrow = length(mu), ncol = length(l))
+  # # set.seed(1, kind = "L'Ecuyer-CMRG")
+  # for (i in 1:nrow(sim.sum3)) {
+  #   for (j in 1:ncol(sim.sum3)) {
+  #     sim.sum3[i,j] <-  sim_single_pd_stages(mu[i], sigma , alpha_in, k, l[j], r, distribution, UDL, n_sim)[l[j]] # If we want to use the probability of detection at the end of mixing, please use this.
+  #   }
+  # }
+
+  sim.sum3 <- matrix(NA, nrow = length(mu), ncol = 2)
   # set.seed(1, kind = "L'Ecuyer-CMRG")
   for (i in 1:nrow(sim.sum3)) {
-    for (j in 1:ncol(sim.sum3)) {
-      sim.sum3[i,j] <-  sim_single_pd_stages(mu[i], sigma , alpha_in, k, l[j], r, distribution, UDL, n_sim)[l[j]] # If we want to use the probability of detection at the end of mixing, please use this.
-    }
+    sim.sum3[i,1] <-  sim_single_pd_end_stages(mu[i], sigma , alpha_in, k, l[1], r, distribution, UDL, n_sim)
+    sim.sum3[i,2] <-  sim_single_pd_end_stages(mu[i], sigma , alpha_in, k, l[2], r, distribution, UDL, n_sim)
   }
   # MA <- function(x, n = 5){stats::filter(x, rep(1 / n, n), sides = 2)}
   result <- data.frame(mu, sim.sum3)
@@ -57,7 +64,7 @@ compare_mixing_2 <-  function(mulower, muupper, sigma , alpha_in, k, l, r, distr
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
     # ggplot2::ggtitle(label = f_spr(n_sim))+
     ggthemes::scale_colour_colorblind()
-  plot1
+  # plot1
   # ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
   # cat("Calculation took", proc.time()[1], "seconds.\n")
   return(plot1)

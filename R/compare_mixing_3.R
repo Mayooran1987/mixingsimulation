@@ -91,15 +91,14 @@ compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, r, distribution, n_sim){
   result <- data.frame(stages, sim.sum3)
   colnames(result) <- c("stages", f_spri(l, k, distribution))
   # return(result)
-  melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "Total_CFU")
+  # melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "Total_CFU")
   # plot1 <- ggplot2::ggplot(melten.Prob, ggplot2::aes(Total_CFU, group = mixing_scheme, colour = mixing_scheme)) + ggplot2::stat_ecdf(geom = "smooth") +
   #   ggplot2::ylab(expression("P(Total CFUs after mixing " <= " N')")) +
   #   ggplot2::theme_classic() + ggplot2::xlab(expression("Total CFUs after mixing (N')")) +
   #   ggplot2::theme(legend.text = ggplot2::element_text(size = 7.5),legend.title = ggplot2::element_text(size = 7.5),legend.key.size = ggplot2::unit(4, 'mm'),
   #                  legend.position = c(0.70,0.25)) +
   #   ggthemes::scale_colour_colorblind()
-  # melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "Total_CFU")
-  # ggplot2::ggplot(df, aes(Total_CFU)) + stat_ecdf(geom = "point")+ theme_classic()
+  melten.Prob <- reshape2::melt(result, id = "stages", variable.name = "mixing_scheme", value.name = "Total_CFU")
   dat <- cbind.data.frame(melten.Prob[,3],melten.Prob[,2])
   colnames(dat) <- c("x", "mixing_scheme")
   # Split the data by group and calculate the smoothed cumulative density for each group
@@ -113,7 +112,7 @@ compare_mixing_3 <- function(mu, sigma, alpha_in, k, l, r, distribution, n_sim){
   plot1 <- ggplot2::ggplot(data = dens, ggplot2::aes(x, cd, colour = mixing_scheme)) +
     # ggplot2::geom_line() +
     ggplot2::stat_smooth(data = dens,size = 0.5, method = 'gam', formula = y ~ s(x, bs = "cs") , ggplot2::aes(x, cd, colour = mixing_scheme),se = FALSE, na.rm = TRUE) +
-    ggplot2::ylim(0,1) +
+    # ggplot2::ylim(0,1) +
     ggplot2::ylab(expression("P(Total CFUs after mixing " <= " N')")) +
     ggplot2::theme_classic() + ggplot2::xlab(expression("Total CFUs after mixing (N')")) + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.70,0.25)) +
     # ggplot2::ggtitle(label = f_spr(l))+
