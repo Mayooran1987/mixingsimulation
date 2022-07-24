@@ -32,7 +32,7 @@
 ##' colnames(Prob_df) <- c("no.revolutions","CFU")
 ##' plot_sim_single_stages <- ggplot2::ggplot(Prob_df,ggplot2::aes(x = no.revolutions, y = CFU)) +
 ##' ggplot2::geom_line() +
-##' tidyquant::geom_ma(ma_fun = SMA, n = 50, linetype = 1, colour = "red") +
+##' # tidyquant::geom_ma(ma_fun = SMA, n = 50, linetype = 1, colour = "red") +
 ##' ggplot2::xlab(expression("Number of revolutions")) +
 ##' ggplot2::ylab(expression("Expected total number of CFUs")) +
 ##' ggplot2::theme_classic() +
