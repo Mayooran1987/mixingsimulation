@@ -1,7 +1,7 @@
 
 [![Build
 Status](https://travis-ci.com/Mayooran1987/mixingsimulation.svg?branch=main)](https://travis-ci.com/Mayooran1987/mixingsimulation)
-[![pages-build-deployment](https://github.com/Mayooran1987/mixingsimulation/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Mayooran1987/mixingsimulation/actions/workflows/pages/pages-build-deployment)
+[![pages-build-deployment](https://github.com/Mayooran1987/mixingsimulation/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Mayooran1987/mixingsimulation/actions/workflows/pages/pages-build-deployment) [![R](https://github.com/Mayooran1987/mixingsimulation/actions/workflows/r.yml/badge.svg)](https://github.com/Mayooran1987/mixingsimulation/actions/workflows/r.yml)
 <!-- <style> -->
 <!-- body {text-align: justify} -->
 <!-- </style> -->
