@@ -129,6 +129,8 @@ sim_single_pd <- function(mu, sigma , alpha , k, distribution, UDL, n_sim){
   results <- mean(as.numeric(lapply(1:n_sim, function(i){sim_single_pd_1(mu, sigma , alpha , k, distribution,UDL)})))
   # colnames(results) <- f_spri(mu, k, alpha, distribution)
   # message("Probability of detection at a single stage")
+  # warning("\033[1;31m","This simulation takes a few hours time to produce the output", call. = FALSE)
+  message("\033[1;31m","This simulation takes a few hours to produce the output! Thanks for your patience.")
   return(results)
 }
 

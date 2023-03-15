@@ -39,11 +39,6 @@
 ##' ggplot2::theme_classic() + ggplot2::xlab(expression("No. of revolutions")) +
 ##' ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5), legend.position = c(0.75,0.25)) +
 ##' #ggplot2::ggtitle(label = f_spr(n_sim))+
-##' ggplot2::geom_vline(xintercept = which.max(Prob_df$prob.detection),
-##' linetype = "dashed",colour = "blue") +
-##' ggplot2::annotate("text", x = which.max(Prob_df$prob.detection), y = 0,
-##' label = sprintf("\n Maximum detection at  %0.0f",round(which.max(Prob_df$prob.detection)))
-##' , size = 3)+
 ##' ggthemes::scale_colour_colorblind()
 ##' print(plot_example)
 ##' @export
@@ -61,11 +56,12 @@ sim_single_pd_stages <- function(mu, sigma , alpha_in, k, l, r, distribution, UD
   }
   sim.sum1 <- matrix(NA, nrow = l, ncol = 1)
   for (i in 1:l) {
-    sim.sum1[i,] <- sim_single_pd(mu, sigma , alpha[j,] , k, distribution, UDL, n_sim)
+    sim.sum1[i,] <- sim_single_pd(mu, sigma , alpha[i,] , k, distribution, UDL, n_sim)
   }
   results <- sim.sum1
   # results <- data.frame(sim.sum1)
   # colnames(results) <- f_spri(mu, k, alpha, distribution)
+  message("\033[1;31m","This simulation takes a few hours to produce the output! Thanks for your patience.")
   return(results)
 }
 
