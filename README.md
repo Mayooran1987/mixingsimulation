@@ -6,10 +6,7 @@
 
 # ‘mixingsimulation’
 
-The goal of mixingsimulation is to develop simulated results and
-comparing graphical displays for different mixing plans. Also,
-description of this package functions is available at
-<https://mayooran1987.github.io/mixingsimulation/reference/index.html>.
+The goal of mixingsimulation is to develop simulated results and creation of graphical displays for different mixing plans. Also, description of this package functions is available at <https://mayooran1987.github.io/mixingsimulation/reference/index.html>.
 
 <!-- (Note that the web page contains an older version of the package. The most recent version of the page, which is associated with the current version of the package, will be updated soon). -->
 
